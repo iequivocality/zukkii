@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 const App: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const App: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React CRINGE DUDE
         </a>
       </header>
     </div>
