@@ -1,26 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
+import Countdown from './components/countdown/Countdown';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React CRINGE DUDE
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <div className="app-container">
+        <Countdown name="山下美月" birthdate="1999-07-26"></Countdown>
+        <Countdown name="山下美月" birthdate="1999-07-26"></Countdown>
+        <Countdown name="山下美月" birthdate="1999-07-26"></Countdown>
+        <Countdown name="山下美月" birthdate="1999-07-26"></Countdown>
+        <Countdown name="山下美月" birthdate="1999-07-26"></Countdown>
+        <Countdown name="山下美月" birthdate="1999-07-26"></Countdown>
+      </div>
+    );
+  }
 }
-
-export default App;
