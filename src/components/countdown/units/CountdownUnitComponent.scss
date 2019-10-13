@@ -1,0 +1,38 @@
+.unit-container {
+    height: 45px;
+    width: 30px;
+    position: relative;
+    border: 2px solid #FFFFFF;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #282C34;
+
+    .value {
+        flex: 1 0 100%;
+        font-weight: bold;
+        text-align: center;
+        z-index: 10;
+    }
+
+    .unit {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        z-index: 10;
+    }
+
+    .progress-bar {
+        height: 45px;
+        width: 50px;
+        position: absolute;
+        z-index: 5;
+        background-color: #5BBEE4;
+        top: 0;
+        left: 0;
+    }
+}

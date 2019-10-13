@@ -3,9 +3,12 @@ import './CountdownComponent.scss'
 import Util from '../../Util';
 import moment from 'moment';
 import Member from '../../models/Member';
+import Group from '../../models/Group';
+import CountdownDetails from './details/CountdownDetails';
+import CountdownUnitComponent from './units/CountdownUnitComponent';
+import { Constants } from '../../Constants';
 
 interface CountdownState {
-    formattedDate : string,
     week : number,
     day : number,
     hour:  number,
@@ -13,14 +16,18 @@ interface CountdownState {
     second : number
 }
 
-export default class Countdown extends Component<Member, CountdownState> {
+interface CountdownProps {
+    member : Member,
+    group : Group 
+}
+
+export default class Countdown extends Component<CountdownProps, CountdownState> {
     loadInterval : any;
 
-    constructor(props : Member) {
+    constructor(props : CountdownProps) {
         super(props);
 
         this.state = {
-            formattedDate : Util.formatYYYYMMDDToJapaneseFormat(props.birthdate),
             week : 0,
             day : 0,
             hour:  0,
@@ -30,8 +37,8 @@ export default class Countdown extends Component<Member, CountdownState> {
     }
 
     componentDidMount() {
-        let { birthdate } = this.props;
-        var targetDate = moment.tz(birthdate, "YYYY-MM-DD", "Japan");
+        let { birthdate } = this.props.member;
+        let targetDate = moment.tz(birthdate, "YYYY-MM-DD", "Japan");
         targetDate.year(moment().tz("Asia/Tokyo").year());
 
         if (Util.checkIfCurrentDateIsBeforeBirthday(targetDate)) {
@@ -39,59 +46,46 @@ export default class Countdown extends Component<Member, CountdownState> {
 		}
 
         this.loadInterval = setInterval(() => {
-			var currentDate = moment().tz("Asia/Tokyo");
-			var duration = moment.duration(targetDate.diff(currentDate)); 
+			let currentDate = moment().tz("Asia/Tokyo");
+            let duration = moment.duration(targetDate.diff(currentDate)); 
+            let asDays = duration.asDays();
 			this.setState({
-				week : Math.floor(duration.asDays() / 7),
-				day : Math.floor(duration.asDays() % 7),
+				week : Math.floor(asDays / 7),
+				day : Math.floor(asDays % 7),
 				hour:  duration.hours(),
-				minute : duration.minutes(), 
+				minute : duration.minutes(),
 				second : duration.seconds()
 			});
 		}, 1000);
     }
     
     render() {
-        let { name, prefecture, kana, height, bloodType, photoPath } = this.props;
-        let { formattedDate, week, day, hour, minute, second } = this.state;
+        let { week, day, hour, minute, second } = this.state;
+        let { group, member } = this.props;
 
-        let style : React.CSSProperties = {
-            backgroundImage: `url(${photoPath})`
+        let photoStyle : React.CSSProperties = {
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/${group.id}/${member.id}.jpg)`
+        }
+
+        let countdownStyle : React.CSSProperties = {
+            backgroundColor : this.props.group.color
         }
 
         return (
-            <div className="countdown-container">
+            <div className="countdown-container" style={countdownStyle}>
                 <div className="profile">
-                    <div className="photo" style={style}></div>
-                    <div className="details">
-                        <div className="name">{ name }</div>
-                        <div className="kana">{ kana }</div>
-                        <div className="other-details">
-                            <div className="birthdate">
-                                <div className="label">生年月日</div>
-                                <div className="text">{formattedDate}</div>
-                            </div>
-                            <div className="prefecture">
-                                <div className="label">出身地</div>
-                                <div className="text">{prefecture}</div>
-                            </div>
-                            <div className="height">
-                                <div className="label">身長</div>
-                                <div className="text">{height}</div>
-                            </div>
-                            <div className="bloodType">
-                                <div className="label">血液型</div>
-                                <div className="text">{bloodType}</div>
-                            </div>
-                        </div>
+                    <div className="photo-container">
+                        <div className="photo" style={photoStyle}></div>
                     </div>
+                    <CountdownDetails {...this.props.member}></CountdownDetails>
                 </div>
                 <div className="countdown">
-
+                    <CountdownUnitComponent value={week} unit="週" maxValue={Constants.MAX_WEEKS} color={group.color}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={day} unit="日" maxValue={Constants.MAX_DAYS} color={group.color}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={hour} unit="時" maxValue={Constants.MAX_HOURS} color={group.color}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={minute} unit="分" maxValue={Constants.MAX_MINUTES} color={group.color}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={second} unit="秒" maxValue={Constants.MAX_SECONDS} color={group.color}></CountdownUnitComponent>
                 </div>
-                {/* <div className="countdown-name">{ name }</div>
-                <div className="countdown-kana">{ kana }</div>
-                 */}
             </div>
         );
     }

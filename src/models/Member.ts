@@ -6,6 +6,5 @@ export default interface Member {
     birthdate : string,
     prefecture : string,
     height : string,
-    bloodType : string,
-    photoPath : string
+    bloodType : string
 }
