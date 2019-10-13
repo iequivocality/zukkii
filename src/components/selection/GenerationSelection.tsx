@@ -1,7 +1,7 @@
 import React from "react";
-import Group from "../models/Group";
+import Group from "../../models/Group";
 import './GenerationSelection.scss';
-import Member from "../models/Member";
+import Member from "../../models/Member";
 
 interface GenerationSelect {
     label : string,

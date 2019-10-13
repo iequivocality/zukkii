@@ -17,6 +17,10 @@
     font-size: 0.75rem;
 }
 
+.selection-button {
+    cursor: pointer;
+}
+
 .selection-button:last-child {
     border-right: 0;
 }

@@ -9,6 +9,7 @@
     align-items: center;
     overflow: hidden;
     background-color: #282C34;
+    user-select: none;
 
     .value {
         flex: 1 0 100%;

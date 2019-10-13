@@ -3,7 +3,7 @@ import './App.scss';
 import Countdown from './components/countdown/CountdownComponent';
 import Member from './models/Member';
 import Group from './models/Group';
-import GenerationSelection from './selection/GenerationSelection';
+import GenerationSelection from './components/selection/GenerationSelection';
 
 export default class App extends React.Component {
   render() {
