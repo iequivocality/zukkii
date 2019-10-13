@@ -1,0 +1,22 @@
+.selection {
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    height: 20px;
+    color: #FFFFFF;
+    border-radius: 5px;
+    margin: 5px 0px;
+}
+
+.selection-button {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid #FFFFFF;
+    font-size: 0.75rem;
+}
+
+.selection-button:last-child {
+    border-right: 0;
+}

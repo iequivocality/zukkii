@@ -3,6 +3,7 @@ import './App.scss';
 import Countdown from './components/countdown/CountdownComponent';
 import Member from './models/Member';
 import Group from './models/Group';
+import GenerationSelection from './selection/GenerationSelection';
 
 export default class App extends React.Component {
   render() {
@@ -16,7 +17,8 @@ export default class App extends React.Component {
         prefecture : "新潟県",
         kana : "いぐち まお",
         height : "163cm",
-        bloodType : "AB型"
+        bloodType : "AB型",
+        generation: 1
       },
       {
         id : 2,
@@ -26,7 +28,8 @@ export default class App extends React.Component {
         prefecture : "神奈川県",
         kana : "うしお さりな",
         height : "157cm",
-        bloodType : "O型"
+        bloodType : "O型",
+        generation: 1
       },
       {
         id : 4,
@@ -36,7 +39,8 @@ export default class App extends React.Component {
         prefecture : "東京都",
         kana : "かげやま ゆうか",
         height : "156cm",
-        bloodType : "O型"
+        bloodType : "O型",
+        generation: 1
       },
       {
         id : 5,
@@ -46,7 +50,8 @@ export default class App extends React.Component {
         prefecture : "東京都",
         kana : "かとう しほ",
         height : "160cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 1
       },
       {
         id : 6,
@@ -56,7 +61,8 @@ export default class App extends React.Component {
         prefecture : "東京都",
         kana : "さいとう きょうこ",
         height : "154cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 1
       },
       {
         id : 7,
@@ -66,7 +72,8 @@ export default class App extends React.Component {
         prefecture : "千葉県",
         kana : "ささき くみ",
         height : "167cm",
-        bloodType : "O型"
+        bloodType : "O型",
+        generation: 1
       },
       {
         id : 8,
@@ -76,7 +83,8 @@ export default class App extends React.Component {
         prefecture : "兵庫県",
         kana : "ささき みれい",
         height : "164cm",
-        bloodType : "O型"
+        bloodType : "O型",
+        generation: 1
       },
       {
         id : 9,
@@ -86,7 +94,8 @@ export default class App extends React.Component {
         prefecture : "大阪府",
         kana : "たかせ まな",
         height : "157cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 1
       },
       {
         id : 10,
@@ -96,7 +105,8 @@ export default class App extends React.Component {
         prefecture : "神奈川県",
         kana : "たかもと あやか",
         height : "162cm",
-        bloodType : "B型"
+        bloodType : "B型",
+        generation: 1
       },
       {
         id : 11,
@@ -106,7 +116,8 @@ export default class App extends React.Component {
         prefecture : "奈良県",
         kana : "ひがしむら めい",
         height : "153cm",
-        bloodType : "O型"
+        bloodType : "O型",
+        generation: 1
       },
       {
         id : 12,
@@ -116,7 +127,8 @@ export default class App extends React.Component {
         prefecture : "埼玉県",
         kana : "かねむら みく",
         height : "162cm",
-        bloodType : "O型"
+        bloodType : "O型",
+        generation: 2
       },
       {
         id : 13,
@@ -126,7 +138,8 @@ export default class App extends React.Component {
         prefecture : "山口県",
         kana : "かわた ひな",
         height : "153cm",
-        bloodType : "B型"
+        bloodType : "B型",
+        generation: 2
       },
       {
         id : 14,
@@ -136,7 +149,8 @@ export default class App extends React.Component {
         prefecture : "大阪府",
         kana : "こさか なお",
         height : "161cm",
-        bloodType : "O型"
+        bloodType : "O型",
+        generation: 2
       },
       {
         id : 15,
@@ -146,7 +160,8 @@ export default class App extends React.Component {
         prefecture : "神奈川県",
         kana : "とみた すずか",
         height : "164cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 2
       },
       {
         id : 16,
@@ -156,7 +171,8 @@ export default class App extends React.Component {
         prefecture : "埼玉県",
         kana : "にぶ あかり",
         height : "156cm",
-        bloodType : "AB型"
+        bloodType : "AB型",
+        generation: 2
       },
       {
         id : 17,
@@ -166,7 +182,8 @@ export default class App extends React.Component {
         prefecture : "福岡県",
         kana : "はまぎし ひより",
         height : "166cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 2
       },
       {
         id : 18,
@@ -176,7 +193,8 @@ export default class App extends React.Component {
         prefecture : "京都府",
         kana : "まつだ このか",
         height : "157cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 2
       },
       {
         id : 19,
@@ -186,7 +204,8 @@ export default class App extends React.Component {
         prefecture : "東京都",
         kana : "みやた まなも",
         height : "158cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 2
       },
       {
         id : 20,
@@ -196,7 +215,8 @@ export default class App extends React.Component {
         prefecture : "埼玉県",
         kana : "わたなべ みほ",
         height : "158cm",
-        bloodType : "A型"
+        bloodType : "A型",
+        generation: 2
       },
       {
         id : 21,
@@ -206,7 +226,8 @@ export default class App extends React.Component {
         prefecture : "東京都",
         kana : "かみむら ひなの",
         height : "161cm",
-        bloodType : "AB型"
+        bloodType : "AB型",
+        generation: 3
       }
     ];
 
@@ -214,21 +235,25 @@ export default class App extends React.Component {
       id : 1,
       name : "日向坂46",
       color : "#5BBEE4",
-      members : members
+      members : members,
+      generations : 3
     }
 
     let titleStyle : React.CSSProperties = {
       color : sampleGroup.color
     } 
 
+    console.log(JSON.stringify(sampleGroup))
+
     return (
       <div className="app-container">
         <header className="title-container" style={titleStyle}>
           <h2>{sampleGroup.name}</h2>
           <h6>アイドルバースデーカウントダウン</h6>
+          <GenerationSelection {...sampleGroup}></GenerationSelection>
         </header>
         <main className="group-container">
-          { sampleGroup.members.map( member => <Countdown member={member} group={sampleGroup}></Countdown>) }
+          { sampleGroup.members.map( member => <Countdown key={member.id} member={member} group={sampleGroup}></Countdown>) }
         </main>
       </div>
     );
