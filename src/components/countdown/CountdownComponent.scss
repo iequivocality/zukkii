@@ -1,0 +1,73 @@
+.countdown-container {
+    flex: 1 0 48%;
+    background-color: #5BBEE4;
+    color: #FFFFFF;
+    height: 125px;
+    margin: 2px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile {
+    flex: 1 0 55%;
+    display: flex;
+    flex-direction: row;
+}
+
+.countdown {
+    flex: 1 0 45%;
+    background-color: #FF0;
+}
+
+%details-container {
+    display: flex;
+    flex-direction: row;
+    flex: 1 0 48%;
+    padding-right: 4px;
+}
+
+.details {
+    margin-left: 3px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    width: 100%;
+
+    .name {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .label {
+        flex: 1 0 30%;
+    }
+
+    .text {
+        flex: 1 0 70%;
+
+    }
+
+    .other-details {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        
+        .birthdate,
+        .prefecture,
+        .height,
+        .bloodType {
+            @extend %details-container;
+        }
+    }
+}
+
+.photo {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    align-self: center;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
