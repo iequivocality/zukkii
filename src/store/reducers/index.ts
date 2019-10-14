@@ -1,17 +1,9 @@
-import React from 'react';
-import './App.scss';
-import Countdown from './components/countdown/CountdownComponent';
-import Member from './models/Member';
-import Group from './models/Group';
-import GenerationSelection from './components/selection/GenerationSelection';
-import { connect } from 'react-redux';
-import AppState from './store/state/AppState';
+import AppState from "../state/AppState";
+import Member from "../../models/Member";
+import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION } from "../actions";
 
-class App extends React.Component<AppState> {
-  render() {
-    let { selectedGroup } = this.props;
-    let members : Array<Member> = [
-      {
+let members : Array<Member> = [
+    {
         id : 1,
         group : "日向坂46",
         name : "井口眞緒",
@@ -21,8 +13,8 @@ class App extends React.Component<AppState> {
         height : "163cm",
         bloodType : "AB型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 2,
         group : "日向坂46",
         name : "潮紗理菜",
@@ -32,8 +24,8 @@ class App extends React.Component<AppState> {
         height : "157cm",
         bloodType : "O型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 4,
         group : "日向坂46",
         name : "影山優佳",
@@ -43,8 +35,8 @@ class App extends React.Component<AppState> {
         height : "156cm",
         bloodType : "O型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 5,
         group : "日向坂46",
         name : "加藤史帆",
@@ -54,8 +46,8 @@ class App extends React.Component<AppState> {
         height : "160cm",
         bloodType : "A型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 6,
         group : "日向坂46",
         name : "齊藤京子",
@@ -65,8 +57,8 @@ class App extends React.Component<AppState> {
         height : "154cm",
         bloodType : "A型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 7,
         group : "日向坂46",
         name : "佐々木久美",
@@ -76,8 +68,8 @@ class App extends React.Component<AppState> {
         height : "167cm",
         bloodType : "O型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 8,
         group : "日向坂46",
         name : "佐々木美玲",
@@ -87,8 +79,8 @@ class App extends React.Component<AppState> {
         height : "164cm",
         bloodType : "O型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 9,
         group : "日向坂46",
         name : "高瀬愛奈",
@@ -98,8 +90,8 @@ class App extends React.Component<AppState> {
         height : "157cm",
         bloodType : "A型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 10,
         group : "日向坂46",
         name : "高本彩花",
@@ -109,8 +101,8 @@ class App extends React.Component<AppState> {
         height : "162cm",
         bloodType : "B型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 11,
         group : "日向坂46",
         name : "東村芽依",
@@ -120,8 +112,8 @@ class App extends React.Component<AppState> {
         height : "153cm",
         bloodType : "O型",
         generation: 1
-      },
-      {
+    },
+    {
         id : 12,
         group : "日向坂46",
         name : "金村美玖",
@@ -131,8 +123,8 @@ class App extends React.Component<AppState> {
         height : "162cm",
         bloodType : "O型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 13,
         group : "日向坂46",
         name : "河田陽菜",
@@ -142,8 +134,8 @@ class App extends React.Component<AppState> {
         height : "153cm",
         bloodType : "B型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 14,
         group : "日向坂46",
         name : "小坂菜緒",
@@ -153,8 +145,8 @@ class App extends React.Component<AppState> {
         height : "161cm",
         bloodType : "O型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 15,
         group : "日向坂46",
         name : "富田鈴花",
@@ -164,8 +156,8 @@ class App extends React.Component<AppState> {
         height : "164cm",
         bloodType : "A型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 16,
         group : "日向坂46",
         name : "丹生明里",
@@ -175,8 +167,8 @@ class App extends React.Component<AppState> {
         height : "156cm",
         bloodType : "AB型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 17,
         group : "日向坂46",
         name : "濱岸ひより",
@@ -186,8 +178,8 @@ class App extends React.Component<AppState> {
         height : "166cm",
         bloodType : "A型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 18,
         group : "日向坂46",
         name : "松田好花",
@@ -197,8 +189,8 @@ class App extends React.Component<AppState> {
         height : "157cm",
         bloodType : "A型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 19,
         group : "日向坂46",
         name : "宮田愛萌",
@@ -208,8 +200,8 @@ class App extends React.Component<AppState> {
         height : "158cm",
         bloodType : "A型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 20,
         group : "日向坂46",
         name : "渡邉美穂",
@@ -219,8 +211,8 @@ class App extends React.Component<AppState> {
         height : "158cm",
         bloodType : "A型",
         generation: 2
-      },
-      {
+    },
+    {
         id : 21,
         group : "日向坂46",
         name : "上村ひなの",
@@ -230,43 +222,31 @@ class App extends React.Component<AppState> {
         height : "161cm",
         bloodType : "AB型",
         generation: 3
-      }
-    ];
-
-    let sampleGroup : Group = {
-      id : 1,
-      name : "日向坂46",
-      color : "#5BBEE4",
-      members : members,
-      generations : 3
     }
+];
 
-    let titleStyle : React.CSSProperties = {
-      color : sampleGroup.color
-    } 
-
-    // console.log(JSON.stringify(sampleGroup))
-
-    return (
-      <div className="app-container">
-        <header className="title-container" style={titleStyle}>
-          <h2>{selectedGroup.name}</h2>
-          <h6>アイドルバースデーカウントダウン</h6>
-          <GenerationSelection></GenerationSelection>
-        </header>
-        <main className="group-container">
-          { selectedGroup.members.map( member => <Countdown key={member.id} member={member} group={sampleGroup}></Countdown>) }
-        </main>
-      </div>
-    );
-  }
+const initialState : AppState = {
+    selectedGroup : {
+        id : 1,
+        name : "日向坂46",
+        color : "#5BBEE4",
+        members : members,
+        generations : 3
+    },
+    selectedGeneration : 0
 }
 
-const mapStateToProps = (state : AppState) => {
-  return state
+export function rootReducer(state : AppState = initialState, action : any) {
+    switch (action.type) {
+        case CHANGE_GENERATION_SELECTION:
+            let members = initialState.selectedGroup.members;
+            return {...state, selectedGeneration : action.payload, selectedGroup : {
+                ...state.selectedGroup,
+                members : action.payload > 0 ? members.filter(member => member.generation === action.payload) : members
+            }};
+        case CLEAR_GENERATION_SELECTION:
+            return {...state, selectedGeneration : 0};
+        default:
+            return state
+    }
 }
-
-const AppContainer = connect(
-  mapStateToProps
-)(App);
-export default AppContainer;
