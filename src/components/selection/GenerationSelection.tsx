@@ -13,6 +13,7 @@ interface GenerationSelect {
 
 interface GenerationSelectionProps {
     group : Group,
+    selectedGeneration : number,
     onSelectGeneration : (generation : number) => void
 }
 
@@ -32,6 +33,7 @@ class GenerationSelection extends React.Component<GenerationSelectionProps> {
 
     render() {
         let { generations, color } = this.props.group;
+        let { selectedGeneration } = this.props;
         let generationArray : Array<GenerationSelect> = [];
         generationArray.push({
             label : "ALL",
@@ -48,9 +50,18 @@ class GenerationSelection extends React.Component<GenerationSelectionProps> {
             backgroundColor: color
         };
 
+        let selectedStyle : React.CSSProperties = {
+            backgroundColor : "#FFFFFF",
+            color : color   
+        }
+
         return (
             <div className="selection" style={buttonStyle}>
-                {generationArray.map((generation : GenerationSelect) => <div className="selection-button" key={generation.value} onClick={() => this.onSelectGeneration(generation.value)}>{generation.label}</div>)}
+                {generationArray.map((generation : GenerationSelect) => 
+                    <div className={'selection-button'}
+                        key={generation.value}
+                        style={generation.value === selectedGeneration ? selectedStyle : null}
+                        onClick={() => this.onSelectGeneration(generation.value)}>{generation.label}</div>)}
             </div>
         );
     }
@@ -58,7 +69,8 @@ class GenerationSelection extends React.Component<GenerationSelectionProps> {
 
 const mapStateToProps = (state : AppState) : Partial<GenerationSelectionProps> => {
     return {
-        group : state.selectedGroup
+        group : state.selectedGroup,
+        selectedGeneration : state.selectedGeneration
     }
 }
 
