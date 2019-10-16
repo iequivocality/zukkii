@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './CountdownComponent.scss'
+import styles from './CountdownComponent.module.scss'
 import Util from '../../Util';
 import moment from 'moment';
 import Member from '../../models/Member';
@@ -72,14 +72,14 @@ export default class Countdown extends Component<CountdownProps, CountdownState>
         }
 
         return (
-            <div className="countdown-container" style={countdownStyle}>
-                <div className="profile">
-                    <div className="photo-container">
-                        <div className="photo" style={photoStyle}></div>
+            <div className={styles.countdownContainer} style={countdownStyle}>
+                <div className={styles.profile}>
+                    <div className={styles.photoContainer}>
+                        <div className={styles.photo} style={photoStyle}></div>
                     </div>
                     <CountdownDetails {...this.props.member}></CountdownDetails>
                 </div>
-                <div className="countdown">
+                <div className={styles.countdown}>
                     <CountdownUnitComponent value={week} unit="週" maxValue={Constants.MAX_WEEKS} color={group.color}></CountdownUnitComponent>
                     <CountdownUnitComponent value={day} unit="日" maxValue={Constants.MAX_DAYS} color={group.color}></CountdownUnitComponent>
                     <CountdownUnitComponent value={hour} unit="時" maxValue={Constants.MAX_HOURS} color={group.color}></CountdownUnitComponent>

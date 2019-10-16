@@ -9,6 +9,7 @@
     "@types/react": "16.9.5",
     "@types/react-dom": "16.9.1",
     "@types/react-redux": "^7.1.4",
+    "firebase": "^7.2.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "node-sass": "^4.12.0",

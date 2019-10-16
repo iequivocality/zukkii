@@ -1,4 +1,4 @@
-%details-container {
+%detailsContainer {
     display: flex;
     flex-direction: row;
     flex: 1 0 48%;
@@ -27,7 +27,7 @@
 
     }
 
-    .other-details {
+    .otherDetails {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -36,7 +36,7 @@
         .prefecture,
         .height,
         .bloodType {
-            @extend %details-container;
+            @extend %detailsContainer;
         }
     }
 }

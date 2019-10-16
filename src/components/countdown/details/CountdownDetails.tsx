@@ -2,7 +2,7 @@ import React from "react";
 import Member from "../../../models/Member";
 import Util from "../../../Util";
 
-import "./CountdownDetails.scss";
+import styles from "./CountdownDetails.module.scss";
 
 export default class CountdownDetails extends React.Component<Member>{
     render() {
@@ -10,25 +10,25 @@ export default class CountdownDetails extends React.Component<Member>{
         let formattedDate = Util.formatYYYYMMDDToJapaneseFormat(birthdate);
 
         return (
-            <div className="details">
-                <div className="name">{ name }</div>
-                <div className="kana">{ kana }</div>
-                <div className="other-details">
-                    <div className="birthdate">
-                        <div className="label">生年月日</div>
-                        <div className="text">{formattedDate}</div>
+            <div className={styles.details}>
+                <div className={styles.name}>{ name }</div>
+                <div className={styles.kana}>{ kana }</div>
+                <div className={styles.otherDetails}>
+                    <div className={styles.birthdate}>
+                        <div className={styles.label}>生年月日</div>
+                        <div className={styles.text}>{formattedDate}</div>
                     </div>
-                    <div className="prefecture">
-                        <div className="label">出身地</div>
-                        <div className="text">{prefecture}</div>
+                    <div className={styles.prefecture}>
+                        <div className={styles.label}>出身地</div>
+                        <div className={styles.text}>{prefecture}</div>
                     </div>
-                    <div className="height">
-                        <div className="label">身長</div>
-                        <div className="text">{height}</div>
+                    <div className={styles.height}>
+                        <div className={styles.label}>身長</div>
+                        <div className={styles.text}>{height}</div>
                     </div>
-                    <div className="bloodType">
-                        <div className="label">血液型</div>
-                        <div className="text">{bloodType}</div>
+                    <div className={styles.bloodType}>
+                        <div className={styles.label}>血液型</div>
+                        <div className={styles.text}>{bloodType}</div>
                     </div>
                 </div>
             </div>

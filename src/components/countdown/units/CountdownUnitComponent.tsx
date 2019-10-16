@@ -1,6 +1,6 @@
 import React from "react";
 import CountdownUnit from "../../../models/CountdownUnit";
-import "./CountdownUnitComponent.scss";
+import styles from "./CountdownUnitComponent.module.scss";
 import Util from "../../../Util";
 
 export default class CountdownUnitComponent extends React.Component<CountdownUnit> {
@@ -13,10 +13,10 @@ export default class CountdownUnitComponent extends React.Component<CountdownUni
         }; 
 
         return (
-            <div className="unit-container">
-                <div className="value">{value}</div>
-                <div className="unit">{unit}</div>
-                <div className="progress-bar" style={style}></div>
+            <div className={styles.unitContainer}>
+                <div className={styles.value}>{value}</div>
+                <div className={styles.unit}>{unit}</div>
+                <div className={styles.progressBar} style={style}></div>
             </div>
         );
     }

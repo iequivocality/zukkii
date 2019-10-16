@@ -6,8 +6,22 @@ import Group from './models/Group';
 import GenerationSelection from './components/selection/GenerationSelection';
 import { connect } from 'react-redux';
 import AppState from './store/state/AppState';
+import FirebaseApp from './data/firebase';
 
 class App extends React.Component<AppState> {
+  componentDidMount() {
+    FirebaseApp.database().ref('members').once('value').then(function (snapshot) {
+      console.log("MEMBERS")
+      console.log(snapshot.val());
+      let objects = [];
+      for (let key of Object.keys(snapshot.val())) {
+        console.log(snapshot.val()[key])
+        objects.push(snapshot.val()[key])
+      }
+      console.log(objects)
+    })
+  }
+
   render() {
     let { selectedGroup } = this.props;
     let members : Array<Member> = [

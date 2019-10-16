@@ -8,7 +8,7 @@
     margin: 5px 0px;
 }
 
-.selection-button {
+.selectionButton {
     flex: 1 0 auto;
     display: flex;
     align-items: center;
@@ -17,15 +17,15 @@
     font-size: 0.75rem;
 }
 
-.selection-button {
+.selectionButton {
     cursor: pointer;
 }
 
-.selection-button:first-child {
+.selectionButton:first-child {
     border-radius: 5px 0px 0px 5px;
 }
 
-.selection-button:last-child {
+.selectionButton:last-child {
     border-radius: 0px 5px 5px 0px;
     border-right: 0;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import Group from "../../models/Group";
-import './GenerationSelection.scss';
+import styles from './GenerationSelection.module.scss';
 import Member from "../../models/Member";
 import { connect } from "react-redux";
 import AppState from "../../store/state/AppState";
@@ -56,9 +56,9 @@ class GenerationSelection extends React.Component<GenerationSelectionProps> {
         }
 
         return (
-            <div className="selection" style={buttonStyle}>
+            <div className={styles.selection} style={buttonStyle}>
                 {generationArray.map((generation : GenerationSelect) => 
-                    <div className={'selection-button'}
+                    <div className={styles.selectionButton}
                         key={generation.value}
                         style={generation.value === selectedGeneration ? selectedStyle : null}
                         onClick={() => this.onSelectGeneration(generation.value)}>{generation.label}</div>)}
