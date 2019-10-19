@@ -233,7 +233,8 @@ const initialState : AppState = {
         members : members,
         generations : 3
     },
-    selectedGeneration : 0
+    selectedGeneration : 0,
+    groupChoices : []
 }
 
 export function rootReducer(state : AppState = initialState, action : any) {

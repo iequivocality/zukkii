@@ -14,11 +14,6 @@ class App extends React.Component<AppState> {
     FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
       console.log("MEMBERS")
       console.log(snapshot.val());
-      let objects = [];
-      // for (let key of Object.keys(snapshot.val())) {
-      //   console.log(snapshot.val()[key])
-      //   objects.push(snapshot.val()[key])
-      // }
       console.log(Util.convertObjectToArray(snapshot.val()));
       return snapshot;
     })
