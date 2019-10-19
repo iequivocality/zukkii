@@ -7,18 +7,20 @@ import GenerationSelection from './components/selection/GenerationSelection';
 import { connect } from 'react-redux';
 import AppState from './store/state/AppState';
 import FirebaseApp from './data/firebase';
+import Util from './Util';
 
 class App extends React.Component<AppState> {
   componentDidMount() {
-    FirebaseApp.database().ref('members').once('value').then(function (snapshot) {
+    FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
       console.log("MEMBERS")
       console.log(snapshot.val());
       let objects = [];
-      for (let key of Object.keys(snapshot.val())) {
-        console.log(snapshot.val()[key])
-        objects.push(snapshot.val()[key])
-      }
-      console.log(objects)
+      // for (let key of Object.keys(snapshot.val())) {
+      //   console.log(snapshot.val()[key])
+      //   objects.push(snapshot.val()[key])
+      // }
+      console.log(Util.convertObjectToArray(snapshot.val()));
+      return snapshot;
     })
   }
 

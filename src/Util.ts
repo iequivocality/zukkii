@@ -15,7 +15,6 @@ export default class Util {
     }
     
     static computeShade(hex : string, lum : number) {
-
         hex = String(hex).replace(/[^0-9a-f]/gi, '');
         if (hex.length < 6) {
             hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
@@ -30,5 +29,9 @@ export default class Util {
         }
     
         return rgb;
+    }
+
+    static convertObjectToArray<O>(object : Object) {
+        return Object.keys(object).map<O>(key => object[key])
     }
 }
