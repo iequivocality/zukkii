@@ -90,7 +90,7 @@ export default class Countdown extends Component<CountdownProps, CountdownState>
         );
     }
 
-    componentWillMount() {
+    componentWillUnmount() {
         clearInterval(this.loadInterval);
     }
 }
