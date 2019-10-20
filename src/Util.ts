@@ -31,7 +31,7 @@ export default class Util {
         return rgb;
     }
 
-    static convertObjectToArray<O>(object : Object) {
+    static convertObjectToArray<O>(object : Object) : Array<O> {
         return Object.keys(object).map<O>(key => object[key])
     }
 }

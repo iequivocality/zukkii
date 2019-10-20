@@ -5,7 +5,9 @@ import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION } from "../acti
 let members : Array<Member> = [
     {
         id : 1,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "井口眞緒",
         birthdate : "1995-11-10",
         prefecture : "新潟県",
@@ -16,7 +18,9 @@ let members : Array<Member> = [
     },
     {
         id : 2,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "潮紗理菜",
         birthdate : "1997-12-26",
         prefecture : "神奈川県",
@@ -27,7 +31,9 @@ let members : Array<Member> = [
     },
     {
         id : 4,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "影山優佳",
         birthdate : "2000-05-08",
         prefecture : "東京都",
@@ -38,7 +44,9 @@ let members : Array<Member> = [
     },
     {
         id : 5,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "加藤史帆",
         birthdate : "1998-02-02",
         prefecture : "東京都",
@@ -49,7 +57,9 @@ let members : Array<Member> = [
     },
     {
         id : 6,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "齊藤京子",
         birthdate : "1997-09-05",
         prefecture : "東京都",
@@ -60,7 +70,9 @@ let members : Array<Member> = [
     },
     {
         id : 7,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "佐々木久美",
         birthdate : "1996-01-22",
         prefecture : "千葉県",
@@ -71,7 +83,9 @@ let members : Array<Member> = [
     },
     {
         id : 8,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "佐々木美玲",
         birthdate : "1999-12-17",
         prefecture : "兵庫県",
@@ -82,7 +96,9 @@ let members : Array<Member> = [
     },
     {
         id : 9,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "高瀬愛奈",
         birthdate : "1998-09-20",
         prefecture : "大阪府",
@@ -93,7 +109,9 @@ let members : Array<Member> = [
     },
     {
         id : 10,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "高本彩花",
         birthdate : "1998-11-02",
         prefecture : "神奈川県",
@@ -104,7 +122,9 @@ let members : Array<Member> = [
     },
     {
         id : 11,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "東村芽依",
         birthdate : "1998-08-23",
         prefecture : "奈良県",
@@ -115,7 +135,9 @@ let members : Array<Member> = [
     },
     {
         id : 12,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "金村美玖",
         birthdate : "2002-09-10",
         prefecture : "埼玉県",
@@ -126,7 +148,9 @@ let members : Array<Member> = [
     },
     {
         id : 13,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "河田陽菜",
         birthdate : "2001-07-23",
         prefecture : "山口県",
@@ -137,7 +161,9 @@ let members : Array<Member> = [
     },
     {
         id : 14,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "小坂菜緒",
         birthdate : "2002-09-07",
         prefecture : "大阪府",
@@ -148,7 +174,9 @@ let members : Array<Member> = [
     },
     {
         id : 15,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "富田鈴花",
         birthdate : "2001-01-18",
         prefecture : "神奈川県",
@@ -159,7 +187,9 @@ let members : Array<Member> = [
     },
     {
         id : 16,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "丹生明里",
         birthdate : "2001-02-15",
         prefecture : "埼玉県",
@@ -170,7 +200,9 @@ let members : Array<Member> = [
     },
     {
         id : 17,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "濱岸ひより",
         birthdate : "2002-09-28",
         prefecture : "福岡県",
@@ -181,7 +213,9 @@ let members : Array<Member> = [
     },
     {
         id : 18,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "松田好花",
         birthdate : "1999-04-27",
         prefecture : "京都府",
@@ -192,7 +226,9 @@ let members : Array<Member> = [
     },
     {
         id : 19,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "宮田愛萌",
         birthdate : "1998-04-28",
         prefecture : "東京都",
@@ -203,7 +239,9 @@ let members : Array<Member> = [
     },
     {
         id : 20,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "渡邉美穂",
         birthdate : "2000-02-24",
         prefecture : "埼玉県",
@@ -214,7 +252,9 @@ let members : Array<Member> = [
     },
     {
         id : 21,
-        group : "日向坂46",
+        group : {
+            "hinatazaka46" : true
+        },
         name : "上村ひなの",
         birthdate : "2004-04-12",
         prefecture : "東京都",

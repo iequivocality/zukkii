@@ -4,13 +4,27 @@ import { connect } from 'react-redux';
 import AppState from './store/state/AppState';
 import FirebaseApp from './data/firebase';
 import Util from './Util';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, RouteProps } from 'react-router-dom';
 import BirthdayCountdownPage from './pages/birthday-countdown/BirthdayCountdown';
+import Member from './models/Member';
+
+const AppRoutes : Array<RouteProps> = [
+  {
+    path: "/",
+    component: BirthdayCountdownPage
+  }
+]
+
 
 class App extends React.Component<AppState> {
   componentDidMount() {
     FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
-      console.log(Util.convertObjectToArray(snapshot.val()));
+      let members = Util.convertObjectToArray<Member>(snapshot.val());
+      console.log('unfiltered: ', members);
+      let filteredMembers = members.filter((value : Member) => {
+        return Object.keys(value.group).findIndex(( value : string ) => ( value === 'hinatazaka')) > -1;
+      });
+      console.log('filtered: ', filteredMembers);
       return snapshot;
     })
   }
@@ -18,9 +32,13 @@ class App extends React.Component<AppState> {
   render() {
     return (
       <div className="app-container">
-        <Router>
-            <Route path="/" component={BirthdayCountdownPage}></Route>
-        </Router>
+          <Router>
+            <Switch>
+              {AppRoutes.map((route : RouteProps, key : number) => (
+                <Route key={key} {...route}></Route>
+              ))}
+            </Switch>
+          </Router>
       </div>
     );
   }

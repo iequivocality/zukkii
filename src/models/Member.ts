@@ -1,6 +1,10 @@
+export interface MemberGroup {
+    [key : string] : boolean
+}
+
 export default interface Member {
     id : number,
-    group : string,
+    group : MemberGroup,
     name : string,
     kana : string,
     birthdate : string,
