@@ -7,14 +7,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './store/reducers';
 import logger from 'redux-logger';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 const store = createStore(rootReducer, applyMiddleware(logger))
 
 const Root = ({ store }) => (
     <Provider store={store}>
-        <Router>
-            <Route path="/" component={App}></Route>
-        </Router>
+        <App></App>
     </Provider>
 );
 

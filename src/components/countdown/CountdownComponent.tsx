@@ -3,7 +3,6 @@ import styles from './CountdownComponent.module.scss'
 import Util from '../../Util';
 import moment from 'moment';
 import Member from '../../models/Member';
-import Group from '../../models/Group';
 import CountdownDetails from './details/CountdownDetails';
 import CountdownUnitComponent from './units/CountdownUnitComponent';
 import { Constants } from '../../Constants';
@@ -18,7 +17,8 @@ interface CountdownState {
 
 interface CountdownProps {
     member : Member,
-    group : Group 
+    groupId : number,
+    groupColor : string,
 }
 
 export default class Countdown extends Component<CountdownProps, CountdownState> {
@@ -61,14 +61,14 @@ export default class Countdown extends Component<CountdownProps, CountdownState>
     
     render() {
         let { week, day, hour, minute, second } = this.state;
-        let { group, member } = this.props;
+        let { groupColor, groupId, member } = this.props;
 
         let photoStyle : React.CSSProperties = {
-            backgroundImage: `url(${process.env.PUBLIC_URL}/images/${group.id}/${member.id}.jpg)`
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/${groupId}/${member.id}.jpg)`
         }
 
         let countdownStyle : React.CSSProperties = {
-            backgroundColor : this.props.group.color
+            backgroundColor : groupColor
         }
 
         return (
@@ -80,11 +80,11 @@ export default class Countdown extends Component<CountdownProps, CountdownState>
                     <CountdownDetails {...this.props.member}></CountdownDetails>
                 </div>
                 <div className={styles.countdown}>
-                    <CountdownUnitComponent value={week} unit="週" maxValue={Constants.MAX_WEEKS} color={group.color}></CountdownUnitComponent>
-                    <CountdownUnitComponent value={day} unit="日" maxValue={Constants.MAX_DAYS} color={group.color}></CountdownUnitComponent>
-                    <CountdownUnitComponent value={hour} unit="時" maxValue={Constants.MAX_HOURS} color={group.color}></CountdownUnitComponent>
-                    <CountdownUnitComponent value={minute} unit="分" maxValue={Constants.MAX_MINUTES} color={group.color}></CountdownUnitComponent>
-                    <CountdownUnitComponent value={second} unit="秒" maxValue={Constants.MAX_SECONDS} color={group.color}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={week} unit="週" maxValue={Constants.MAX_WEEKS} color={groupColor}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={day} unit="日" maxValue={Constants.MAX_DAYS} color={groupColor}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={hour} unit="時" maxValue={Constants.MAX_HOURS} color={groupColor}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={minute} unit="分" maxValue={Constants.MAX_MINUTES} color={groupColor}></CountdownUnitComponent>
+                    <CountdownUnitComponent value={second} unit="秒" maxValue={Constants.MAX_SECONDS} color={groupColor}></CountdownUnitComponent>
                 </div>
             </div>
         );
