@@ -1,3 +1,8 @@
+import Group from "../../models/Group";
+import FirebaseApp from "../../data/firebase";
+import Util from "../../Util";
+import Member from "../../models/Member";
+
 // import { Action } from "redux";
 
 // export enum SelectionGenerationActions {
@@ -17,6 +22,7 @@
 
 export const CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION";
 export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
+export const LOAD_GROUPS = "LOAD_GROUPS";
 
 export function changeGeneration(gen : number) {
     return {
@@ -28,5 +34,27 @@ export function changeGeneration(gen : number) {
 export function clearGeneration() {
     return {
         type : CLEAR_GENERATION_SELECTION
+    }
+}
+
+export function loadGroups(groupChoices : Array<Group>) {
+    return {
+        type : LOAD_GROUPS,
+        payload : groupChoices
+    }
+}
+
+export function fetchGroups() {
+    return function (dispatch : any) {
+        FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
+            let groups = Util.convertObjectToArray<Group>(snapshot.val());
+            console.log('unfiltered: ', groups);
+            // let filteredMembers = members.filter((value : Member) => {
+            //   return Object.keys(value.group).findIndex(( value : string ) => ( value === 'hinatazaka')) > -1;
+            // });
+            // console.log('filtered: ', filteredMembers);
+            dispatch(loadGroups(groups))
+            return snapshot;
+        });
     }
 }

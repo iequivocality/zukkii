@@ -10,7 +10,7 @@ export default class Util {
     }
 
     static checkIfCurrentDateIsBeforeBirthday(targetDate : moment.Moment) {
-		var now = moment().tz("Asia/Tokyo");
+		let now = moment().tz("Japan");
         return targetDate.isBefore(now, 'day');
     }
     
@@ -33,5 +33,11 @@ export default class Util {
 
     static convertObjectToArray<O>(object : Object) : Array<O> {
         return Object.keys(object).map<O>(key => object[key])
+    }
+
+    static getAgeFromBirthdate(birthdate : string) : number {
+        let birthdateMoment = moment(birthdate, "YYYY-MM-DD").tz("Japan");
+        let currentMoment = moment().tz("Japan");
+        return currentMoment.diff(birthdateMoment, 'years');
     }
 }

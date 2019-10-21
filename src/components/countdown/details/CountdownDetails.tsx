@@ -8,6 +8,7 @@ export default class CountdownDetails extends React.Component<Member>{
     render() {
         let { name, prefecture, kana, height, bloodType, birthdate } = this.props;
         let formattedDate = Util.formatYYYYMMDDToJapaneseFormat(birthdate);
+        let age = Util.getAgeFromBirthdate(birthdate);
 
         return (
             <div className={styles.details}>
@@ -16,7 +17,7 @@ export default class CountdownDetails extends React.Component<Member>{
                 <div className={styles.otherDetails}>
                     <div className={styles.birthdate}>
                         <div className={styles.label}>生年月日</div>
-                        <div className={styles.text}>{formattedDate}</div>
+                        <div className={styles.text}>{formattedDate} ({age}歳)</div>
                     </div>
                     <div className={styles.prefecture}>
                         <div className={styles.label}>出身地</div>

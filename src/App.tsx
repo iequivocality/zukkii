@@ -6,11 +6,17 @@ import FirebaseApp from './data/firebase';
 import Util from './Util';
 import { BrowserRouter as Router, Route, Switch, RouteProps } from 'react-router-dom';
 import BirthdayCountdownPage from './pages/birthday-countdown/BirthdayCountdown';
+import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
 import Member from './models/Member';
 
 const AppRoutes : Array<RouteProps> = [
   {
     path: "/",
+    component: BirthdaySelectionPage,
+    exact: true
+  },
+  {
+    path: "/hinatazaka",
     component: BirthdayCountdownPage
   }
 ]
@@ -18,15 +24,15 @@ const AppRoutes : Array<RouteProps> = [
 
 class App extends React.Component<AppState> {
   componentDidMount() {
-    FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
-      let members = Util.convertObjectToArray<Member>(snapshot.val());
-      console.log('unfiltered: ', members);
-      let filteredMembers = members.filter((value : Member) => {
-        return Object.keys(value.group).findIndex(( value : string ) => ( value === 'hinatazaka')) > -1;
-      });
-      console.log('filtered: ', filteredMembers);
-      return snapshot;
-    })
+    // FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
+    //   let members = Util.convertObjectToArray<Member>(snapshot.val());
+    //   console.log('unfiltered: ', members);
+    //   let filteredMembers = members.filter((value : Member) => {
+    //     return Object.keys(value.group).findIndex(( value : string ) => ( value === 'hinatazaka')) > -1;
+    //   });
+    //   console.log('filtered: ', filteredMembers);
+    //   return snapshot;
+    // })
   }
 
   render() {

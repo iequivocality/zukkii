@@ -1,7 +1,7 @@
 import Member from "./Member";
 
 export default interface Group {
-    id : number,
+    id : string,
     name : string,
     color : string,
     generations : number,

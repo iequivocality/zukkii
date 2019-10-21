@@ -1,7 +1,6 @@
 %detailsContainer {
     display: flex;
     flex-direction: row;
-    flex: 1 0 48%;
     padding-right: 4px;
 }
 
@@ -37,10 +36,15 @@
         line-height: 1.1rem;
         
         .birthdate,
+        .height {
+            @extend %detailsContainer;
+            flex: 1 0 58%;
+        }
+
         .prefecture,
-        .height,
         .bloodType {
             @extend %detailsContainer;
+            flex: 1 0 38%;
         }
     }
 }

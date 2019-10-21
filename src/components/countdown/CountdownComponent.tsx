@@ -17,7 +17,7 @@ interface CountdownState {
 
 interface CountdownProps {
     member : Member,
-    groupId : number,
+    groupId : string,
     groupColor : string,
 }
 

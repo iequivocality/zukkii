@@ -1,6 +1,6 @@
 import AppState from "../state/AppState";
 import Member from "../../models/Member";
-import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION } from "../actions";
+import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION, LOAD_GROUPS } from "../actions";
 
 let members : Array<Member> = [
     {
@@ -267,7 +267,7 @@ let members : Array<Member> = [
 
 const initialState : AppState = {
     selectedGroup : {
-        id : 1,
+        id : "hinatazaka",
         name : "日向坂46",
         color : "#5BBEE4",
         members : members,
@@ -287,6 +287,8 @@ export function rootReducer(state : AppState = initialState, action : any) {
             }};
         case CLEAR_GENERATION_SELECTION:
             return {...state, selectedGeneration : 0};
+        case LOAD_GROUPS:
+            return {...state, groupChoices : action.payload}
         default:
             return state
     }
