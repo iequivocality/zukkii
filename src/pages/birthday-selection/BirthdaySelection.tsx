@@ -26,7 +26,7 @@ class BirthdaySelectionPage extends React.Component<BirthdaySelectionPageProps> 
                     {/* {JSON.stringify(this.props.groupChoices)} */}
                     {this.props.groupChoices.map((group : Group) => {
                         return (
-                            <Link style={this.getGroupStyle(group)} className={styles.groupChoice} to={`/${group.id}`} key={group.id}>
+                            <Link style={this.getGroupStyle(group)} className={styles.groupChoice} to={`/group/${group.id}`} key={group.id}>
                                 <img className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img>
                                 <div className={styles.groupName}>
                                     {group.name}
