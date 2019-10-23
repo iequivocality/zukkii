@@ -5,7 +5,7 @@ import GenerationSelectionContainer from '../../components/selection/GenerationS
 import Countdown from '../../components/countdown/CountdownComponent';
 import AppState from '../../store/state/AppState';
 import { connect } from 'react-redux';
-import { useParams, withRouter, RouteComponentProps } from 'react-router';
+import { useParams, withRouter, RouteComponentProps, Redirect } from 'react-router';
 import Member from '../../models/Member';
 import { fetchMembersFromGroup } from '../../store/actions';
 
@@ -26,24 +26,30 @@ class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPa
     }
 
     render() {
-        let { name, color, id } = this.props.selectedGroup;
-        let members = this.props.members;
-        let titleStyle : React.CSSProperties = {
-            color : color
+        if (this.props.selectedGroup) {
+            let { name, color, id } = this.props.selectedGroup;
+            let members = this.props.members;
+            let titleStyle : React.CSSProperties = {
+                color : color
+            }
+            return (
+                <Fragment>
+                    <header className={styles.titleContainer} style={titleStyle}>
+                        <h2>{name}</h2>
+                        <h6>アイドルバースデーカウントダウン</h6>
+                        <GenerationSelectionContainer></GenerationSelectionContainer>
+                    </header>
+                    <main className={styles.groupContainer}>
+                    { members.map( member => <Countdown key={member.id} member={member} groupColor={color} groupId={id}></Countdown>) }
+                    </main>
+                </Fragment>
+            );
+        }
+        else {
+            return (<Redirect to={'/404'}></Redirect>)
         }
 
-        return (
-            <Fragment>
-                <header className={styles.titleContainer} style={titleStyle}>
-                    <h2>{name}</h2>
-                    <h6>アイドルバースデーカウントダウン</h6>
-                    <GenerationSelectionContainer></GenerationSelectionContainer>
-                </header>
-                <main className={styles.groupContainer}>
-                { members.map( member => <Countdown key={member.id} member={member} groupColor={color} groupId={id}></Countdown>) }
-                </main>
-            </Fragment>
-        );
+        
     }
 }
 

@@ -3,12 +3,7 @@ import Member from "../../models/Member";
 import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION, LOAD_GROUPS, LOAD_MEMBERS } from "../actions";
 
 const initialState : AppState = {
-    selectedGroup : {
-        id : "hinatazaka",
-        name : "日向坂46",
-        color : "#5BBEE4",
-        generations : 3
-    },
+    selectedGroup : null,
     members : [],
     selectedGeneration : 0,
     groupChoices : []

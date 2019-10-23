@@ -18,6 +18,10 @@ const AppRoutes : Array<RouteProps> = [
     component: BirthdayCountdownPage
   },
   {
+    path: "404",
+    component : NoMatchComponent
+  },
+  {
     path: "*",
     component : NoMatchComponent
   }
