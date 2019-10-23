@@ -23,6 +23,7 @@ import Member from "../../models/Member";
 export const CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION";
 export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
 export const LOAD_GROUPS = "LOAD_GROUPS";
+export const LOAD_MEMBERS = "LOAD_MEMBERS";
 
 export function changeGeneration(gen : number) {
     return {
@@ -44,6 +45,13 @@ export function loadGroups(groupChoices : Array<Group>) {
     }
 }
 
+export function loadMembers(members : Array<Member>) {
+    return {
+        type : LOAD_MEMBERS,
+        payload : members
+    }
+}
+
 export function fetchGroups() {
     return function (dispatch : any) {
         FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
@@ -54,6 +62,20 @@ export function fetchGroups() {
             // });
             // console.log('filtered: ', filteredMembers);
             dispatch(loadGroups(groups))
+            return snapshot;
+        });
+    }
+}
+
+export function fetchMembersFromGroup(group : string) {
+    return function (dispatch : any) {
+        FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
+            let members = Util.convertObjectToArray<Member>(snapshot.val());
+            console.log('unfiltered: ', members);
+            let filteredMembers = members.filter((value : Member) => {
+              return Object.keys(value.group).findIndex(( value : string ) => ( value === group)) > -1;
+            });
+            dispatch(loadMembers(members))
             return snapshot;
         });
     }

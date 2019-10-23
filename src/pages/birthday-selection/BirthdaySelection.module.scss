@@ -10,6 +10,7 @@
 .birthdaySelection {
     color : #fff;
     flex: 1 0 85%;
+    margin: 0 15%;
     width: 100%;
     height: 100%;
     display: flex;
@@ -37,7 +38,7 @@
 
 .groupChoice:hover {
     .groupBackground {
-        transform: scale(1.25);
+        transform: scale(1.25) rotate(3deg);
     }
 }
 

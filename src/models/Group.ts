@@ -4,6 +4,5 @@ export default interface Group {
     id : string,
     name : string,
     color : string,
-    generations : number,
-    members : Array<Member>
+    generations : number
 }

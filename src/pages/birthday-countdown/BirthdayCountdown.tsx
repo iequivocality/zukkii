@@ -5,10 +5,29 @@ import GenerationSelectionContainer from '../../components/selection/GenerationS
 import Countdown from '../../components/countdown/CountdownComponent';
 import AppState from '../../store/state/AppState';
 import { connect } from 'react-redux';
+import { useParams, withRouter, RouteComponentProps } from 'react-router';
+import Member from '../../models/Member';
+import { fetchMembersFromGroup } from '../../store/actions';
 
-class BirthdayCountdownPageComponent extends React.Component<Group> {
+interface BirthdayCountdownPageProps {
+    selectedGroup : Group,
+    members : Array<Member>,
+    loadMembersFromGroup : (group : string) => void
+}
+
+class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPageProps & RouteComponentProps> {
+    componentDidMount() {
+        let { isExact, params } = this.props.match;
+        if ( isExact ) {
+            let group = params['group'];
+            console.log("GROUP", group);
+            this.props.loadMembersFromGroup(group);
+        }
+    }
+
     render() {
-        let { name, members, color, id } = this.props;
+        let { name, color, id } = this.props.selectedGroup;
+        let members = this.props.members;
         let titleStyle : React.CSSProperties = {
             color : color
         }
@@ -28,14 +47,24 @@ class BirthdayCountdownPageComponent extends React.Component<Group> {
     }
 }
 
-const mapStateToProps = (state : AppState) => {
+const mapStateToProps = (state : AppState) : Partial<BirthdayCountdownPageProps> => {
     return {
-        ...state.selectedGroup
+        selectedGroup : state.selectedGroup,
+        members : state.members
+    }
+}
+
+const mapDispatchToProps = (dispatch : any) : Partial<BirthdayCountdownPageProps> => {
+    return {
+        loadMembersFromGroup : (group : string) => {
+            dispatch(fetchMembersFromGroup(group));
+        }
     }
 }
 
 const BirthdayCountdownPage = connect(
-    mapStateToProps
-)(BirthdayCountdownPageComponent);
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(BirthdayCountdownPageComponent));
 export default BirthdayCountdownPage;
 
