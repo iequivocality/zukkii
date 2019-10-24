@@ -7,26 +7,29 @@ import AppState from '../../store/state/AppState';
 import { connect } from 'react-redux';
 import { useParams, withRouter, RouteComponentProps, Redirect } from 'react-router';
 import Member from '../../models/Member';
-import { fetchMembersFromGroup } from '../../store/actions';
+import { fetchMembersFromGroup, fetchGroup } from '../../store/actions';
+import { Link } from 'react-router-dom';
 
-interface BirthdayCountdownPageProps {
+interface BirthdayCountdownProps {
     selectedGroup : Group,
+    doesGroupExist : boolean,
     members : Array<Member>,
-    loadMembersFromGroup : (group : string) => void
+    loadGroupFromParameter : (group: string) => void
 }
 
-class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPageProps & RouteComponentProps> {
+type BirthdayCountdownPageProps = BirthdayCountdownProps & RouteComponentProps;
+
+class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPageProps> {
     componentDidMount() {
         let { isExact, params } = this.props.match;
         if ( isExact ) {
             let group = params['group'];
-            console.log("GROUP", group);
-            this.props.loadMembersFromGroup(group);
+            this.props.loadGroupFromParameter(group);
         }
     }
 
     render() {
-        if (this.props.selectedGroup) {
+        if (this.props.doesGroupExist) {
             let { name, color, id } = this.props.selectedGroup;
             let members = this.props.members;
             let titleStyle : React.CSSProperties = {
@@ -35,6 +38,7 @@ class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPa
             return (
                 <Fragment>
                     <header className={styles.titleContainer} style={titleStyle}>
+                        <Link to="/">Back</Link>
                         <h2>{name}</h2>
                         <h6>アイドルバースデーカウントダウン</h6>
                         <GenerationSelectionContainer></GenerationSelectionContainer>
@@ -46,24 +50,29 @@ class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPa
             );
         }
         else {
-            return (<Redirect to={'/404'}></Redirect>)
+            // return (<Redirect to={'/404'}></Redirect>)
+            return null;
         }
 
         
     }
 }
 
-const mapStateToProps = (state : AppState) : Partial<BirthdayCountdownPageProps> => {
+const mapStateToProps = (state : AppState, ownProps : BirthdayCountdownPageProps) : Partial<BirthdayCountdownPageProps> => {    
+    let { params } = ownProps.match;
+    let group = params['group'];
+    
     return {
         selectedGroup : state.selectedGroup,
-        members : state.members
+        members : state.members,
+        doesGroupExist : (state.groupChoices.length > 0 && state.groupChoices.map(group => (group.id)).includes(group)) || (state.selectedGroup !== null && state.selectedGroup.id === group)
     }
 }
 
 const mapDispatchToProps = (dispatch : any) : Partial<BirthdayCountdownPageProps> => {
     return {
-        loadMembersFromGroup : (group : string) => {
-            dispatch(fetchMembersFromGroup(group));
+        loadGroupFromParameter : (group : string) => {
+            dispatch(fetchGroup(group))
         }
     }
 }

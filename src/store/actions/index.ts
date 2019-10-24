@@ -22,6 +22,7 @@ import Member from "../../models/Member";
 
 export const CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION";
 export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
+export const LOAD_GROUP = "LOAD_GROUP";
 export const LOAD_GROUPS = "LOAD_GROUPS";
 export const LOAD_MEMBERS = "LOAD_MEMBERS";
 
@@ -35,6 +36,13 @@ export function changeGeneration(gen : number) {
 export function clearGeneration() {
     return {
         type : CLEAR_GENERATION_SELECTION
+    }
+}
+
+export function loadGroup(group : Group) {
+    return {
+        type : LOAD_GROUP,
+        payload : group
     }
 }
 
@@ -52,11 +60,32 @@ export function loadMembers(members : Array<Member>) {
     }
 }
 
-export function fetchGroups() {
-    return function (dispatch : any) {
+export function fetchGroup(groupName : string) {
+    return (dispatch : any) => {
         FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let groups = Util.convertObjectToArray<Group>(snapshot.val());
             console.log('unfiltered: ', groups);
+            let filteredGroup = groups.filter((value : Group) => {
+              return value.id === groupName;
+            });
+            let selectedGroup = groups.find((value : Group) => {
+                return value.id === groupName;
+            });
+            if (Util.isNotNullAndNotUndefined(selectedGroup)) {
+                dispatch(loadGroup(filteredGroup.length > 0 ? filteredGroup[0] : null))
+                dispatch(fetchMembersFromGroup(groupName));
+            }
+            console.log('filtered: ', filteredGroup);
+            return snapshot;
+        });
+    }
+}
+
+export function fetchGroups() {
+    return (dispatch : any) => {
+        FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
+            let groups = Util.convertObjectToArray<Group>(snapshot.val());
+            // console.log('unfiltered: ', groups);
             // let filteredMembers = members.filter((value : Member) => {
             //   return Object.keys(value.group).findIndex(( value : string ) => ( value === 'hinatazaka')) > -1;
             // });
@@ -75,7 +104,7 @@ export function fetchMembersFromGroup(group : string) {
             let filteredMembers = members.filter((value : Member) => {
               return Object.keys(value.group).findIndex(( value : string ) => ( value === group)) > -1;
             });
-            dispatch(loadMembers(members))
+            dispatch(loadMembers(filteredMembers))
             return snapshot;
         });
     }

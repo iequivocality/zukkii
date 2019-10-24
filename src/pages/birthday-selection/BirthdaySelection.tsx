@@ -2,13 +2,14 @@ import React, { Fragment } from 'react';
 import styles from './BirthdaySelection.module.scss';
 import AppState from '../../store/state/AppState';
 import { connect } from 'react-redux';
-import { fetchGroups } from '../../store/actions';
+import { fetchGroups, loadGroup } from '../../store/actions';
 import Group from '../../models/Group';
 import { Link } from 'react-router-dom';
 
 interface BirthdaySelectionPageProps {
     groupChoices : Array<Group>,
-    loadGroups : () => void
+    loadGroups : () => void,
+    setGroup : (group : Group) => void,
 }
 
 class BirthdaySelectionPage extends React.Component<BirthdaySelectionPageProps> {
@@ -26,7 +27,8 @@ class BirthdaySelectionPage extends React.Component<BirthdaySelectionPageProps> 
                     {/* {JSON.stringify(this.props.groupChoices)} */}
                     {this.props.groupChoices.map((group : Group) => {
                         return (
-                            <Link style={this.getGroupStyle(group)} className={styles.groupChoice} to={`/group/${group.id}`} key={group.id}>
+                            <Link style={this.getGroupStyle(group)} className={styles.groupChoice} to={`/group/${group.id}`} 
+                                key={group.id} onClick={() => this.props.setGroup(group)}>
                                 <img className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img>
                                 <div className={styles.groupName}>
                                     {group.name}
@@ -57,6 +59,9 @@ const mapDispatchToProps = (dispatch : any) => {
     return {
         loadGroups : () => {
             dispatch(fetchGroups());
+        },
+        setGroup : (group : Group) => {
+            dispatch(loadGroup(group));
         }
     }
 };

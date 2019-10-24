@@ -40,4 +40,8 @@ export default class Util {
         let currentMoment = moment().tz("Japan");
         return currentMoment.diff(birthdateMoment, 'years');
     }
+
+    static isNotNullAndNotUndefined(object : Object) {
+        return object !== undefined && object !== null;
+    }
 }

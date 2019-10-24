@@ -1,6 +1,6 @@
 import AppState from "../state/AppState";
 import Member from "../../models/Member";
-import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION, LOAD_GROUPS, LOAD_MEMBERS } from "../actions";
+import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION, LOAD_GROUPS, LOAD_MEMBERS, LOAD_GROUP } from "../actions";
 
 const initialState : AppState = {
     selectedGroup : null,
@@ -19,10 +19,12 @@ export function rootReducer(state : AppState = initialState, action : any) {
             }};
         case CLEAR_GENERATION_SELECTION:
             return {...state, selectedGeneration : 0};
+        case LOAD_GROUP:
+            return {...state, selectedGroup : action.payload};
         case LOAD_GROUPS:
             return {...state, groupChoices : action.payload};
         case LOAD_MEMBERS:
-            return {...state, members: action.payload}
+            return {...state, members: action.payload};
         default:
             return state
     }
