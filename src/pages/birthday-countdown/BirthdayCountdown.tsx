@@ -29,7 +29,7 @@ class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPa
     }
 
     render() {
-        if (this.props.doesGroupExist) {
+        if (this.props.selectedGroup) {
             let { name, color, id } = this.props.selectedGroup;
             let members = this.props.members;
             let titleStyle : React.CSSProperties = {
@@ -64,8 +64,7 @@ const mapStateToProps = (state : AppState, ownProps : BirthdayCountdownPageProps
     
     return {
         selectedGroup : state.selectedGroup,
-        members : state.members,
-        doesGroupExist : (state.groupChoices.length > 0 && state.groupChoices.map(group => (group.id)).includes(group)) || (state.selectedGroup !== null && state.selectedGroup.id === group)
+        members : state.members
     }
 }
 
