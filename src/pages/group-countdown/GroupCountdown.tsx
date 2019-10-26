@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import styles from './BirthdayCountdown.module.scss'
+import styles from './GroupCountdown.module.scss'
 import Group from '../../models/Group';
 import GenerationSelectionContainer from '../../components/selection/GenerationSelection';
 import Countdown from '../../components/countdown/CountdownComponent';
@@ -9,17 +9,18 @@ import { useParams, withRouter, RouteComponentProps, Redirect } from 'react-rout
 import Member from '../../models/Member';
 import { fetchMembersFromGroup, fetchGroup } from '../../store/actions';
 import { Link } from 'react-router-dom';
+import BackButton from '../../components/backbutton/BackButton';
 
-interface BirthdayCountdownProps {
+interface GroupCountdownProps {
     selectedGroup : Group,
     doesGroupExist : boolean,
     members : Array<Member>,
     loadGroupFromParameter : (group: string) => void
 }
 
-type BirthdayCountdownPageProps = BirthdayCountdownProps & RouteComponentProps;
+type GroupCountdownPageProps = GroupCountdownProps & RouteComponentProps;
 
-class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPageProps> {
+class GroupCountdownPageComponent extends React.Component<GroupCountdownPageProps> {
     componentDidMount() {
         let { isExact, params } = this.props.match;
         if ( isExact ) {
@@ -38,7 +39,7 @@ class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPa
             return (
                 <Fragment>
                     <header className={styles.titleContainer} style={titleStyle}>
-                        <Link to="/">Back</Link>
+                        <BackButton to="/"></BackButton>
                         <h2>{name}</h2>
                         <h6>アイドルバースデーカウントダウン</h6>
                         <GenerationSelectionContainer></GenerationSelectionContainer>
@@ -58,17 +59,14 @@ class BirthdayCountdownPageComponent extends React.Component<BirthdayCountdownPa
     }
 }
 
-const mapStateToProps = (state : AppState, ownProps : BirthdayCountdownPageProps) : Partial<BirthdayCountdownPageProps> => {    
-    let { params } = ownProps.match;
-    let group = params['group'];
-    
+const mapStateToProps = (state : AppState, ownProps : GroupCountdownPageProps) : Partial<GroupCountdownPageProps> => {        
     return {
         selectedGroup : state.selectedGroup,
         members : state.members
     }
 }
 
-const mapDispatchToProps = (dispatch : any) : Partial<BirthdayCountdownPageProps> => {
+const mapDispatchToProps = (dispatch : any) : Partial<GroupCountdownPageProps> => {
     return {
         loadGroupFromParameter : (group : string) => {
             dispatch(fetchGroup(group))
@@ -76,9 +74,9 @@ const mapDispatchToProps = (dispatch : any) : Partial<BirthdayCountdownPageProps
     }
 }
 
-const BirthdayCountdownPage = connect(
+const GroupCountdownPage = connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(BirthdayCountdownPageComponent));
-export default BirthdayCountdownPage;
+)(withRouter(GroupCountdownPageComponent));
+export default GroupCountdownPage;
 

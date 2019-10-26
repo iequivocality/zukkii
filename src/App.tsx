@@ -3,7 +3,7 @@ import './App.scss';
 import { connect } from 'react-redux';
 import AppState from './store/state/AppState';
 import { BrowserRouter as Router, Route, Switch, RouteProps } from 'react-router-dom';
-import BirthdayCountdownPage from './pages/birthday-countdown/BirthdayCountdown';
+import BirthdayCountdownPage from './pages/group-countdown/GroupCountdown';
 import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
 import NoMatchComponent from './pages/no-match/NoMatch';
 
