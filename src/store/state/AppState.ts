@@ -5,5 +5,6 @@ export default interface AppState {
     selectedGroup : Group,
     selectedGeneration : number
     groupChoices : Array<Group>,
-    members : Array<Member>
+    members : Array<Member>,
+    filteredMembers : Array<Member>
 }

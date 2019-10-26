@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch, RouteProps } from 'react-router
 import BirthdayCountdownPage from './pages/group-countdown/GroupCountdown';
 import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
 import NoMatchComponent from './pages/no-match/NoMatch';
+import { fetchGroups } from './store/actions';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -25,10 +26,18 @@ const AppRoutes : Array<RouteProps> = [
     path: "*",
     component : NoMatchComponent
   }
-]
+];
+
+interface AppProps {
+  loadGroups : () => void
+}
 
 
-class App extends React.Component<AppState> {
+class App extends React.Component<AppState & AppProps> {
+  componentDidMount() {
+    this.props.loadGroups();
+  }
+
   render() {
     return (
       <div className="app-container">
@@ -46,9 +55,18 @@ class App extends React.Component<AppState> {
 
 const mapStateToProps = (state : AppState) => {
   return state
+};
+
+const mapDispatchToProps = (dispatch : any) => {
+  return {
+    loadGroups : () => {
+      dispatch(fetchGroups());
+    }
+  }
 }
 
 const AppContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App);
 export default AppContainer;

@@ -29,7 +29,7 @@ class BirthdaySelectionPage extends React.Component<BirthdaySelectionPageProps> 
                         return (
                             <Link style={this.getGroupStyle(group)} className={styles.groupChoice} to={`/group/${group.id}`} 
                                 key={group.id} onClick={() => this.props.setGroup(group)}>
-                                <img className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img>
+                                <img alt={group.name} className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img>
                                 <div className={styles.groupName}>
                                     {group.name}
                                 </div>

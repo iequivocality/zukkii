@@ -2,19 +2,20 @@ import React, { Fragment } from 'react';
 import styles from './GroupCountdown.module.scss'
 import Group from '../../models/Group';
 import GenerationSelectionContainer from '../../components/selection/GenerationSelection';
-import Countdown from '../../components/countdown/CountdownComponent';
 import AppState from '../../store/state/AppState';
 import { connect } from 'react-redux';
-import { useParams, withRouter, RouteComponentProps, Redirect } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
 import Member from '../../models/Member';
-import { fetchMembersFromGroup, fetchGroup } from '../../store/actions';
-import { Link } from 'react-router-dom';
+import { fetchGroup } from '../../store/actions';
 import BackButton from '../../components/backbutton/BackButton';
+import MemberCountdown from '../member-countdown/MemberCountdown';
+import Util from '../../Util';
 
 interface GroupCountdownProps {
     selectedGroup : Group,
     doesGroupExist : boolean,
     members : Array<Member>,
+    shouldRedirect : boolean,
     loadGroupFromParameter : (group: string) => void
 }
 
@@ -30,9 +31,9 @@ class GroupCountdownPageComponent extends React.Component<GroupCountdownPageProp
     }
 
     render() {
-        if (this.props.selectedGroup) {
-            let { name, color, id } = this.props.selectedGroup;
-            let members = this.props.members;
+        let { selectedGroup, members, doesGroupExist } = this.props;
+        if (doesGroupExist) {
+            let { name, color } = selectedGroup;
             let titleStyle : React.CSSProperties = {
                 color : color
             }
@@ -44,14 +45,11 @@ class GroupCountdownPageComponent extends React.Component<GroupCountdownPageProp
                         <h6>アイドルバースデーカウントダウン</h6>
                         <GenerationSelectionContainer></GenerationSelectionContainer>
                     </header>
-                    <main className={styles.groupContainer}>
-                    { members.map( member => <Countdown key={member.id} member={member} groupColor={color} groupId={id}></Countdown>) }
-                    </main>
+                    <MemberCountdown group={this.props.selectedGroup} members={members} ></MemberCountdown>
                 </Fragment>
             );
         }
         else {
-            // return (<Redirect to={'/404'}></Redirect>)
             return null;
         }
 
@@ -62,7 +60,8 @@ class GroupCountdownPageComponent extends React.Component<GroupCountdownPageProp
 const mapStateToProps = (state : AppState, ownProps : GroupCountdownPageProps) : Partial<GroupCountdownPageProps> => {        
     return {
         selectedGroup : state.selectedGroup,
-        members : state.members
+        members : state.filteredMembers,
+        doesGroupExist : Util.isNotNullAndNotUndefined(state.selectedGroup) && Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === state.selectedGroup.id )))
     }
 }
 
