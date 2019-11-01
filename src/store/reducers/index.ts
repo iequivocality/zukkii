@@ -13,13 +13,6 @@ export function rootReducer(state : AppState = initialState, action : any) {
     switch (action.type) {
         case CHANGE_GENERATION_SELECTION:
             let members = state.members;
-            if (action.payload > 0) {
-                console.log(members.filter(member => member.generation === action.payload))
-            }
-            else {
-                console.log(members)
-            }
-            // console.log(members.filter(member => member.generation === action.payload))
             return {...state,
                 selectedGeneration : action.payload, 
                 filteredMembers : action.payload > 0 ? members.filter(member => member.generation === action.payload) : state.members

@@ -1,33 +1,42 @@
-import React, { Fragment, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './GroupCountdown.module.scss'
 import GenerationSelectionContainer from '../../components/selection/GenerationSelection';
 import AppState from '../../store/state/AppState';
-import { useSelector, useDispatch } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router';
 import { fetchGroup } from '../../store/actions';
 import BackButton from '../../components/backbutton/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
 
 function GroupCountdownPageComponent(props : RouteComponentProps) {
-    let selectedGroup = useSelector((state : AppState) => state.selectedGroup)
-    let members = useSelector((state : AppState) => state.filteredMembers)
-    let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.selectedGroup) && Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === state.selectedGroup.id ))))
+    let { isExact, params } = props.match;
+    let groupParam = params['group'];
+    let selectedGroup = useSelector((state : AppState) => state.selectedGroup, shallowEqual)
+    let members = useSelector((state : AppState) => state.filteredMembers, shallowEqual)
+    let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === groupParam ))), shallowEqual)
     let dispatch = useDispatch();
+    let [ showNotFound, setShowNotFound ] = useState(false);
     let loadGroupFromParameter = useCallback((group : string) => {
         dispatch(fetchGroup(group));
     }, [dispatch])
-    let { isExact, params } = props.match;
 
     useEffect(() => {
         if ( isExact ) {
-            let group = params['group'];
-            console.log(group)
-            loadGroupFromParameter(group);
-            // dispatch(fetchGroup(group))
+            console.log(groupParam)
+            loadGroupFromParameter(groupParam);
         }
-        
     }, []);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (!doesGroupExist) {
+                setShowNotFound(true);
+            }
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [ showNotFound ]);
 
     if (doesGroupExist) {
         let { name, color } = selectedGroup;
@@ -35,7 +44,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
             color : color
         }
         return (
-            <Fragment>
+            <>
                 <header className={styles.titleContainer} style={titleStyle}>
                     <BackButton to="/"></BackButton>
                     <h2>{name}</h2>
@@ -43,12 +52,16 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
                     <GenerationSelectionContainer></GenerationSelectionContainer>
                 </header>
                 <MemberCountdown group={selectedGroup} members={members} ></MemberCountdown>
-            </Fragment>
+            </>
         );
     }
     else {
-        return null;
+        if (showNotFound) {
+            return <Redirect to="/404"></Redirect>;
+        }
+        else {
+            return <h6>LOADING</h6>;
+        }
     }
 }
 export default withRouter(GroupCountdownPageComponent);
-

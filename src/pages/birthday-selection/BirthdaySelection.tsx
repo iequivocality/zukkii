@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styles from './BirthdaySelection.module.scss';
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch } from 'react-redux';
@@ -34,8 +34,9 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
     }, [])
 
     return (
-        <Fragment>
+        <>
             <div className={styles.titleContainer}>
+                <h2>アイドルバースデーカウントダウン</h2>
                 <h4>アイドルグループ選んでください</h4>
             </div>
             <div className={styles.birthdaySelection}>
@@ -51,6 +52,6 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
                     );
                 })}
             </div>
-        </Fragment>
+        </>
     )
 }

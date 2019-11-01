@@ -8,9 +8,19 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    color: #888;
+    transition: color 100ms ease-in-out;
 
     svg {
         font-size: 1.2rem;
     }
+
+    a {
+        color: inherit;
+    }
+}
+
+.backButton:hover {
+    color: #fff;
 }

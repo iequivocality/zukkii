@@ -3,23 +3,6 @@ import FirebaseApp from "../../data/firebase";
 import Util from "../../Util";
 import Member from "../../models/Member";
 
-// import { Action } from "redux";
-
-// export enum SelectionGenerationActions {
-//     CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION",
-//     CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION"
-// }
-
-
-// export interface ChangeGenerationSelectionAction extends Action<SelectionGenerationActions.CHANGE_GENERATION_SELECTION> {
-//     payload : number
-// }
-
-// export interface ClearGenerationSelectionAction extends Action<SelectionGenerationActions.CLEAR_GENERATION_SELECTION> {
-// }
-
-// export type SelectionGenerationActionTypes = ChangeGenerationSelectionAction | ClearGenerationSelectionAction;
-
 export const CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION";
 export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
 export const LOAD_GROUP = "LOAD_GROUP";
@@ -85,11 +68,6 @@ export function fetchGroups() {
     return (dispatch : any) => {
         FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let groups = Util.convertObjectToArray<Group>(snapshot.val());
-            // console.log('unfiltered: ', groups);
-            // let filteredMembers = members.filter((value : Member) => {
-            //   return Object.keys(value.group).findIndex(( value : string ) => ( value === 'hinatazaka')) > -1;
-            // });
-            // console.log('filtered: ', filteredMembers);
             dispatch(loadGroups(groups))
             return snapshot;
         });
