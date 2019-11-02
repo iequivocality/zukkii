@@ -9,6 +9,7 @@ import BackButton from '../../components/backbutton/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
 import useTimeout from '../../hooks/useTimeout';
+import Loading from '../../components/loading/Loading';
 
 function GroupCountdownPageComponent(props : RouteComponentProps) {
     let { isExact, params } = props.match;
@@ -33,16 +34,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         if (!doesGroupExist) {
             setShowNotFound(true);
         }
-    }, 5000);
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         if (!doesGroupExist) {
-    //             setShowNotFound(true);
-    //         }
-    //     }, 5000);
-
-    //     return () => clearTimeout(timer);
-    // }, [ showNotFound ]);
+    }, 10000, [showNotFound]);
 
     if (doesGroupExist) {
         let { name, color } = selectedGroup;
@@ -66,7 +58,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
             return <Redirect to="/404"></Redirect>;
         }
         else {
-            return <h6>LOADING</h6>;
+            return <Loading></Loading>;
         }
     }
 }
