@@ -57,12 +57,15 @@ export default function Countdown(props : CountdownProps) {
             </div>
             <CountdownDetails {...props.member}></CountdownDetails>
         </div>
-        <div className={styles.countdown}>
-            <CountdownUnitComponent value={week} unit="週" maxValue={Constants.MAX_WEEKS} color={groupColor}></CountdownUnitComponent>
-            <CountdownUnitComponent value={day} unit="日" maxValue={Constants.MAX_DAYS} color={groupColor}></CountdownUnitComponent>
-            <CountdownUnitComponent value={hour} unit="時" maxValue={Constants.MAX_HOURS} color={groupColor}></CountdownUnitComponent>
-            <CountdownUnitComponent value={minute} unit="分" maxValue={Constants.MAX_MINUTES} color={groupColor}></CountdownUnitComponent>
-            <CountdownUnitComponent value={second} unit="秒" maxValue={Constants.MAX_SECONDS} color={groupColor}></CountdownUnitComponent>
-        </div>
+        {
+            !Util.checkIsBirthday(targetDate) ?
+            <div className={styles.countdown}>
+                <CountdownUnitComponent value={week} unit="週" maxValue={Constants.MAX_WEEKS} color={groupColor}></CountdownUnitComponent>
+                <CountdownUnitComponent value={day} unit="日" maxValue={Constants.MAX_DAYS} color={groupColor}></CountdownUnitComponent>
+                <CountdownUnitComponent value={hour} unit="時" maxValue={Constants.MAX_HOURS} color={groupColor}></CountdownUnitComponent>
+                <CountdownUnitComponent value={minute} unit="分" maxValue={Constants.MAX_MINUTES} color={groupColor}></CountdownUnitComponent>
+                <CountdownUnitComponent value={second} unit="秒" maxValue={Constants.MAX_SECONDS} color={groupColor}></CountdownUnitComponent>
+            </div> : <div className={styles.currentbirthday}>お誕生日おめでとうございます</div>
+        }
     </div>)
 }

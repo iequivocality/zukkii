@@ -5,8 +5,8 @@
 }
 
 .details {
-    flex: 1 0 85%;
-    margin-left: 5px;
+    flex: 1 0 calc(85% - 9px);
+    padding-left: 5px;
     padding-top: 10px;
     display: flex;
     flex-direction: column;

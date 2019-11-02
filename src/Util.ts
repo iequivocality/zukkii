@@ -13,6 +13,11 @@ export default class Util {
 		let now = moment().tz("Japan");
         return targetDate.isBefore(now, 'day');
     }
+
+    static checkIsBirthday(targetDate : moment.Moment) {
+        let now = moment().tz("Japan");
+        return targetDate.isSame(now, 'day');
+    }
     
     static computeShade(hex : string, lum : number) {
         hex = String(hex).replace(/[^0-9a-f]/gi, '');

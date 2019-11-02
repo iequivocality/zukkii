@@ -9,6 +9,7 @@
     "node-sass": "^4.12.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-flip-move": "^3.0.4",
     "react-icons": "^3.8.0",
     "react-motion": "^0.5.2",
     "react-redux": "^7.1.1",

@@ -8,6 +8,7 @@ import { fetchGroup } from '../../store/actions';
 import BackButton from '../../components/backbutton/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
+import useTimeout from '../../hooks/useTimeout';
 
 function GroupCountdownPageComponent(props : RouteComponentProps) {
     let { isExact, params } = props.match;
@@ -28,15 +29,20 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         }
     }, []);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (!doesGroupExist) {
-                setShowNotFound(true);
-            }
-        }, 5000);
+    useTimeout(() => {
+        if (!doesGroupExist) {
+            setShowNotFound(true);
+        }
+    }, 5000);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         if (!doesGroupExist) {
+    //             setShowNotFound(true);
+    //         }
+    //     }, 5000);
 
-        return () => clearTimeout(timer);
-    }, [ showNotFound ]);
+    //     return () => clearTimeout(timer);
+    // }, [ showNotFound ]);
 
     if (doesGroupExist) {
         let { name, color } = selectedGroup;
