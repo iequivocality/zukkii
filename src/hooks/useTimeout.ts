@@ -4,5 +4,5 @@ export default function useTimeout(callback : Function, delay : number, deps? : 
     useEffect(() => {
         const timer = setTimeout(callback, delay);
         return () => clearTimeout(timer);
-    }, deps);
+    }, [...deps, callback, delay]);
 }

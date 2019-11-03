@@ -5,7 +5,6 @@ import AppState from './store/state/AppState';
 import { BrowserRouter as Router, Route, Switch, RouteProps } from 'react-router-dom';
 import BirthdayCountdownPage from './pages/group-countdown/GroupCountdown';
 import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
-import NoMatchComponent from './pages/no-found/NotFound';
 import { fetchGroups } from './store/actions';
 import NotFoundComponent from './pages/no-found/NotFound';
 
@@ -21,7 +20,7 @@ const AppRoutes : Array<RouteProps> = [
   },
   {
     path: "404",
-    component : NoMatchComponent
+    component : NotFoundComponent
   },
   {
     path: "*",
