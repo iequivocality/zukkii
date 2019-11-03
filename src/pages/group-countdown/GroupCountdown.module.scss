@@ -16,3 +16,17 @@
         font-size: initial;
     }
 }
+
+.sortButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+    margin: 5px 5px 0px 0px;
+    width: 75px;
+    height: 25px;
+    font-weight: bold;
+}

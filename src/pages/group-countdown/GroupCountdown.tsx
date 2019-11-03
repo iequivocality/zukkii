@@ -1,27 +1,33 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, CSSProperties } from 'react';
 import styles from './GroupCountdown.module.scss'
 import GenerationSelectionContainer from '../../components/selection/GenerationSelection';
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router';
-import { fetchGroup } from '../../store/actions';
+import { fetchGroup, openDialog } from '../../store/actions';
 import BackButton from '../../components/backbutton/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
 import useTimeout from '../../hooks/useTimeout';
 import Loading from '../../components/loading/Loading';
+import MemberChooser from '../../components/member-chooser/MemberChooser';
+import Group from '../../models/Group';
+import { IoIosFunnel } from 'react-icons/io';
 
 function GroupCountdownPageComponent(props : RouteComponentProps) {
     let { isExact, params } = props.match;
     let groupParam = params['group'];
-    let selectedGroup = useSelector((state : AppState) => state.selectedGroup, shallowEqual)
+    let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual)
     let members = useSelector((state : AppState) => state.filteredMembers, shallowEqual)
     let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === groupParam ))), shallowEqual)
     let dispatch = useDispatch();
     let [ showNotFound, setShowNotFound ] = useState(false);
     let loadGroupFromParameter = useCallback((group : string) => {
         dispatch(fetchGroup(group));
-    }, [dispatch])
+    }, [dispatch]);
+    let clickToOpenDialog = useCallback(() => {
+        dispatch(openDialog());
+    }, [dispatch]);
 
     useEffect(() => {
         if ( isExact ) {
@@ -34,17 +40,24 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         if (!doesGroupExist) {
             setShowNotFound(true);
         }
-    }, 10000, [showNotFound]);
+    }, 10000, [showNotFound]); 
 
     if (doesGroupExist) {
         let { name, color } = selectedGroup;
         let titleStyle : React.CSSProperties = {
             color : color
         }
+        let buttonStyle : CSSProperties = {
+            backgroundColor : selectedGroup.color
+        }
         return (
             <>
+                <MemberChooser changeSort={() => {}}></MemberChooser>
+                <div className={styles.sortButton} onClick={() => { clickToOpenDialog() }} style={buttonStyle}>
+                    <IoIosFunnel/>分ける
+                </div>
                 <header className={styles.titleContainer} style={titleStyle}>
-                    <BackButton to="/"></BackButton>
+                    <BackButton to="/" style={buttonStyle}></BackButton>
                     <h2>{name}</h2>
                     <h6>アイドルバースデーカウントダウン</h6>
                     <GenerationSelectionContainer></GenerationSelectionContainer>

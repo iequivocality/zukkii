@@ -17,5 +17,7 @@ a:link,
 a:visited,
 a:hover,
 a:active {
+  color: #FFFFFF;
   text-decoration: none;
+  user-select: none;
 }

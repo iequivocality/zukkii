@@ -5,6 +5,6 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 
 export default function BackButton(props : LinkProps) {
     return (
-        <Link {...props} className={styles.backButton}><IoIosArrowRoundBack/>Back</Link>
+        <Link {...props} className={styles.backButton}><IoIosArrowRoundBack/>戻る</Link>
     );
 }

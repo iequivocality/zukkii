@@ -1,12 +1,13 @@
 import AppState from "../state/AppState";
-import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION, LOAD_GROUPS, LOAD_MEMBERS, LOAD_GROUP } from "../actions";
+import { CHANGE_GENERATION_SELECTION, CLEAR_GENERATION_SELECTION, LOAD_GROUPS, LOAD_MEMBERS, LOAD_GROUP, OPEN_DIALOG, CLOSE_DIALOG } from "../actions";
 
 const initialState : AppState = {
     selectedGroup : null,
     members : [],
     selectedGeneration : 0,
     groupChoices : [],
-    filteredMembers : []
+    filteredMembers : [],
+    isOpen : false
 }
 
 export function rootReducer(state : AppState = initialState, action : any) {
@@ -24,7 +25,11 @@ export function rootReducer(state : AppState = initialState, action : any) {
         case LOAD_GROUPS:
             return {...state, groupChoices : action.payload};
         case LOAD_MEMBERS:
-            return {...state, members: action.payload, filteredMembers : action.payload};
+            return {...state, members : action.payload, filteredMembers : action.payload};
+        case OPEN_DIALOG:
+            return {...state, isOpen : true}
+        case CLOSE_DIALOG:
+            return {...state, isOpen : false}
         default:
             return state
     }

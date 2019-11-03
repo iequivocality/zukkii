@@ -6,5 +6,6 @@ export default interface AppState {
     readonly selectedGeneration : number
     readonly groupChoices : Array<Group>,
     readonly members : Array<Member>,
-    readonly filteredMembers : Array<Member>
+    readonly filteredMembers : Array<Member>,
+    readonly isOpen : boolean
 }

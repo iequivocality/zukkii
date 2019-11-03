@@ -8,6 +8,8 @@ export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
 export const LOAD_GROUP = "LOAD_GROUP";
 export const LOAD_GROUPS = "LOAD_GROUPS";
 export const LOAD_MEMBERS = "LOAD_MEMBERS";
+export const OPEN_DIALOG = "OPEN_DIALOG";
+export const CLOSE_DIALOG = "CLOSE_DIALOG";
 
 export function changeGeneration(gen : number) {
     return {
@@ -40,6 +42,18 @@ export function loadMembers(members : Array<Member>) {
     return {
         type : LOAD_MEMBERS,
         payload : members
+    }
+}
+
+export function openDialog() {
+    return {
+        type : OPEN_DIALOG
+    }
+}
+
+export function closeDialog() {
+    return {
+        type : CLOSE_DIALOG
     }
 }
 

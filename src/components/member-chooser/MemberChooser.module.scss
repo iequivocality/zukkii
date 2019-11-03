@@ -1,0 +1,42 @@
+.memberChooser {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #282C34;
+    z-index: 20;
+}
+
+.memberChooserClose {
+    @extend .memberChooser;
+    right: -250px;
+}
+
+.modalBackground {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 15;
+    background-color: #282C34;
+    opacity: 0.5;
+    pointer-events: inherit;
+}
+
+.modalBackgroundClose {
+    @extend .modalBackground;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.closeButton {
+    margin: 3px 10px 3px 0px;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    svg {
+        width: 30px;
+        height: 30px;
+    }
+}
