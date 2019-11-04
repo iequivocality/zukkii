@@ -1,16 +1,10 @@
 .memberChooser {
     position: fixed;
     top: 0;
-    // right: 0;
     height: 100%;
     width: 250px;
     background-color: #282C34;
     z-index: 20;
-}
-
-.memberChooserClose {
-    // @extend .memberChooser;
-    // right: -250px;
 }
 
 .modalBackground {

@@ -15,7 +15,7 @@ export default function Dropdown() {
     return (
         <div className={isOpen ? styles.dropdownWrapperOpen : styles.dropdownWrapper}>
             <div className={styles.dropdownButton} onClick={toggleDropdown}>Dropdown<span className={styles.triangle}/></div>
-            <div className={styles.dropdownContent} style={{ top : `0px`, transform: `translateY(${isOpen ? 30 : 0}px)`, height : `${isOpen ? totalWidth : 30}px` }}>
+            <div className={styles.dropdownContent} style={{ opacity : isOpen ? 1 : 0, visibility : isOpen ? 'visible' : 'hidden' }}>
                 <div>Link 1</div>
                 <div>Link 2</div>
                 <div>Link 3</div>

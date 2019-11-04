@@ -4,7 +4,7 @@ import Dropdown from '../../components/ui/dropdown/Dropdown';
 
 export default function ComponentTest() {
     return (
-        <main>
+        <main style={{ justifyContent : 'space-around' }}>
             <ToggleSwitch
                 width={150}
                 onState={{ label : 'Bukas', color : '#ff3456' }}
