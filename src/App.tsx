@@ -7,6 +7,7 @@ import BirthdayCountdownPage from './pages/group-countdown/GroupCountdown';
 import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
 import { fetchGroups } from './store/actions';
 import NotFoundComponent from './pages/no-found/NotFound';
+import ComponentTest from './pages/component-test/ComponentTest';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -17,6 +18,10 @@ const AppRoutes : Array<RouteProps> = [
   {
     path: "/group/:group",
     component: BirthdayCountdownPage
+  },
+  {
+    path: "/test",
+    component : ComponentTest
   },
   {
     path: "404",

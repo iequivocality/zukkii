@@ -1,7 +1,7 @@
 .memberChooser {
     position: fixed;
     top: 0;
-    right: 0;
+    // right: 0;
     height: 100%;
     width: 250px;
     background-color: #282C34;
@@ -9,8 +9,8 @@
 }
 
 .memberChooserClose {
-    @extend .memberChooser;
-    right: -250px;
+    // @extend .memberChooser;
+    // right: -250px;
 }
 
 .modalBackground {
@@ -19,13 +19,11 @@
     width: 100%;
     z-index: 15;
     background-color: #282C34;
-    opacity: 0.5;
     pointer-events: inherit;
 }
 
 .modalBackgroundClose {
     @extend .modalBackground;
-    opacity: 0;
     pointer-events: none;
 }
 
@@ -34,6 +32,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    cursor: pointer;
 
     svg {
         width: 30px;
