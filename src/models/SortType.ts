@@ -1,7 +1,8 @@
 enum SortType {
     NONE = 'none',
     AGE = 'age',
-    HEIGHT = 'height'
+    HEIGHT = 'height',
+    PREFECTURE = 'prefecture'
 }
 
 export default SortType;

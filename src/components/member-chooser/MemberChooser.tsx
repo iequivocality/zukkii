@@ -6,9 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import AppState from '../../store/state/AppState';
 import { openDialog, closeDialog } from '../../store/actions';
 import { Motion, spring } from 'react-motion';
+import Dropdown from '../ui/dropdown/Dropdown';
+import PREFECTURES, { Prefecture } from '../../data/prefectures';
+import SortObject from '../../models/SortObject';
 
 interface MemberChooserProps {
-    changeSort : (sortType : SortType) => void
+    changeSort : (sortType : SortObject) => void
 }
 
 export default function MemberChooser(props : MemberChooserProps) {
@@ -34,8 +37,22 @@ export default function MemberChooser(props : MemberChooserProps) {
                     <aside className={styles.memberChooser} style={{
                         right: interpolatingStyle.x + 'px'
                     }}>
-                        <div className={styles.closeButton} onClick={() => clickToCloseDialog()}>
-                            <IoIosCloseCircleOutline/>
+                        <div className={styles.memberChooserContainer}>
+                            <div>SELECT</div>
+                            <div className={styles.closeButton} onClick={() => clickToCloseDialog()}>
+                                <IoIosCloseCircleOutline/>
+                            </div>
+                        </div>
+                        <div className={styles.memberChooserContainer}>
+                            <div className={styles.memberChooserContainerLabel}>都道府県</div>
+                            <div className={styles.memberChooserContainerForm}>
+                                <Dropdown<Prefecture>
+                                    width={100}
+                                    placeholder={'都道府県'}
+                                    contents={PREFECTURES}
+                                    onSelect={(value : Prefecture) => { props.changeSort({ type : SortType.PREFECTURE, value : value.jp }) }}
+                                    mapContentToDropdown={(content : Prefecture) => ( { label : content.jp, value : content } )}/>
+                            </div>
                         </div>
                     </aside>
                 ) }

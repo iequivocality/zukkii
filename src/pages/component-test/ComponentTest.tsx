@@ -3,6 +3,8 @@ import ToggleSwitch from '../../components/ui/toggle-switch/ToggleSwitch';
 import Dropdown from '../../components/ui/dropdown/Dropdown';
 
 export default function ComponentTest() {
+    
+    let contents = ['Link 1', 'Link 2', 'Link 3'];
     return (
         <main style={{ justifyContent : 'space-around' }}>
             <ToggleSwitch
@@ -13,7 +15,9 @@ export default function ComponentTest() {
                 labelStyle={{
                     fontFamily : "'Roboto', 'sans-serif'"
                 }}></ToggleSwitch>
-            <Dropdown></Dropdown>
+            <Dropdown width={200} contents={contents}
+                      onSelect={(value : string) => { console.log(value) }}
+                      mapContentToDropdown={(content : string) => ({ label : content, value : content })}/>
         </main>
     );
 }

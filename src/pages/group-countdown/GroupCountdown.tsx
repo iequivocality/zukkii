@@ -4,7 +4,7 @@ import GenerationSelectionContainer from '../../components/selection/GenerationS
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router';
-import { fetchGroup, openDialog } from '../../store/actions';
+import { fetchGroup, openDialog, closeDialog } from '../../store/actions';
 import BackButton from '../../components/backbutton/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
@@ -13,12 +13,14 @@ import Loading from '../../components/loading/Loading';
 import MemberChooser from '../../components/member-chooser/MemberChooser';
 import Group from '../../models/Group';
 import { IoIosFunnel } from 'react-icons/io';
+import SortObject from '../../models/SortObject';
+import Member from '../../models/Member';
 
 function GroupCountdownPageComponent(props : RouteComponentProps) {
     let { isExact, params } = props.match;
     let groupParam = params['group'];
     let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual)
-    let members = useSelector((state : AppState) => state.filteredMembers, shallowEqual)
+    let members : Member[] = useSelector((state : AppState) => state.filteredMembers, shallowEqual)
     let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === groupParam ))), shallowEqual)
     let dispatch = useDispatch();
     let [ showNotFound, setShowNotFound ] = useState(false);
@@ -28,6 +30,13 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
     let clickToOpenDialog = useCallback(() => {
         dispatch(openDialog());
     }, [dispatch]);
+    let clickToCloseDialog = useCallback(() => {
+        dispatch(closeDialog());
+    }, [dispatch]);
+    let [currentSort, setCurrentSort] = useState<SortObject>(null);
+    let sortedMembers = Util.isNotNullAndNotUndefined(currentSort) ? members.filter((member) => {
+        return member[currentSort.type] === currentSort.value
+    }) : members;
 
     useEffect(() => {
         if ( isExact ) {
@@ -42,6 +51,12 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         }
     }, 10000, [showNotFound]); 
 
+    let sortChanged = (value : SortObject) => {
+        console.log('MEMBER CHOOSE', value);
+        setCurrentSort(value);
+        clickToCloseDialog();
+    }
+
     if (doesGroupExist) {
         let { name, color } = selectedGroup;
         let titleStyle : React.CSSProperties = {
@@ -52,7 +67,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         }
         return (
             <>
-                <MemberChooser changeSort={() => {}}></MemberChooser>
+                <MemberChooser changeSort={(value : SortObject) => { sortChanged(value) }}></MemberChooser>
                 <div className={styles.sortButton} onClick={() => { clickToOpenDialog() }} style={buttonStyle}>
                     <IoIosFunnel/>分ける
                 </div>
@@ -62,7 +77,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
                     <h6>アイドルバースデーカウントダウン</h6>
                     <GenerationSelectionContainer></GenerationSelectionContainer>
                 </header>
-                <MemberCountdown group={selectedGroup} members={members} ></MemberCountdown>
+                <MemberCountdown group={selectedGroup} members={sortedMembers} ></MemberCountdown>
             </>
         );
     }

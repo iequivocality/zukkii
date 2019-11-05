@@ -4,7 +4,8 @@
     user-select: none;
     cursor: pointer;
     z-index: 5;
-    // overflow: hidden;
+    font-family: 'Roboto', 'sans-serif';
+    font-size: 0.9rem;
 
     .dropdownButton {
         border-radius: 6px;
@@ -29,10 +30,13 @@
 }
 
 .dropdownButton {
-    min-width: 160px;
+    min-width: 100px;
     min-height: 30px;
     background-color: #2196F3;
     border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
 .triangle {
@@ -51,10 +55,17 @@
     position: absolute;
     top: 30px;
     background-color: #2196F3;
-    min-width: 160px;
+    min-width: 100px;
     z-index: 3;
     border-radius: 0px 0px 6px 6px;
     box-sizing: border-box;
     z-index: 1;
     transition: 0.3s opacity;
+    overflow-y: scroll;
+    max-height: 180px;
+
+    div {
+        display: flex;
+        justify-content: center;
+    }
 }
