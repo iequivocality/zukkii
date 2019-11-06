@@ -13,25 +13,21 @@ import Loading from '../../components/loading/Loading';
 import MemberChooser from '../../components/member-chooser/MemberChooser';
 import Group from '../../models/Group';
 import { IoIosFunnel } from 'react-icons/io';
-import SortObject from '../../models/FilterObject';
 import Member from '../../models/Member';
 
 function GroupCountdownPageComponent(props : RouteComponentProps) {
     let { isExact, params } = props.match;
     let [ openChooser, setOpenChooser ] = useState(false);
     let groupParam = params['group'];
-    let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual)
-    let members : Member[] = useSelector((state : AppState) => state.filteredMembers, shallowEqual)
-    let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === groupParam ))), shallowEqual)
+    let isLoading = useSelector((state : AppState) => state.isLoading, shallowEqual)
+    let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual);
+    let members : Member[] = useSelector((state : AppState) => state.filteredMembers, shallowEqual);
+    let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === groupParam ))), shallowEqual) 
     let dispatch = useDispatch();
     let [ showNotFound, setShowNotFound ] = useState(false);
     let loadGroupFromParameter = useCallback((group : string) => {
         dispatch(fetchGroup(group));
     }, [dispatch]);
-    // let clickToOpenDialog = useCallback(() => {
-    //     // dispatch(openDialog());
-
-    // }, [dispatch]);
 
     useEffect(() => {
         if ( isExact ) {
@@ -46,7 +42,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         }
     }, 10000, [showNotFound]);
 
-    if (doesGroupExist) {
+    if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;
         let titleStyle : React.CSSProperties = {
             color : color

@@ -47,7 +47,7 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
             <div className={styles.dropdownContent} style={{ width : `${newWidth}px`, opacity : isOpen ? 1 : 0, pointerEvents : isOpen ? 'inherit' : 'none' }}>
                 {contentsForDropdown.map((content : DropdownContent<T>) => {
                     return (
-                        content.key !== currentValue.key ? <div onClick={() => onDropdownSelect(content)}>{content.label}</div> : null
+                        content.key !== currentValue.key ? <div key={content.key} onClick={() => onDropdownSelect(content)}>{content.label}</div> : null
                     )
                 })}
             </div>

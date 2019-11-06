@@ -7,5 +7,6 @@ export default interface AppState {
     readonly groupChoices : Array<Group>,
     readonly members : Array<Member>,
     readonly filteredMembers : Array<Member>,
-    readonly currentFilter : FilterObject
+    readonly currentFilter : FilterObject,
+    readonly isLoading : boolean
 }

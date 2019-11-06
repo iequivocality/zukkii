@@ -10,6 +10,8 @@ export const LOAD_GROUP = "LOAD_GROUP";
 export const LOAD_GROUPS = "LOAD_GROUPS";
 export const LOAD_MEMBERS = "LOAD_MEMBERS";
 export const FILTER_MEMBERS = "FILTER_MEMBERS";
+export const LOADING_STARTED = "LOADING_STARTED";
+export const LOADING_FINISHED = "LOADING_FINISHED";
 
 export function changeGeneration(gen : number) {
     return {
@@ -45,6 +47,18 @@ export function loadMembers(members : Array<Member>) {
     }
 }
 
+export function loadingStarted() {
+    return {
+        type : LOADING_STARTED
+    }
+}
+
+export function loadingFinished() {
+    return {
+        type : LOADING_FINISHED
+    }
+}
+
 export function filterMembers(filter : FilterObject) {
     return {
         type : FILTER_MEMBERS,
@@ -54,6 +68,7 @@ export function filterMembers(filter : FilterObject) {
 
 export function fetchGroup(groupName : string) {
     return (dispatch : any) => {
+        dispatch(loadingStarted());
         FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let groups = Util.convertObjectToArray<Group>(snapshot.val());
             console.log('unfiltered: ', groups);
@@ -68,6 +83,7 @@ export function fetchGroup(groupName : string) {
                 dispatch(fetchMembersFromGroup(groupName));
             }
             console.log('filtered: ', filteredGroup);
+            dispatch(loadingFinished());
             return snapshot;
         });
     }
@@ -75,9 +91,11 @@ export function fetchGroup(groupName : string) {
 
 export function fetchGroups() {
     return (dispatch : any) => {
+        dispatch(loadingStarted());
         FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let groups = Util.convertObjectToArray<Group>(snapshot.val());
-            dispatch(loadGroups(groups))
+            dispatch(loadGroups(groups));
+            dispatch(loadingFinished());
             return snapshot;
         });
     }
@@ -85,13 +103,15 @@ export function fetchGroups() {
 
 export function fetchMembersFromGroup(group : string) {
     return function (dispatch : any) {
+        dispatch(loadingStarted());
         FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let members = Util.convertObjectToArray<Member>(snapshot.val());
             console.log('unfiltered: ', members);
             let filteredMembers = members.filter((value : Member) => {
               return Object.keys(value.group).findIndex(( value : string ) => ( value === group)) > -1;
             });
-            dispatch(loadMembers(filteredMembers))
+            dispatch(loadMembers(filteredMembers));
+            dispatch(loadingFinished());
             return snapshot;
         });
     }

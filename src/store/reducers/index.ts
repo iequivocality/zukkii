@@ -1,5 +1,5 @@
 import AppState from "../state/AppState";
-import { LOAD_GROUPS, LOAD_MEMBERS, LOAD_GROUP, FILTER_MEMBERS } from "../actions";
+import { LOAD_GROUPS, LOAD_MEMBERS, LOAD_GROUP, FILTER_MEMBERS, LOADING_STARTED, LOADING_FINISHED } from "../actions";
 import { Constants } from "../../Constants";
 import Util from "../../Util";
 import FilterType from "../../models/FilterType";
@@ -10,7 +10,8 @@ const initialState : AppState = {
     members : [],
     groupChoices : [],
     filteredMembers : [],
-    currentFilter : Constants.ALL_FILTER
+    currentFilter : Constants.ALL_FILTER,
+    isLoading : false
 }
 
 export function rootReducer(state : AppState = initialState, action : any) : AppState {
@@ -27,6 +28,10 @@ export function rootReducer(state : AppState = initialState, action : any) : App
                 return member[sort.type] === sort.value
             }) : state.members;
             return {...state, currentFilter : sort, filteredMembers }
+        case LOADING_STARTED:
+            return {...state, isLoading : true}
+        case LOADING_FINISHED:
+            return {...state, isLoading : false}
         default:
             return state
     }

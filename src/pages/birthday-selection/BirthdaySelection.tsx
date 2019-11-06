@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchGroups, loadGroup } from '../../store/actions';
 import Group from '../../models/Group';
 import { Link } from 'react-router-dom';
+import Loading from '../../components/loading/Loading';
 
 interface BirthdaySelectionPageProps {
     groupChoices : Array<Group>,
@@ -20,7 +21,8 @@ function getGroupStyle(group : Group) {
 }
 
 export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps) {
-    let groupChoices = useSelector((state : AppState) => state.groupChoices)
+    let groupChoices = useSelector((state : AppState) => state.groupChoices);
+    let isLoading = useSelector((state : AppState) => state.isLoading);
     let dispatch = useDispatch();
     let setGroup = useCallback((group : Group) => {
         dispatch(loadGroup(group));
@@ -33,25 +35,30 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
         loadGroups();
     }, [])
 
-    return (
-        <>
-            <div className={styles.titleContainer}>
-                <h2>アイドルバースデーカウントダウン</h2>
-                <h4>アイドルグループ選んでください</h4>
-            </div>
-            <div className={styles.birthdaySelection}>
-                {groupChoices.map((group : Group) => {
-                    return (
-                        <Link style={getGroupStyle(group)} className={styles.groupChoice} to={`/group/${group.id}`} 
-                            key={group.id} onClick={() => setGroup(group)}>
-                            <img alt={group.name} className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img>
-                            <div className={styles.groupName}>
-                                {group.name}
-                            </div>
-                        </Link>
-                    );
-                })}
-            </div>
-        </>
-    )
+    if (!isLoading) {
+        return (
+            <>
+                <div className={styles.titleContainer}>
+                    <h2>アイドルバースデーカウントダウン</h2>
+                    <h4>アイドルグループ選んでください</h4>
+                </div>
+                <div className={styles.birthdaySelection}>
+                    {groupChoices.map((group : Group) => {
+                        return (
+                            <Link style={getGroupStyle(group)} className={styles.groupChoice} to={`/group/${group.id}`} 
+                                key={group.id} onClick={() => setGroup(group)}>
+                                <img alt={group.name} className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img>
+                                <div className={styles.groupName}>
+                                    {group.name}
+                                </div>
+                            </Link>
+                        );
+                    })}
+                </div>
+            </>
+        );
+    }
+    else {
+        return <Loading></Loading>
+    }
 }
