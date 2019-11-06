@@ -1,84 +1,49 @@
-import React from "react";
-import Group from "../../models/Group";
+import React, { useCallback } from "react";
 import styles from './GenerationSelection.module.scss';
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AppState from "../../store/state/AppState";
-import { changeGeneration } from "../../store/actions";
+import { Constants } from "../../Constants";
+import { filterMembers } from "../../store/actions";
+import FilterType from "../../models/FilterType";
 
 interface GenerationSelect {
     label : string,
     value : number
 }
 
-interface GenerationSelectionProps {
-    group : Group,
-    selectedGeneration : number,
-    onSelectGeneration : (generation : number) => void
-}
-
-class GenerationSelection extends React.Component<GenerationSelectionProps> {
-    onSelectGeneration(generation : number) {
-        let { onSelectGeneration } = this.props;
-        onSelectGeneration(generation);
+export default function GenerationSelection() {
+    let group = useSelector(( state : AppState ) => state.selectedGroup);
+    let selectedGeneration = useSelector(( state : AppState ) => state.currentFilter.type === FilterType.GENERATION ? Number.parseInt(state.currentFilter.value) : 0);
+    let dispatch = useDispatch();
+    let onSelectGeneration = useCallback((generation : number) => {
         if (generation > 0) {
-            onSelectGeneration(generation);
+            dispatch(filterMembers({ type : FilterType.GENERATION, value : generation }))
         }
-    }
+        else {
+            dispatch(filterMembers(Constants.ALL_FILTER))
+        }
+    }, [])
 
-    render() {
-        let { generations, color } = this.props.group;
-        let { selectedGeneration } = this.props;
-        let generationArray : Array<GenerationSelect> = [];
+    let { generations, color } = group;
+    let generationArray : Array<GenerationSelect> = [];
+    generationArray.push({
+        label : "全部",
+        value : 0
+    });
+    for( let index = 1; index <= generations; index++) {
         generationArray.push({
-            label : "ALL",
-            value : 0
+            label : `${index}期`,
+            value : index
         });
-        for( let index = 1; index <= generations; index++) {
-            generationArray.push({
-                label : `${index}期`,
-                value : index
-            });
-        }
-
-        let buttonStyle : React.CSSProperties = {
-            backgroundColor: color
-        };
-
-        let selectedStyle : React.CSSProperties = {
-            backgroundColor : "#FFFFFF",
-            color : color   
-        }
-
-        return (
-            <div className={styles.selection} style={buttonStyle}>
-                {generationArray.map((generation : GenerationSelect) => 
-                    <div className={styles.selectionButton}
-                        key={generation.value}
-                        style={generation.value === selectedGeneration ? selectedStyle : null}
-                        onClick={() => this.onSelectGeneration(generation.value)}>{generation.label}</div>)}
-            </div>
-        );
     }
+
+    return (
+        <div className={styles.selection} style={{ backgroundColor: color }}>
+            {generationArray.map((generation : GenerationSelect) => 
+                <div className={styles.selectionButton}
+                    key={generation.value}
+                    style={generation.value === selectedGeneration ? { backgroundColor : "#FFFFFF", color : color } : null}
+                    onClick={() => onSelectGeneration(generation.value)}>{generation.label}</div>)}
+        </div>
+    );
 }
-
-const mapStateToProps = (state : AppState) : Partial<GenerationSelectionProps> => {
-    return {
-        group : state.selectedGroup,
-        selectedGeneration : state.selectedGeneration
-    }
-}
-
-const mapDispatchToProps = (dispatch : any) : Partial<GenerationSelectionProps> => {
-    return {
-        onSelectGeneration : (generation : number) => {
-            dispatch(changeGeneration(generation))
-        }
-    }
-}
-
-const GenerationSelectionContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(GenerationSelection);
-
-export default GenerationSelectionContainer;

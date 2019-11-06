@@ -4,7 +4,7 @@ import GenerationSelectionContainer from '../../components/selection/GenerationS
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router';
-import { fetchGroup, openDialog, closeDialog } from '../../store/actions';
+import { fetchGroup } from '../../store/actions';
 import BackButton from '../../components/backbutton/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
@@ -13,11 +13,12 @@ import Loading from '../../components/loading/Loading';
 import MemberChooser from '../../components/member-chooser/MemberChooser';
 import Group from '../../models/Group';
 import { IoIosFunnel } from 'react-icons/io';
-import SortObject from '../../models/SortObject';
+import SortObject from '../../models/FilterObject';
 import Member from '../../models/Member';
 
 function GroupCountdownPageComponent(props : RouteComponentProps) {
     let { isExact, params } = props.match;
+    let [ openChooser, setOpenChooser ] = useState(false);
     let groupParam = params['group'];
     let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual)
     let members : Member[] = useSelector((state : AppState) => state.filteredMembers, shallowEqual)
@@ -27,16 +28,10 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
     let loadGroupFromParameter = useCallback((group : string) => {
         dispatch(fetchGroup(group));
     }, [dispatch]);
-    let clickToOpenDialog = useCallback(() => {
-        dispatch(openDialog());
-    }, [dispatch]);
-    let clickToCloseDialog = useCallback(() => {
-        dispatch(closeDialog());
-    }, [dispatch]);
-    let [currentSort, setCurrentSort] = useState<SortObject>(null);
-    let sortedMembers = Util.isNotNullAndNotUndefined(currentSort) ? members.filter((member) => {
-        return member[currentSort.type] === currentSort.value
-    }) : members;
+    // let clickToOpenDialog = useCallback(() => {
+    //     // dispatch(openDialog());
+
+    // }, [dispatch]);
 
     useEffect(() => {
         if ( isExact ) {
@@ -49,13 +44,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         if (!doesGroupExist) {
             setShowNotFound(true);
         }
-    }, 10000, [showNotFound]); 
-
-    let sortChanged = (value : SortObject) => {
-        console.log('MEMBER CHOOSE', value);
-        setCurrentSort(value);
-        clickToCloseDialog();
-    }
+    }, 10000, [showNotFound]);
 
     if (doesGroupExist) {
         let { name, color } = selectedGroup;
@@ -67,8 +56,8 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         }
         return (
             <>
-                <MemberChooser changeSort={(value : SortObject) => { sortChanged(value) }}></MemberChooser>
-                <div className={styles.sortButton} onClick={() => { clickToOpenDialog() }} style={buttonStyle}>
+                <MemberChooser isOpen={openChooser} onChoose={() => { setOpenChooser(false) }}></MemberChooser>
+                <div className={styles.sortButton} onClick={() => { setOpenChooser(true) }} style={buttonStyle}>
                     <IoIosFunnel/>分ける
                 </div>
                 <header className={styles.titleContainer} style={titleStyle}>
@@ -77,7 +66,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
                     <h6>アイドルバースデーカウントダウン</h6>
                     <GenerationSelectionContainer></GenerationSelectionContainer>
                 </header>
-                <MemberCountdown group={selectedGroup} members={sortedMembers} ></MemberCountdown>
+                <MemberCountdown group={selectedGroup} members={members} ></MemberCountdown>
             </>
         );
     }

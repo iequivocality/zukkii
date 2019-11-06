@@ -1,11 +1,11 @@
 import Group from "../../models/Group";
 import Member from "../../models/Member";
+import FilterObject from "../../models/FilterObject";
 
 export default interface AppState {
     readonly selectedGroup : Group,
-    readonly selectedGeneration : number
     readonly groupChoices : Array<Group>,
     readonly members : Array<Member>,
     readonly filteredMembers : Array<Member>,
-    readonly isOpen : boolean
+    readonly currentFilter : FilterObject
 }

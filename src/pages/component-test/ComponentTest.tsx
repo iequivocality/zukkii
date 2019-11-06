@@ -17,7 +17,7 @@ export default function ComponentTest() {
                 }}></ToggleSwitch>
             <Dropdown width={200} contents={contents}
                       onSelect={(value : string) => { console.log(value) }}
-                      mapContentToDropdown={(content : string) => ({ label : content, value : content })}/>
+                      mapContentToDropdown={(content : string) => ({ key : content, label : content, value : content })}/>
         </main>
     );
 }

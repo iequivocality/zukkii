@@ -2,14 +2,14 @@ import Group from "../../models/Group";
 import FirebaseApp from "../../data/firebase";
 import Util from "../../Util";
 import Member from "../../models/Member";
+import FilterObject from "../../models/FilterObject";
 
 export const CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION";
 export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
 export const LOAD_GROUP = "LOAD_GROUP";
 export const LOAD_GROUPS = "LOAD_GROUPS";
 export const LOAD_MEMBERS = "LOAD_MEMBERS";
-export const OPEN_DIALOG = "OPEN_DIALOG";
-export const CLOSE_DIALOG = "CLOSE_DIALOG";
+export const FILTER_MEMBERS = "FILTER_MEMBERS";
 
 export function changeGeneration(gen : number) {
     return {
@@ -45,15 +45,10 @@ export function loadMembers(members : Array<Member>) {
     }
 }
 
-export function openDialog() {
+export function filterMembers(filter : FilterObject) {
     return {
-        type : OPEN_DIALOG
-    }
-}
-
-export function closeDialog() {
-    return {
-        type : CLOSE_DIALOG
+        type : FILTER_MEMBERS,
+        payload : filter
     }
 }
 
