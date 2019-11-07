@@ -3,6 +3,7 @@ import FirebaseApp from "../../data/firebase";
 import Util from "../../Util";
 import Member from "../../models/Member";
 import FilterObject from "../../models/FilterObject";
+import SortObject from "../../models/SortObject";
 
 export const CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION";
 export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
@@ -10,6 +11,7 @@ export const LOAD_GROUP = "LOAD_GROUP";
 export const LOAD_GROUPS = "LOAD_GROUPS";
 export const LOAD_MEMBERS = "LOAD_MEMBERS";
 export const FILTER_MEMBERS = "FILTER_MEMBERS";
+export const SORT_MEMBERS = "SORT_MEMBERS"
 export const LOADING_STARTED = "LOADING_STARTED";
 export const LOADING_FINISHED = "LOADING_FINISHED";
 
@@ -63,6 +65,13 @@ export function filterMembers(filter : FilterObject) {
     return {
         type : FILTER_MEMBERS,
         payload : filter
+    }
+}
+
+export function sortMembers(sort : SortObject) {
+    return {
+        type : SORT_MEMBERS,
+        payload : sort
     }
 }
 

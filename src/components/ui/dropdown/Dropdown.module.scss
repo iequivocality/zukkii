@@ -6,6 +6,7 @@
     z-index: 5;
     font-family: 'Roboto', 'sans-serif';
     font-size: 0.9rem;
+    z-index: 25;
 
     .dropdownButton {
         border-radius: 6px;
@@ -56,7 +57,7 @@
     top: 30px;
     background-color: #2196F3;
     min-width: 100px;
-    z-index: 3;
+    z-index: 30000;
     border-radius: 0px 0px 6px 6px;
     box-sizing: border-box;
     z-index: 1;
@@ -68,4 +69,9 @@
         display: flex;
         justify-content: center;
     }
+}
+
+.dropdownContentItem {
+    height: 30px;
+    width: 100%;
 }

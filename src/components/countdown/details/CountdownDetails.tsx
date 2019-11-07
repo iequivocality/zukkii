@@ -5,9 +5,8 @@ import Util from "../../../Util";
 import styles from "./CountdownDetails.module.scss";
 
 export default function CountdownDetails(props : Member) {
-    let { name, prefecture, kana, height, bloodType, birthdate } = props;
+    let { name, prefecture, kana, height, bloodType, birthdate, age } = props;
     let formattedDate = Util.formatYYYYMMDDToJapaneseFormat(birthdate);
-    let age = Util.getAgeFromBirthdate(birthdate);
 
     return (
         <div className={styles.details}>

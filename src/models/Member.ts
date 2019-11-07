@@ -11,5 +11,6 @@ export default interface Member {
     prefecture : string,
     height : string,
     bloodType : string,
-    generation : number
+    generation : number,
+    age : number
 }

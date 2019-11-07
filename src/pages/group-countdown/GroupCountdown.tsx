@@ -3,8 +3,8 @@ import styles from './GroupCountdown.module.scss'
 import GenerationSelectionContainer from '../../components/selection/GenerationSelection';
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { withRouter, RouteComponentProps, Redirect } from 'react-router';
-import { fetchGroup } from '../../store/actions';
+import { Redirect, useRouteMatch } from 'react-router';
+import { fetchGroup, filterMembers, sortMembers } from '../../store/actions';
 import BackButton from '../../components/backbutton/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
@@ -14,13 +14,16 @@ import MemberChooser from '../../components/member-chooser/MemberChooser';
 import Group from '../../models/Group';
 import { IoIosFunnel } from 'react-icons/io';
 import Member from '../../models/Member';
+import SortObject from '../../models/SortObject';
+import SortType, { SortOrder } from '../../models/SortType';
 
-function GroupCountdownPageComponent(props : RouteComponentProps) {
-    let { isExact, params } = props.match;
+export default function GroupCountdownPageComponent() {
+    let { isExact, params } = useRouteMatch();
     let [ openChooser, setOpenChooser ] = useState(false);
     let groupParam = params['group'];
     let isLoading = useSelector((state : AppState) => state.isLoading, shallowEqual)
     let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual);
+    let currentSort : SortObject = useSelector((state : AppState) => state.currentSort, shallowEqual);
     let members : Member[] = useSelector((state : AppState) => state.filteredMembers, shallowEqual);
     let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === groupParam ))), shallowEqual) 
     let dispatch = useDispatch();
@@ -41,6 +44,17 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
             setShowNotFound(true);
         }
     }, 10000, [showNotFound]);
+    let sortedMembers = currentSort.type !== SortType.NONE ? members.sort((a : Member, b : Member) => {
+        console.log("DO SORT", a[currentSort.type], b[currentSort.type])
+        if (a[currentSort.type] > b[currentSort.type]) {
+            return 1;
+        }
+        else if (a[currentSort.type] > b[currentSort.type]) {
+            return -1;
+        }
+        return 0;
+    }) : members;
+    sortedMembers = currentSort.order === SortOrder.ASCENDING ? sortedMembers : sortedMembers.reverse();
 
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;
@@ -62,7 +76,7 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
                     <h6>アイドルバースデーカウントダウン</h6>
                     <GenerationSelectionContainer></GenerationSelectionContainer>
                 </header>
-                <MemberCountdown group={selectedGroup} members={members} ></MemberCountdown>
+                <MemberCountdown group={selectedGroup} members={sortedMembers} ></MemberCountdown>
             </>
         );
     }
@@ -75,4 +89,3 @@ function GroupCountdownPageComponent(props : RouteComponentProps) {
         }
     }
 }
-export default withRouter(GroupCountdownPageComponent);
