@@ -44,17 +44,13 @@ export default function GroupCountdownPageComponent() {
             setShowNotFound(true);
         }
     }, 10000, [showNotFound]);
-    let sortedMembers = currentSort.type !== SortType.NONE ? members.sort((a : Member, b : Member) => {
-        console.log("DO SORT", a[currentSort.type], b[currentSort.type])
-        if (a[currentSort.type] > b[currentSort.type]) {
-            return 1;
-        }
-        else if (a[currentSort.type] > b[currentSort.type]) {
-            return -1;
-        }
-        return 0;
-    }) : members;
-    sortedMembers = currentSort.order === SortOrder.ASCENDING ? sortedMembers : sortedMembers.reverse();
+    console.log('TYPE:', currentSort.type);
+    console.log('ORDER:', currentSort.order); 
+    let sortedMembers = members;
+    if (currentSort.type !== SortType.NONE) {
+        console.log("NOT NONE");
+        sortedMembers = members.sort(Util.compareValues(currentSort.type, currentSort.order));
+    }
 
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;

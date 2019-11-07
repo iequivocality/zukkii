@@ -9,7 +9,7 @@ export default interface Member {
     kana : string,
     birthdate : string,
     prefecture : string,
-    height : string,
+    height : number,
     bloodType : string,
     generation : number,
     age : number

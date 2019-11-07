@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { SortOrder } from './models/SortType';
 
 export default class Util {
     static formatYYYYMMDDToJapaneseFormat(date : string) {
@@ -46,4 +47,24 @@ export default class Util {
     static isNotNullAndNotUndefined(object : Object) {
         return object !== undefined && object !== null;
     }
+
+    static compareValues<T = any>(key : string, order : SortOrder) {
+        console.log('KEY:', key)
+        return (a : T, b : T) => {
+            if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                return 0;
+            }
+            let varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
+            let varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
+
+            let comparison : number = 0;
+            if (varA > varB) {
+                comparison = -1;
+            }
+            else if (varA < varB) {
+                comparison = -1;
+            }
+            return order === SortOrder.DESCENDING ? comparison * -1 : comparison;
+        }
+    } 
 }
