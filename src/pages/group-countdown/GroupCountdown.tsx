@@ -46,11 +46,11 @@ export default function GroupCountdownPageComponent() {
     }, 10000, [showNotFound]);
     console.log('TYPE:', currentSort.type);
     console.log('ORDER:', currentSort.order); 
-    let sortedMembers = members;
-    if (currentSort.type !== SortType.NONE) {
-        console.log("NOT NONE");
-        sortedMembers = members.sort(Util.compareValues(currentSort.type, currentSort.order));
-    }
+    // let sortedMembers = members;
+    // if (currentSort.type !== SortType.NONE) {
+    //     console.log("NOT NONE");
+    //     sortedMembers = members.sort(Util.compareValues(currentSort.type, currentSort.order));
+    // }
 
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;
@@ -72,7 +72,7 @@ export default function GroupCountdownPageComponent() {
                     <h6>アイドルバースデーカウントダウン</h6>
                     <GenerationSelectionContainer></GenerationSelectionContainer>
                 </header>
-                <MemberCountdown group={selectedGroup} members={sortedMembers} ></MemberCountdown>
+                <MemberCountdown group={selectedGroup} members={members} ></MemberCountdown>
             </>
         );
     }

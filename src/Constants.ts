@@ -1,7 +1,7 @@
 import FilterObject from "./models/FilterObject";
 import FilterType from "./models/FilterType";
 import SortObject from "./models/SortObject";
-import SortType, { SortOrder } from "./models/SortType";
+import SortType, { SortOrders } from "./models/SortType";
 
 export class Constants {
     static MAX_WEEKS = 51;
@@ -14,7 +14,7 @@ export class Constants {
         value : null
     };
     static NONE_SORT : SortObject = {
-        order : SortOrder.NONE,
+        order : SortOrders.NONE,
         type : SortType.NONE
     }
 }

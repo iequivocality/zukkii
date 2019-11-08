@@ -28,13 +28,14 @@ export function rootReducer(state : AppState = initialState, action : any) : App
             return {...state, members : membersAddedAge, filteredMembers : membersAddedAge};
         case FILTER_MEMBERS:
             let filter : FilterObject = action.payload;
-            let filteredMembers = Util.isNotNullAndNotUndefined(filter) && filter.type !== FilterType.NONE ? state.members.filter((member) => {
+            let filteredMembers = Util.isNotNullAndNotUndefined(filter) && filter.type !== FilterType.NONE ? [...state.members].filter((member) => {
                 return member[filter.type] === filter.value
             }) : state.members;
             return {...state, currentFilter : filter, filteredMembers }
         case SORT_MEMBERS:
             let sort : SortObject = action.payload;
-            return {...state, currentSort : sort};
+            let sortedMembers = sort.order.key !== 'none' ? [...state.members].sort(Util.compareValues(sort.type, sort.order)) : state.members;
+            return {...state, currentSort : sort, filteredMembers : sortedMembers};
         case LOADING_STARTED:
             return {...state, isLoading : true}
         case LOADING_FINISHED:

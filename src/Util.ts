@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import { SortOrder } from './models/SortType';
+import { SortOrder, SortOrders } from './models/SortType';
 
 export default class Util {
     static formatYYYYMMDDToJapaneseFormat(date : string) {
@@ -59,12 +59,12 @@ export default class Util {
 
             let comparison : number = 0;
             if (varA > varB) {
-                comparison = -1;
+                comparison = 1;
             }
             else if (varA < varB) {
                 comparison = -1;
             }
-            return order === SortOrder.DESCENDING ? comparison * -1 : comparison;
+            return order.key === SortOrders.DESCENDING.key ? comparison * -1 : comparison;
         }
     } 
 }

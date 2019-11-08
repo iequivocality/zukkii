@@ -10,7 +10,8 @@ import PREFECTURES, { Prefecture } from '../../data/prefectures';
 import { Constants } from '../../Constants';
 import FilterType from '../../models/FilterType';
 import ToggleSwitch, { ToggleSwitchState } from '../ui/toggle-switch/ToggleSwitch';
-import SortType, { SortOrder } from '../../models/SortType'
+import SortType, { SortOrder, SortOrders } from '../../models/SortType'
+import SortObject from '../../models/SortObject';
 
 export interface MemberChooserProps {
     isOpen : boolean,
@@ -26,7 +27,7 @@ export default function MemberChooser(props : MemberChooserProps) {
         return memberPrefectures.findIndex(mPre => mPre === prefecture.jp) > -1;
     })
     let dispatch = useDispatch();
-    let doSort = useCallback((value : Prefecture) => {
+    let doFilter = useCallback((value : Prefecture) => {
         if (value !== null) {
             dispatch(filterMembers({
                 type : FilterType.PREFECTURE,
@@ -36,12 +37,13 @@ export default function MemberChooser(props : MemberChooserProps) {
         else {
             dispatch(filterMembers(Constants.ALL_FILTER));
         }
-        onChoose()
+        onChoose();
     }, []);
 
-    let doFilter = useCallback((order : SortOrder, type : SortType) => {
+    let doSort = useCallback((order : SortOrder, type : SortType) => {
         console.log(order, type);
         dispatch(sortMembers({ type, order }));
+        onChoose();
     }, []);
     
     return (
@@ -72,35 +74,31 @@ export default function MemberChooser(props : MemberChooserProps) {
                                 <Dropdown<Prefecture>
                                     all width={110} color={selectedGroup.color}
                                     contents={prefectureValues}
-                                    onSelect={(value : Prefecture) => { doSort(value) }}
-                                    style={{ fontFamily : 'KosugiMaru,sans-serif' }}
+                                    onSelect={(value : Prefecture) => { doFilter(value) }}
+                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 40 }}
                                     mapContentToDropdown={(content : Prefecture) => ( { key : content.en.toLowerCase(), label : content.jp, value : content } )}/>
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>
                             <div className={styles.memberChooserContainerLabel}>歳</div>
                             <div className={styles.memberChooserContainerForm}>
-                                <ToggleSwitch
-                                    width={110}
-                                    onState={{ key : SortOrder.ASCENDING, label : '昇順', selected : false, iconComponent : <IoIosArrowDropup/>, color : selectedGroup.color }}
-                                    offState={{ key : SortOrder.DESCENDING, label : '降順', selected : true, iconComponent : <IoIosArrowDropdown/> }}
-                                    onToggle={(toggleStatus, state) => { doFilter(state.key as SortOrder, SortType.AGE) }}
-                                    labelStyle={{
-                                        fontFamily : "'Roboto', 'sans-serif'"
-                                    }}></ToggleSwitch>
+                                <Dropdown<SortOrder>
+                                    width={110} color={selectedGroup.color}
+                                    contents={SortOrders.toArray()}
+                                    onSelect={(value : SortOrder) => { doSort(value, SortType.AGE) }}
+                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 35 }}
+                                    mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content } )}/>
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>
                             <div className={styles.memberChooserContainerLabel}>身長</div>
                             <div className={styles.memberChooserContainerForm}>
-                                <ToggleSwitch
-                                    width={110}
-                                    onState={{ key : SortOrder.ASCENDING, label : '昇順', selected : false, iconComponent : <IoIosArrowDropup/>, color : selectedGroup.color }}
-                                    offState={{ key : SortOrder.DESCENDING, label : '降順', selected : true, iconComponent : <IoIosArrowDropdown/> }}
-                                    onToggle={(toggleStatus, state : ToggleSwitchState) => { doFilter(state.key as SortOrder, SortType.HEIGHT) }}
-                                    labelStyle={{
-                                        fontFamily : "'Roboto', 'sans-serif'"
-                                    }}></ToggleSwitch>
+                                <Dropdown<SortOrder>
+                                    width={110} color={selectedGroup.color}
+                                    contents={SortOrders.toArray()}
+                                    onSelect={(value : SortOrder) => { doSort(value, SortType.HEIGHT) }}
+                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 30 }}
+                                    mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content } )}/>
                             </div>
                         </div>
                     </aside>
