@@ -13,6 +13,7 @@ import ToggleSwitch, { ToggleSwitchState } from '../ui/toggle-switch/ToggleSwitc
 import SortType, { SortOrder, SortOrders } from '../../models/SortType'
 import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
+import BLOOD_TYPES, { BloodType } from '../../data/bloodtypes';
 
 export interface MemberChooserProps {
     isOpen : boolean,
@@ -30,17 +31,13 @@ export default function MemberChooser(props : MemberChooserProps) {
         return memberPrefectures.findIndex(mPre => mPre === prefecture.jp) > -1;
     })
     let dispatch = useDispatch();
-    let doFilter = useCallback((value : Prefecture) => {
-        // if (value !== null) {
-        //     dispatch(filterMembers({
-        //         type : FilterType.PREFECTURE,
-        //         value : value.jp
-        //     }));
-        // }
-        // else {
-        //     dispatch(filterMembers(Constants.ALL_FILTER));
-        // }
-        filter(value !== null ? { type : FilterType.PREFECTURE, value : value.jp } : Constants.ALL_FILTER);
+    let doFilter = useCallback((filterType : FilterType, value : any) => {
+        if (filterType === FilterType.PREFECTURE) {
+            filter(value !== null ? { type : filterType, value : (value as Prefecture).jp } : Constants.ALL_FILTER);
+        }
+        else if (filterType === FilterType.BLOOD_TYPE) {
+            filter(value !== null ? { type : filterType, value : (value as BloodType).type } : Constants.ALL_FILTER);
+        }
         onChoose();
     }, []);
 
@@ -53,11 +50,11 @@ export default function MemberChooser(props : MemberChooserProps) {
     console.log("MEMBER CHOOSER RENDER")
     return (
         <>
-            <Motion defaultStyle={{ x : 0 }} style={{ x : isOpen ? spring(0.65) : spring(0) }}>
+            <Motion defaultStyle={{ x : 0 }} style={{ x : isOpen ? spring(0.4) : spring(0) }}>
                 {
                     interpolatingStyle => (
                         <div className={isOpen ? styles.modalBackground : styles.modalBackgroundClose} style={{
-                            opacity: interpolatingStyle.x
+                            opacity: interpolatingStyle.x, backgroundColor : selectedGroup.color
                         }} onClick={() => onChoose()}></div>
                     )
                 }
@@ -79,7 +76,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                 <Dropdown<Prefecture>
                                     all width={110} color={selectedGroup.color}
                                     contents={prefectureValues}
-                                    onSelect={(value : Prefecture) => { doFilter(value) }}
+                                    onSelect={(value : Prefecture) => { doFilter(FilterType.PREFECTURE, value) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 40 }}
                                     mapContentToDropdown={(content : Prefecture) => ( { key : content.en.toLowerCase(), label : content.jp, value : content } )}/>
                             </div>
@@ -104,6 +101,18 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     onSelect={(value : SortOrder) => { doSort(value, SortType.HEIGHT) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 30 }}
                                     mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content } )}/>
+                            </div>
+                        </div>
+                        <div className={styles.memberChooserContainer}>
+                            <div className={styles.memberChooserContainerLabel}>身長</div>
+                            <div className={styles.memberChooserContainerForm}>
+                                <Dropdown<BloodType>
+                                    all
+                                    width={110} color={selectedGroup.color}
+                                    contents={BLOOD_TYPES}
+                                    onSelect={(value : BloodType) => { doFilter(FilterType.BLOOD_TYPE, value) }}
+                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 25 }}
+                                    mapContentToDropdown={(content : BloodType) => ( { key : content.type, label : content.jp, value : content } )}/>
                             </div>
                         </div>
                     </aside>

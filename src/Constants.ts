@@ -2,6 +2,7 @@ import FilterObject from "./models/FilterObject";
 import FilterType from "./models/FilterType";
 import SortObject from "./models/SortObject";
 import SortType, { SortOrders } from "./models/SortType";
+import { DropdownContent } from "./components/ui/dropdown/Dropdown";
 
 export class Constants {
     static MAX_WEEKS = 51;
@@ -16,7 +17,12 @@ export class Constants {
     static NONE_SORT : SortObject = {
         order : SortOrders.NONE,
         type : SortType.NONE
-    }
+    };
+    static ALL_DROPDOWN_CONTENT : DropdownContent = {
+        key : 'all',
+        label : '全部',
+        value : null
+    };
 }
 
 export enum Units {

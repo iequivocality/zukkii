@@ -28,7 +28,7 @@ export default function CountdownDetails(props : Member) {
                     </div>
                     <div className={styles.bloodType}>
                         <div className={styles.label}>血液型</div>
-                        <div className={styles.text}>{bloodType}</div>
+                        <div className={styles.text}>{bloodType}型</div>
                     </div>
                 </div>
             </div>
