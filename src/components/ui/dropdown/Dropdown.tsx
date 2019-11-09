@@ -36,7 +36,7 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
     useEffect(() => {
         let newContents = contents.map(mapContentToDropdown);
         if (all) {
-            newContents.unshift({ key : 'all', label : '全部', value : null });
+            newContents.unshift(Constants.ALL_DROPDOWN_CONTENT);
         }
         setContentsForDropdown(newContents)
     }, [contents]);
@@ -50,7 +50,6 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
     let dropdownElement = useRef<HTMLDivElement>(null);
     useClickOutside(dropdownElement, () => {
         if (isOpen) {
-            console.log("OUTSIDE");
             setIsOpen(false);
         }
     });

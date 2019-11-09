@@ -25,7 +25,7 @@ export default function ToggleSwitch(props : ToggleSwitchProps) {
     let offState : ToggleSwitchState = props.offState;
     let [ isOn, setIsOn ] = useState(onState.selected);
     
-    let transform : number = isOn ? width - 34 : 4;
+    let transform : number = isOn ? width - 34 : 2;
     let switchStyle : CSSProperties = props.labelStyle ? props.labelStyle : {};
 
     let onSwitchClick = () => {

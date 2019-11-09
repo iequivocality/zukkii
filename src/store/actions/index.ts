@@ -80,7 +80,6 @@ export function fetchGroup(groupName : string) {
         dispatch(loadingStarted());
         FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let groups = Util.convertObjectToArray<Group>(snapshot.val());
-            console.log('unfiltered: ', groups);
             let filteredGroup = groups.filter((value : Group) => {
               return value.id === groupName;
             });
@@ -91,7 +90,6 @@ export function fetchGroup(groupName : string) {
                 dispatch(loadGroup(filteredGroup.length > 0 ? filteredGroup[0] : null))
                 dispatch(fetchMembersFromGroup(groupName));
             }
-            console.log('filtered: ', filteredGroup);
             dispatch(loadingFinished());
             return snapshot;
         });
@@ -115,7 +113,6 @@ export function fetchMembersFromGroup(group : string) {
         dispatch(loadingStarted());
         FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let members = Util.convertObjectToArray<Member>(snapshot.val());
-            console.log('unfiltered: ', members);
             let filteredMembers = members.filter((value : Member) => {
               return Object.keys(value.group).findIndex(( value : string ) => ( value === group)) > -1;
             });

@@ -1,8 +1,4 @@
-export interface Prefecture {
-    jp : string,
-    en : string,
-    category : 'do' | 'ken' | 'fu' | 'to'
-}
+import Prefecture from "../models/Prefecture";
 
 const PREFECTURES : Array<Prefecture> = [
     { en : 'aichi', jp : '愛知県', category : 'ken' },

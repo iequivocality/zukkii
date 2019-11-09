@@ -1,4 +1,5 @@
-import SortType, { SortOrder } from "./SortType";
+import SortType from "./SortType";
+import { SortOrder } from "./SortOrder";
 
 export default interface SortObject {
     order : SortOrder,

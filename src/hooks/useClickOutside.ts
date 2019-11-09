@@ -1,4 +1,4 @@
-import { useRef, MutableRefObject, useEffect, useCallback } from "react";
+import { MutableRefObject, useEffect } from "react";
 
 export default function useClickOutside<T extends HTMLElement>(element : MutableRefObject<T>, callback : (elem : HTMLElement) => void) {
     let onOutsideCallback = (event : MouseEvent) => {
@@ -14,6 +14,4 @@ export default function useClickOutside<T extends HTMLElement>(element : Mutable
         document.addEventListener('click', listener);
         return () => document.removeEventListener('click', listener)
     }, [callback]);
-
-    return 
 }

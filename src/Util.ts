@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
-import { SortOrder, SortOrders } from './models/SortType';
 import { Age } from './models/Age';
+import SortOrders, { SortOrder } from './models/SortOrder';
 
 export default class Util {
     static formatYYYYMMDDToJapaneseFormat(date : string) {
@@ -53,7 +53,6 @@ export default class Util {
     }
 
     static compareValues<T = any>(key : string, order : SortOrder) {
-        console.log('KEY:', key)
         return (a : T, b : T) => {
             if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
                 return 0;

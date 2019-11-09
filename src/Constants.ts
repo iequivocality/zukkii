@@ -1,8 +1,9 @@
 import FilterObject from "./models/FilterObject";
 import FilterType from "./models/FilterType";
 import SortObject from "./models/SortObject";
-import SortType, { SortOrders } from "./models/SortType";
+import SortType from "./models/SortType";
 import { DropdownContent } from "./components/ui/dropdown/Dropdown";
+import SortOrders from "./models/SortOrder";
 
 export class Constants {
     static MAX_WEEKS = 51;

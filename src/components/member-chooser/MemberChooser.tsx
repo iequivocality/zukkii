@@ -1,19 +1,19 @@
 import React, { useCallback } from 'react';
 import styles from './MemberChooser.module.scss';
-import { IoIosCloseCircleOutline, IoIosArrowDropup, IoIosArrowDropdown } from 'react-icons/io';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { useSelector, useDispatch } from 'react-redux';
 import AppState from '../../store/state/AppState';
-import { filterMembers, sortMembers } from '../../store/actions';
 import { Motion, spring } from 'react-motion';
 import Dropdown from '../ui/dropdown/Dropdown';
-import PREFECTURES, { Prefecture } from '../../data/prefectures';
+import PREFECTURES from '../../data/prefectures';
 import { Constants } from '../../Constants';
 import FilterType from '../../models/FilterType';
-import ToggleSwitch, { ToggleSwitchState } from '../ui/toggle-switch/ToggleSwitch';
-import SortType, { SortOrder, SortOrders } from '../../models/SortType'
+import SortType from '../../models/SortType';
+import SortOrders, { SortOrder } from '../../models/SortOrder'
 import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
 import BLOOD_TYPES, { BloodType } from '../../data/bloodtypes';
+import Prefecture from '../../models/Prefecture';
 
 export interface MemberChooserProps {
     isOpen : boolean,
@@ -42,12 +42,10 @@ export default function MemberChooser(props : MemberChooserProps) {
     }, []);
 
     let doSort = useCallback((order : SortOrder, type : SortType) => {
-        console.log(order, type);
         sort({ type, order });
-        // dispatch(sortMembers({ type, order }));
         onChoose();
     }, []);
-    console.log("MEMBER CHOOSER RENDER")
+
     return (
         <>
             <Motion defaultStyle={{ x : 0 }} style={{ x : isOpen ? spring(0.4) : spring(0) }}>
