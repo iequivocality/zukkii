@@ -83,22 +83,24 @@ export default function MemberChooser(props : MemberChooserProps) {
                             <div className={styles.memberChooserContainerLabel}>歳</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
+                                    icon
                                     width={110} color={selectedGroup.color}
                                     contents={SortOrders.toArray()}
                                     onSelect={(value : SortOrder) => { doSort(value, SortType.AGE_BY_DAYS) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 35 }}
-                                    mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content } )}/>
+                                    mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content, iconComponent : content.icon } )}/>
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>
                             <div className={styles.memberChooserContainerLabel}>身長</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
+                                    icon
                                     width={110} color={selectedGroup.color}
                                     contents={SortOrders.toArray()}
                                     onSelect={(value : SortOrder) => { doSort(value, SortType.HEIGHT) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 30 }}
-                                    mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content } )}/>
+                                    mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content, iconComponent : content.icon } )}/>
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>

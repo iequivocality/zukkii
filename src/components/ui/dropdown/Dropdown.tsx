@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties, useCallback, useMemo, useRef, useEffect } from 'react';
+import React, { useState, CSSProperties, useCallback, useMemo, useRef, useEffect, ReactNode } from 'react';
 import styles from './Dropdown.module.scss';
 import useClickOutside from '../../../hooks/useClickOutside';
 import { Constants } from '../../../Constants';
@@ -6,7 +6,8 @@ import { Constants } from '../../../Constants';
 export interface DropdownContent<T = any> {
     key : string,
     label : string,
-    value : T
+    value : T,
+    iconComponent? : ReactNode
 }
 
 export interface DropdownProps<T = string> {
@@ -16,11 +17,12 @@ export interface DropdownProps<T = string> {
     width? : number,
     style? : CSSProperties,
     all? : boolean,
+    icon? : boolean,
     color? : string
 }
 
 export default function Dropdown<T = string>(props : DropdownProps<T>) {
-    let { width, contents, mapContentToDropdown, onSelect, style, all, color } = props;
+    let { width, contents, mapContentToDropdown, onSelect, style, all, color, icon } = props;
     let [ isOpen, setIsOpen ] = useState(false);
     let [ currentValue, setCurrentValue ] = useState<DropdownContent<T>>(null);
     let [ contentsForDropdown, setContentsForDropdown] = useState([]);
@@ -56,11 +58,19 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
 
     return (
         <div ref={dropdownElement} className={isOpen ? styles.dropdownWrapperOpen : styles.dropdownWrapper} style={style}>
-            <div className={styles.dropdownButton} style={{ width : `${newWidth}px`, backgroundColor : color }} onClick={toggleDropdown}>{currentValue !== null ? currentValue.label : ''}<span className={styles.triangle}/></div>
+            <div className={styles.dropdownButton} style={{ width : `${newWidth}px`, backgroundColor : color }} onClick={toggleDropdown}>
+                { icon && <span className={styles.dropdownContentIcon}>{currentValue && currentValue.iconComponent}</span> }
+                {currentValue !== null ? currentValue.label : ''}
+                <span className={styles.triangle}/>
+            </div>
             <div className={styles.dropdownContent} style={{ width : `${newWidth}px`, backgroundColor : color, opacity : isOpen ? 1 : 0, pointerEvents : isOpen ? 'inherit' : 'none' }}>
                 {contentsForDropdown.map((content : DropdownContent<T>) => {
                     return (
-                        content.key !== currentValue.key ? <div key={content.key} className={styles.dropdownContentItem} onClick={() => onDropdownSelect(content)}>{content.label}</div> : null
+                        content.key !== currentValue.key ? 
+                        <div key={content.key} className={styles.dropdownContentItem} onClick={() => onDropdownSelect(content)}>
+                            { icon && <span className={styles.dropdownContentIcon}>{content.iconComponent}</span> }
+                            <span>{content.label}</span>
+                        </div> : null
                     )
                 })}
             </div>
