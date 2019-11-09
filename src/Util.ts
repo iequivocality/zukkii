@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import { SortOrder, SortOrders } from './models/SortType';
+import { Age } from './models/Age';
 
 export default class Util {
     static formatYYYYMMDDToJapaneseFormat(date : string) {
@@ -38,10 +39,13 @@ export default class Util {
         return Object.keys(object).map<O>(key => object[key])
     }
 
-    static getAgeFromBirthdate(birthdate : string) : number {
+    static getAgeFromBirthdate(birthdate : string) : Age {
         let birthdateMoment = moment(birthdate, "YYYY-MM-DD").tz("Japan");
         let currentMoment = moment().tz("Japan");
-        return currentMoment.diff(birthdateMoment, 'years');
+        return {
+            years : currentMoment.diff(birthdateMoment, 'years'),
+            days : currentMoment.diff(birthdateMoment, 'days')
+        };
     }
 
     static isNotNullAndNotUndefined(object : Object) {

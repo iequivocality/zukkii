@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties, useCallback } from 'react';
+import React, { useState, CSSProperties, useCallback, useMemo } from 'react';
 import styles from './Dropdown.module.scss';
 
 export interface DropdownContent<T> {
@@ -23,9 +23,9 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
     let allContent = { key : 'all', label : '全部', value : null };
     let [ currentValue, setCurrentValue ] = useState<DropdownContent<T>>(all ? allContent : mapContentToDropdown(contents[0]));
 
-    let toggleDropdown = () => {
+    let toggleDropdown = useCallback(() => {
         setIsOpen(!isOpen);
-    }
+    }, [isOpen]);
     let newWidth = width ? width : 0;
     let contentsForDropdown = contents.map(mapContentToDropdown);
     if (all) {
@@ -38,7 +38,6 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
         setIsOpen(false);
     }, [currentValue]);
 
-    console.log("RENDER")
     return (
         <div className={isOpen ? styles.dropdownWrapperOpen : styles.dropdownWrapper} style={style}>
             <div className={styles.dropdownButton} style={{ width : `${newWidth}px`, backgroundColor : color }} onClick={toggleDropdown}>{currentValue.label}<span className={styles.triangle}/></div>

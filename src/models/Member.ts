@@ -1,3 +1,5 @@
+import { Age } from "./Age";
+
 export interface MemberGroup {
     [key : string] : boolean
 }
@@ -12,5 +14,6 @@ export default interface Member {
     height : number,
     bloodType : string,
     generation : number,
-    age : number
+    ageByYears : number,
+    ageByDays : number
 }

@@ -12,14 +12,17 @@ import FilterType from '../../models/FilterType';
 import ToggleSwitch, { ToggleSwitchState } from '../ui/toggle-switch/ToggleSwitch';
 import SortType, { SortOrder, SortOrders } from '../../models/SortType'
 import SortObject from '../../models/SortObject';
+import FilterObject from '../../models/FilterObject';
 
 export interface MemberChooserProps {
     isOpen : boolean,
-    onChoose : () => void
+    onChoose : () => void,
+    filter : (f : FilterObject) => void,
+    sort : (s : SortObject) => void
 }
 
 export default function MemberChooser(props : MemberChooserProps) {
-    let { isOpen, onChoose } = props;
+    let { isOpen, onChoose, filter, sort } = props;
     let selectedGroup = useSelector((state : AppState) => state.selectedGroup);
     let members = useSelector((state : AppState) => state.members);
     let memberPrefectures = members.map(member => member.prefecture);
@@ -28,24 +31,26 @@ export default function MemberChooser(props : MemberChooserProps) {
     })
     let dispatch = useDispatch();
     let doFilter = useCallback((value : Prefecture) => {
-        if (value !== null) {
-            dispatch(filterMembers({
-                type : FilterType.PREFECTURE,
-                value : value.jp
-            }));
-        }
-        else {
-            dispatch(filterMembers(Constants.ALL_FILTER));
-        }
+        // if (value !== null) {
+        //     dispatch(filterMembers({
+        //         type : FilterType.PREFECTURE,
+        //         value : value.jp
+        //     }));
+        // }
+        // else {
+        //     dispatch(filterMembers(Constants.ALL_FILTER));
+        // }
+        filter(value !== null ? { type : FilterType.PREFECTURE, value : value.jp } : Constants.ALL_FILTER);
         onChoose();
     }, []);
 
     let doSort = useCallback((order : SortOrder, type : SortType) => {
         console.log(order, type);
-        dispatch(sortMembers({ type, order }));
+        sort({ type, order });
+        // dispatch(sortMembers({ type, order }));
         onChoose();
     }, []);
-    
+    console.log("MEMBER CHOOSER RENDER")
     return (
         <>
             <Motion defaultStyle={{ x : 0 }} style={{ x : isOpen ? spring(0.65) : spring(0) }}>
@@ -85,7 +90,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                 <Dropdown<SortOrder>
                                     width={110} color={selectedGroup.color}
                                     contents={SortOrders.toArray()}
-                                    onSelect={(value : SortOrder) => { doSort(value, SortType.AGE) }}
+                                    onSelect={(value : SortOrder) => { doSort(value, SortType.AGE_BY_DAYS) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 35 }}
                                     mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content } )}/>
                             </div>

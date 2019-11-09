@@ -16,9 +16,11 @@ export interface SortOrder {
 }
 
 enum SortType {
-    AGE = 'age',
+    AGE_BY_YEARS = 'ageByYears',
+    AGE_BY_DAYS = 'ageByDays',
     HEIGHT = 'height',
-    NONE = 'none'
+    NONE = 'none',
+    BIRTHDATE = 'birthdate'
 }
 
 export default SortType;
