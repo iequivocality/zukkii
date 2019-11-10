@@ -14,7 +14,7 @@ export default function MemberCountdown(props: MemberCountdownProps) {
     let { members } = props;
 
     return (
-        <main className={styles.groupContainer}>
+        <main className={members.length ? styles.groupContainer : styles.noMemberGroupContainer}>
             { members.map( member => <Countdown key={member.id} member={member} groupColor={color} groupId={id}></Countdown>) }
         </main>
     );

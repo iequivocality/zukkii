@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState, CSSProperties, useRef, Dispatch, SetStateAction } from 'react';
 import styles from './GroupCountdown.module.scss'
-import GenerationSelectionContainer from '../../components/selection/GenerationSelection';
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Redirect, useRouteMatch } from 'react-router';
@@ -69,7 +68,6 @@ export default function GroupCountdownPageComponent() {
                     <BackButton to="/" style={buttonStyle}></BackButton>
                     <h2>{name}</h2>
                     <h6>アイドルバースデーカウントダウン</h6>
-                    {/* <GenerationSelectionContainer onGenerationSelect()></GenerationSelectionContainer> */}
                 </header>
                 <MemberCountdown group={selectedGroup} members={processedMembers} ></MemberCountdown>
             </>

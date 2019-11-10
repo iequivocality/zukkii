@@ -15,18 +15,18 @@ export interface ToggleSwitchProps {
     onState? : ToggleSwitchState,
     offState? : ToggleSwitchState,
     labelStyle? : CSSProperties,
-    icon? : boolean
+    switchStyle? : CSSProperties,
+    icon? : boolean,
+    iconOnly? : boolean
 }
 
 export default function ToggleSwitch(props : ToggleSwitchProps) {
-    
-    let width : number = props.width ? props.width : 100;
-    let onState : ToggleSwitchState = props.onState;
-    let offState : ToggleSwitchState = props.offState;
+    let { width, onState, offState, labelStyle, switchStyle, icon, iconOnly } = props;
+    let newWidth : number = width ? width : 100;
     let [ isOn, setIsOn ] = useState(onState.selected);
     
     let transform : number = isOn ? width - 34 : 2;
-    let switchStyle : CSSProperties = props.labelStyle ? props.labelStyle : {};
+    let switchLabelStyle : CSSProperties = labelStyle ? labelStyle : {};
 
     let onSwitchClick = () => {
         setIsOn(!isOn);
@@ -39,12 +39,12 @@ export default function ToggleSwitch(props : ToggleSwitchProps) {
     }
 
     return (
-        <label className={styles.toggleSwitch} style={{ width : `${width}px` }} onClick={onSwitchClick}>
-            <span className={styles.switch} style={{ transform : `translateX(${transform}px)` }}></span>
+        <label className={styles.toggleSwitch} style={{ width : `${newWidth}px` }} onClick={onSwitchClick}>
+            <span className={styles.switch} style={{ transform : `translateX(${transform}px)`, ...switchStyle }}></span>
             <span className={isOn ? styles.sliderOn : styles.slider} style={{ backgroundColor : isOn ? onState.color : offState.color }}>
-                <span className={styles.switchLabel} style={switchStyle}>
-                    {props.icon ? (<span className={styles.switchIcon}>{iconComponent}</span>) : null}
-                    <span>{isOn ? onState.label : offState.label}</span>
+                <span className={styles.switchLabel} style={switchLabelStyle}>
+                    {(icon) ? (<span className={styles.switchIcon}>{iconComponent}</span>) : null}
+                    {<span>{isOn ? onState.label : offState.label}</span>}
                 </span>
             </span>
         </label>
