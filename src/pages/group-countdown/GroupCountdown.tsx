@@ -5,10 +5,11 @@ import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Redirect, useRouteMatch } from 'react-router';
 import { fetchGroup } from '../../store/actions';
-import BackButton from '../../components/backbutton/BackButton';
+import BackButton from '../../components/back-button/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
 import useTimeout from '../../hooks/useTimeout';
+import useProcessedMembers from '../../hooks/useProcessedMembers';
 import Loading from '../../components/loading/Loading';
 import MemberChooser from '../../components/member-chooser/MemberChooser';
 import Group from '../../models/Group';
@@ -16,28 +17,7 @@ import { IoIosFunnel } from 'react-icons/io';
 import Member from '../../models/Member';
 import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
-import FilterType from '../../models/FilterType';
 import { Constants } from '../../Constants';
-
-function useProcessedMembers(currentSort : SortObject, currentFilter : FilterObject) : Member[] {
-    let members : Member[] = useSelector((state : AppState) => state.members, shallowEqual);
-    let [ processedMembers, setProcessedMembers ] = useState<Member[]>([]);
-    useEffect(() => {
-        setProcessedMembers(members);
-    }, [members]);
-
-    useEffect(() => {
-        setProcessedMembers(currentFilter.type !== FilterType.NONE ? [...members].filter((member) => {
-            return member[currentFilter.type] === currentFilter.value
-        }) : members)
-    }, [currentFilter])
-
-    useEffect(() => {
-        setProcessedMembers(currentSort.order.key !== 'none' ? [...members].sort(Util.compareValues(currentSort.type, currentSort.order)) : members);
-    }, [currentSort]);
-
-    return processedMembers;
-}
 
 export default function GroupCountdownPageComponent() {    
     let { isExact, params } = useRouteMatch();
@@ -68,8 +48,6 @@ export default function GroupCountdownPageComponent() {
         }
     }, 10000, [showNotFound]);
 
-    console.log("USE PROCESSED:", useProcessedMembers(currentSort, currentFilter));
-
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;
         let titleStyle : React.CSSProperties = {
@@ -91,7 +69,7 @@ export default function GroupCountdownPageComponent() {
                     <BackButton to="/" style={buttonStyle}></BackButton>
                     <h2>{name}</h2>
                     <h6>アイドルバースデーカウントダウン</h6>
-                    <GenerationSelectionContainer></GenerationSelectionContainer>
+                    {/* <GenerationSelectionContainer onGenerationSelect()></GenerationSelectionContainer> */}
                 </header>
                 <MemberCountdown group={selectedGroup} members={processedMembers} ></MemberCountdown>
             </>

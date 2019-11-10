@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './NotFound.module.scss'
-import BackButton from "../../components/backbutton/BackButton";
+import BackButton from "../../components/back-button/BackButton";
 
 export default function NotFoundComponent() {
     return (

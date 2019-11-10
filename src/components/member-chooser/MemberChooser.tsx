@@ -14,6 +14,8 @@ import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
 import BLOOD_TYPES, { BloodType } from '../../data/bloodtypes';
 import Prefecture from '../../models/Prefecture';
+import CloseButton from '../close-button/CloseButton';
+import GenerationSelection, { GenerationSelect } from '../selection/GenerationSelection';
 
 export interface MemberChooserProps {
     isOpen : boolean,
@@ -30,13 +32,15 @@ export default function MemberChooser(props : MemberChooserProps) {
     let prefectureValues = PREFECTURES.filter(prefecture => {
         return memberPrefectures.findIndex(mPre => mPre === prefecture.jp) > -1;
     })
-    let dispatch = useDispatch();
     let doFilter = useCallback((filterType : FilterType, value : any) => {
         if (filterType === FilterType.PREFECTURE) {
             filter(value !== null ? { type : filterType, value : (value as Prefecture).jp } : Constants.ALL_FILTER);
         }
         else if (filterType === FilterType.BLOOD_TYPE) {
             filter(value !== null ? { type : filterType, value : (value as BloodType).type } : Constants.ALL_FILTER);
+        }
+        else if (filterType === FilterType.GENERATION) {
+            filter(value && (value as GenerationSelect).value != 0 ? { type : filterType, value : (value as GenerationSelect).value } : Constants.ALL_FILTER);
         }
         onChoose();
     }, []);
@@ -64,15 +68,13 @@ export default function MemberChooser(props : MemberChooserProps) {
                     }}>
                         <div className={styles.memberChooserContainer}>
                             <div>SELECT</div>
-                            <div className={styles.closeButton} onClick={() => onChoose()}>
-                                <IoIosCloseCircleOutline/>
-                            </div>
+                            <CloseButton onClose={() => { onChoose() }}></CloseButton>
                         </div>
                         <div className={styles.memberChooserContainer}>
                             <div className={styles.memberChooserContainerLabel}>都道府県</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<Prefecture>
-                                    all width={110} color={selectedGroup.color}
+                                    all width={150} color={selectedGroup.color}
                                     contents={prefectureValues}
                                     onSelect={(value : Prefecture) => { doFilter(FilterType.PREFECTURE, value) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 40 }}
@@ -84,7 +86,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
                                     icon
-                                    width={110} color={selectedGroup.color}
+                                    width={150} color={selectedGroup.color}
                                     contents={SortOrders.toArray()}
                                     onSelect={(value : SortOrder) => { doSort(value, SortType.AGE_BY_DAYS) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 35 }}
@@ -96,7 +98,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
                                     icon
-                                    width={110} color={selectedGroup.color}
+                                    width={150} color={selectedGroup.color}
                                     contents={SortOrders.toArray()}
                                     onSelect={(value : SortOrder) => { doSort(value, SortType.HEIGHT) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 30 }}
@@ -108,11 +110,19 @@ export default function MemberChooser(props : MemberChooserProps) {
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<BloodType>
                                     all
-                                    width={110} color={selectedGroup.color}
+                                    width={150} color={selectedGroup.color}
                                     contents={BLOOD_TYPES}
                                     onSelect={(value : BloodType) => { doFilter(FilterType.BLOOD_TYPE, value) }}
                                     style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 25 }}
                                     mapContentToDropdown={(content : BloodType) => ( { key : content.type, label : content.jp, value : content } )}/>
+                            </div>
+                        </div>
+                        <div className={styles.memberChooserContainer}>
+                            <div className={styles.memberChooserContainerLabel}>期</div>
+                            <div className={styles.memberChooserContainerForm}>
+                                <GenerationSelection
+                                    onGenerationSelect={(value : GenerationSelect) => { doFilter(FilterType.GENERATION, value) }}
+                                ></GenerationSelection>
                             </div>
                         </div>
                     </aside>
