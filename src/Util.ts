@@ -69,5 +69,5 @@ export default class Util {
             }
             return order.key === SortOrders.DESCENDING.key ? comparison * -1 : comparison;
         }
-    } 
+    }
 }

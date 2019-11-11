@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useContext } from 'react';
 import styles from './BirthdaySelection.module.scss';
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,6 +6,7 @@ import { fetchGroups, loadGroup } from '../../store/actions';
 import Group from '../../models/Group';
 import { Link } from 'react-router-dom';
 import Loading from '../../components/loading/Loading';
+import ThemeContext from '../../contexts/themeContext';
 
 interface BirthdaySelectionPageProps {
     groupChoices : Array<Group>,
@@ -21,6 +22,7 @@ function getGroupStyle(group : Group) {
 }
 
 export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps) {
+    let themeContainer = useContext(ThemeContext);
     let groupChoices = useSelector((state : AppState) => state.groupChoices);
     let isLoading = useSelector((state : AppState) => state.isLoading);
     let dispatch = useDispatch();
@@ -33,12 +35,14 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
 
     useEffect(() => {
         loadGroups();
-    }, [])
+    }, []);
+
+    console.log("SEEC", themeContainer)
 
     if (!isLoading) {
         return (
             <>
-                <div className={styles.titleContainer}>
+                <div className={styles.titleContainer} style={{ color : themeContainer.theme.foregroundColor }}>
                     <h2>アイドルバースデーカウントダウン</h2>
                     <h4>アイドルグループ選んでください</h4>
                 </div>

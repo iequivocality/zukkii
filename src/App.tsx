@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import './App.scss';
-import { connect } from 'react-redux';
-import AppState from './store/state/AppState';
-import { BrowserRouter as Router, Route, Switch, RouteProps } from 'react-router-dom';
-import BirthdayCountdownPage from './pages/group-countdown/GroupCountdown';
+import { RouteProps, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
-import { fetchGroups } from './store/actions';
-import NotFoundComponent from './pages/no-found/NotFound';
+import GroupCountdown from './pages/group-countdown/GroupCountdown';
 import ComponentTest from './pages/component-test/ComponentTest';
+import NotFoundComponent from './pages/no-found/NotFound';
+import { useDispatch } from 'react-redux';
+import { fetchGroups } from './store/actions';
+import ThemeContext, { themes, Theme } from './contexts/themeContext';
+import AppContainer from './components/app-container/AppContainer';
+import useTheme from './hooks/useTheme';
+import DarkModeToggle from './components/dark-mode-toggle/DarkModeToggle';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -17,7 +20,7 @@ const AppRoutes : Array<RouteProps> = [
   },
   {
     path: "/group/:group",
-    component: BirthdayCountdownPage
+    component: GroupCountdown
   },
   {
     path: "/test",
@@ -33,45 +36,26 @@ const AppRoutes : Array<RouteProps> = [
   }
 ];
 
-interface AppProps {
-  loadGroups : () => void
+export default function App() {
+  let [theme] = useTheme();
+  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchGroups());
+  }, []);
+  console.log("THEME:", theme);
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <AppContainer>
+        <Router>
+          <Switch>
+            {AppRoutes.map((route : RouteProps, key : number) => (
+              <Route key={key} {...route}></Route>
+            ))}
+          </Switch>
+        </Router>
+        <DarkModeToggle></DarkModeToggle>
+      </AppContainer>
+    </ThemeContext.Provider>
+  );
 }
-
-
-class App extends React.Component<AppState & AppProps> {
-  componentDidMount() {
-    this.props.loadGroups();
-  }
-
-  render() {
-    return (
-      <div className="app-container">
-          <Router>
-            <Switch>
-              {AppRoutes.map((route : RouteProps, key : number) => (
-                <Route key={key} {...route}></Route>
-              ))}
-            </Switch>
-          </Router>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state : AppState) => {
-  return state
-};
-
-const mapDispatchToProps = (dispatch : any) => {
-  return {
-    loadGroups : () => {
-      dispatch(fetchGroups());
-    }
-  }
-}
-
-const AppContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
-export default AppContainer;

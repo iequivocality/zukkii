@@ -3,6 +3,8 @@
     display: inline-block;
     width: 100px;
     height: 34px;
+    border-radius: 34px;
+    transition: .4s all;
     cursor: pointer;
 
     .slider {
@@ -30,36 +32,21 @@
         left: 2px;
         bottom: 3px;
         background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
+        transition: .4s all;
         border-radius: 50%;
         z-index: 5;
     }
     
-    .switchLabel {
-        color: white;
+    .switchIcon {
         position: absolute;
-        transform: translate(-50%,-50%);
-        top: 50%;
-        left: 50%;
-        font-size: 0.85rem;
-        z-index: 10;
-        user-select: none;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex-direction: row;
-        width: 100%;
+        right: 5px;
+        bottom: 4.5px;
+        height: 25px;
+        width: 25px;
 
-        .switchIcon {
-            margin-right: 5px;
-            height: 28px;
-            width: 28px;
-
-            svg {
-                width: 1.25rem;
-                height: 1.25rem;
-            }
+        svg {
+            height: 25px;
+            width: 25px;
         }
     }
 }

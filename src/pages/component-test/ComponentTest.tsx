@@ -10,13 +10,10 @@ export default function ComponentTest() {
         <main style={{ justifyContent : 'space-around' }}>
             <ToggleSwitch
                 width={75}
-                iconOnly
-                onState={{ key : 'light', label : 'Bukas', color : '#ff3456', selected : false, iconComponent : <IoIosSunny/> }}
-                offState={{ key : 'dark', label : 'Cerado', color : '#5634ff', selected : true, iconComponent : <IoIosMoon/> }}
-                onToggle={(toggleStatus) => { console.log(toggleStatus) }}
-                labelStyle={{
-                    fontFamily : "'Roboto', 'sans-serif'"
-                }}></ToggleSwitch>
+                icon value
+                onState={{ key : 'light', color : '#ecf0f1', switchStyle : { backgroundColor : "#f1c40f" }, iconComponent : <IoIosSunny color="#f1c40f"/> }}
+                offState={{ key : 'dark', color : '#34495e', switchStyle : { backgroundColor : "#ffffff" }, iconComponent : <IoIosMoon color="#ffffff"/> }}
+                onToggle={(toggleStatus) => { console.log(toggleStatus) }}></ToggleSwitch>
             <Dropdown width={200} contents={contents}
                       onSelect={(value : string) => { console.log(value) }}
                       mapContentToDropdown={(content : string) => ({ key : content, label : content, value : content })}/>

@@ -13,12 +13,11 @@ import Loading from '../../components/loading/Loading';
 import MemberChooser from '../../components/member-chooser/MemberChooser';
 import Group from '../../models/Group';
 import { IoIosFunnel } from 'react-icons/io';
-import Member from '../../models/Member';
 import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
 import { Constants } from '../../Constants';
 
-export default function GroupCountdownPageComponent() {    
+export default function GroupCountdownPageComponent() {
     let { isExact, params } = useRouteMatch();
     let [ openChooser, setOpenChooser ] = useState(false);
     let [ currentFilter, setCurrentFilter ] = useState<FilterObject>(Constants.ALL_FILTER);

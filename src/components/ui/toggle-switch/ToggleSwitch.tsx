@@ -1,12 +1,13 @@
-import React, { useState, CSSProperties, ReactNode } from 'react';
+import React, { useState, CSSProperties, ReactNode, ReactElement } from 'react';
 import styles from './ToggleSwitch.module.scss'
+import { IconBaseProps } from 'react-icons/lib/cjs';
 
 export interface ToggleSwitchState {
     key : string,
+    iconComponent? : ReactElement<IconBaseProps>,
     color? : string,
-    label? : string,
-    selected : boolean
-    iconComponent? : ReactNode
+    switchContainerStyle? : CSSProperties,
+    switchStyle? : CSSProperties
 }
 
 export interface ToggleSwitchProps {
@@ -14,19 +15,17 @@ export interface ToggleSwitchProps {
     onToggle : (toggleStatus : boolean, state? : ToggleSwitchState) => void,
     onState? : ToggleSwitchState,
     offState? : ToggleSwitchState,
-    labelStyle? : CSSProperties,
-    switchStyle? : CSSProperties,
+    switchContainerStyle? : CSSProperties,
     icon? : boolean,
-    iconOnly? : boolean
+    value : boolean,
 }
 
 export default function ToggleSwitch(props : ToggleSwitchProps) {
-    let { width, onState, offState, labelStyle, switchStyle, icon, iconOnly } = props;
+    let { width, onState, offState, switchContainerStyle, icon, value } = props;
     let newWidth : number = width ? width : 100;
-    let [ isOn, setIsOn ] = useState(onState.selected);
+    let [ isOn, setIsOn ] = useState(value);
     
     let transform : number = isOn ? width - 34 : 2;
-    let switchLabelStyle : CSSProperties = labelStyle ? labelStyle : {};
 
     let onSwitchClick = () => {
         setIsOn(!isOn);
@@ -38,14 +37,14 @@ export default function ToggleSwitch(props : ToggleSwitchProps) {
         iconComponent = isOn ? onState.iconComponent : offState.iconComponent
     }
 
+    let stateSwitchContainerStyle = isOn ? onState.switchContainerStyle : offState.switchContainerStyle;
+    let stateSwitchStyle = isOn ? onState.switchStyle : offState.switchStyle;
+
     return (
-        <label className={styles.toggleSwitch} style={{ width : `${newWidth}px` }} onClick={onSwitchClick}>
-            <span className={styles.switch} style={{ transform : `translateX(${transform}px)`, ...switchStyle }}></span>
+        <label className={styles.toggleSwitch} style={{ width : `${newWidth}px`, ...switchContainerStyle, ...stateSwitchContainerStyle }} onClick={onSwitchClick}>
+            <span className={styles.switch} style={{ transform : `translateX(${transform}px)`, ...stateSwitchStyle }}></span>
             <span className={isOn ? styles.sliderOn : styles.slider} style={{ backgroundColor : isOn ? onState.color : offState.color }}>
-                <span className={styles.switchLabel} style={switchLabelStyle}>
-                    {(icon) ? (<span className={styles.switchIcon}>{iconComponent}</span>) : null}
-                    {<span>{isOn ? onState.label : offState.label}</span>}
-                </span>
+                {(icon) ? (<span className={styles.switchIcon} style={!isOn ? { right : '5px' } : { right : `${width - 34}px` }}>{iconComponent}</span>) : null}
             </span>
         </label>
     );
