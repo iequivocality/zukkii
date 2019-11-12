@@ -1,7 +1,7 @@
 import Theme from "./variables";
 
 const LightTheme : Theme = {
-    backgroundColor : '#ecf0f1',
+    backgroundColor : '#ffffff',
     foregroundColor : '#2c3e50'
 }
 export default LightTheme;
