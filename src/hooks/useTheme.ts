@@ -1,6 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import ThemeContext, { ThemeContextContainer, Theme, themes } from "../contexts/themeContext";
+import ThemeContext, { ThemeContextContainer } from "../contexts/themeContext";
 import useLocalStorage from "./useLocalStorage";
+import Theme from "../themes/variables";
+import DarkTheme from "../themes/darkTheme";
+import LightTheme from "../themes/lightTheme";
 
 export default function useTheme() {
     let themeContainer = useContext(ThemeContext);
@@ -9,19 +12,12 @@ export default function useTheme() {
 
     let toggleTheme = (newTheme : Theme) => {
         setCurrentTheme({toggleTheme, theme : newTheme});
-        if (newTheme === themes.dark) {
-            console.log("DARK");
-            setEnabledState(true);
-        }
-        else {
-            console.log("LIGHT");
-            setEnabledState(false);
-        }
+        setEnabledState(newTheme === DarkTheme);
     };
 
     useEffect(() => {
         setCurrentTheme({
-          theme : enabledState ? themes.dark : themes.light,
+          theme : enabledState ? DarkTheme : LightTheme,
           toggleTheme
         });
     }, []);
