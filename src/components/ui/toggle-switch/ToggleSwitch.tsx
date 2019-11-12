@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties, ReactNode, ReactElement } from 'react';
+import React, { useState, CSSProperties, ReactElement, useEffect } from 'react';
 import styles from './ToggleSwitch.module.scss'
 import { IconBaseProps } from 'react-icons/lib/cjs';
 
@@ -24,6 +24,10 @@ export default function ToggleSwitch(props : ToggleSwitchProps) {
     let { width, onState, offState, switchContainerStyle, icon, value } = props;
     let newWidth : number = width ? width : 100;
     let [ isOn, setIsOn ] = useState(value);
+
+    useEffect(() => {
+        setIsOn(value);
+    }, [value]);
     
     let transform : number = isOn ? width - 34 : 2;
 
@@ -41,7 +45,7 @@ export default function ToggleSwitch(props : ToggleSwitchProps) {
     let stateSwitchStyle = isOn ? onState.switchStyle : offState.switchStyle;
 
     return (
-        <label className={styles.toggleSwitch} style={{ width : `${newWidth}px`, ...switchContainerStyle, ...stateSwitchContainerStyle }} onClick={onSwitchClick}>
+        <label className={styles.toggleSwitch} style={{ width : `${newWidth}px`, backgroundColor : isOn ? onState.color : offState.color, ...switchContainerStyle, ...stateSwitchContainerStyle }} onClick={onSwitchClick}>
             <span className={styles.switch} style={{ transform : `translateX(${transform}px)`, ...stateSwitchStyle }}></span>
             <span className={isOn ? styles.sliderOn : styles.slider} style={{ backgroundColor : isOn ? onState.color : offState.color }}>
                 {(icon) ? (<span className={styles.switchIcon} style={!isOn ? { right : '5px' } : { right : `${width - 34}px` }}>{iconComponent}</span>) : null}

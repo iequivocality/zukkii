@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactNode } from "react";
-import { IoIosArrowRoundUp, IoIosArrowRoundDown, IoIosRemove, IoIosRemoveCircleOutline, IoIosArrowDropupCircle, IoIosArrowDropdownCircle } from 'react-icons/io';
+import { IoIosRemoveCircleOutline, IoIosArrowDropupCircle, IoIosArrowDropdownCircle } from 'react-icons/io';
 
 export default class SortOrders {
     static NONE : SortOrder = { key : 'none', jp : '無い', en : 'NONE', icon : (<IoIosRemoveCircleOutline/>) };

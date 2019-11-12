@@ -3,17 +3,18 @@ import styles from './CloseButton.module.scss';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 export interface CloseButtonProps {
-    onClose : () => void
+    onClose : () => void,
+    color : string
 }
 
 export default function CloseButton(props : CloseButtonProps) {
-    let { onClose } = props;
+    let { onClose, color } = props;
 
     return (
         useMemo(() => {
             return (
                 <div className={styles.closeButton} onClick={() => onClose()}>
-                    <IoIosCloseCircleOutline/>
+                    <IoIosCloseCircleOutline color={color}/>
                 </div>
             )
         }, [])

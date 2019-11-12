@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode, useState, useEffect, CSSProperties, useCallback }  from 'react';
+import React, { MouseEvent, ReactNode, useState, useEffect, CSSProperties }  from 'react';
 import styles from './ButtonGroup.module.scss';
 
 export interface ButtonProps<T> {
@@ -26,9 +26,6 @@ export default function ButtonGroup<T>(props : ButtonGroupProps<T>) {
 
     useEffect(() => {
         let newContents = contents.map(mapToButton);
-        // if (all) {
-        //     newContents.unshift(Constants.ALL_DROPDOWN_CONTENT);
-        // }
         setSelectedItem(newContents.find(nc => nc.selected));
         setButtonGroupContents(newContents)
     }, [contents]);

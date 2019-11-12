@@ -12,7 +12,7 @@ export interface Themes {
 
 export const themes : Themes = {
     light : {
-        foregroundColor : '#34495e',
+        foregroundColor : '#2c3e50',
         backgroundColor : '#ecf0f1'
     },
     dark : {

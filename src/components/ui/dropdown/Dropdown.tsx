@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties, useCallback, useMemo, useRef, useEffect, ReactNode } from 'react';
+import React, { useState, CSSProperties, useCallback, useRef, useEffect, ReactNode } from 'react';
 import styles from './Dropdown.module.scss';
 import useClickOutside from '../../../hooks/useClickOutside';
 import { Constants } from '../../../Constants';

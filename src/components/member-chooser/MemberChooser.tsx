@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import styles from './MemberChooser.module.scss';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AppState from '../../store/state/AppState';
 import { Motion, spring } from 'react-motion';
 import Dropdown from '../ui/dropdown/Dropdown';
@@ -16,6 +15,7 @@ import BLOOD_TYPES, { BloodType } from '../../data/bloodtypes';
 import Prefecture from '../../models/Prefecture';
 import CloseButton from '../close-button/CloseButton';
 import GenerationSelection, { GenerationSelect } from '../selection/GenerationSelection';
+import ThemeContext from '../../contexts/themeContext';
 
 export interface MemberChooserProps {
     isOpen : boolean,
@@ -26,6 +26,7 @@ export interface MemberChooserProps {
 
 export default function MemberChooser(props : MemberChooserProps) {
     let { isOpen, onChoose, filter, sort } = props;
+    let themeContainer = useContext(ThemeContext);
     let selectedGroup = useSelector((state : AppState) => state.selectedGroup);
     let members = useSelector((state : AppState) => state.members);
     let memberPrefectures = members.map(member => member.prefecture);
@@ -64,14 +65,14 @@ export default function MemberChooser(props : MemberChooserProps) {
             <Motion defaultStyle={{ x : -250 }} style={{ x : isOpen ? spring(0) : spring(-250) }}>
                 { interpolatingStyle => (
                     <aside className={styles.memberChooser} style={{
-                        right: interpolatingStyle.x + 'px'
+                        right: interpolatingStyle.x + 'px', backgroundColor : themeContainer.theme.backgroundColor
                     }}>
                         <div className={styles.memberChooserContainer}>
-                            <div>SELECT</div>
-                            <CloseButton onClose={() => { onChoose() }}></CloseButton>
+                            <div style={{ color : themeContainer.theme.foregroundColor }}>SELECT</div>
+                            <CloseButton onClose={() => { onChoose() }} color={themeContainer.theme.foregroundColor}></CloseButton>
                         </div>
                         <div className={styles.memberChooserContainer}>
-                            <div className={styles.memberChooserContainerLabel}>都道府県</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>都道府県</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<Prefecture>
                                     all width={150} color={selectedGroup.color}
@@ -82,7 +83,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>
-                            <div className={styles.memberChooserContainerLabel}>歳</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>歳</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
                                     icon
@@ -94,7 +95,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>
-                            <div className={styles.memberChooserContainerLabel}>身長</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>身長</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
                                     icon
@@ -106,7 +107,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>
-                            <div className={styles.memberChooserContainerLabel}>身長</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>身長</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<BloodType>
                                     all
@@ -118,7 +119,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             </div>
                         </div>
                         <div className={styles.memberChooserContainer}>
-                            <div className={styles.memberChooserContainerLabel}>期</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>期</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <GenerationSelection
                                     onGenerationSelect={(value : GenerationSelect) => { doFilter(FilterType.GENERATION, value) }}

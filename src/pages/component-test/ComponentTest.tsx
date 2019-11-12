@@ -1,7 +1,7 @@
 import React from 'react';
 import ToggleSwitch from '../../components/ui/toggle-switch/ToggleSwitch';
 import Dropdown from '../../components/ui/dropdown/Dropdown';
-import { IoIosArrowDropup, IoIosArrowDropdown, IoIosSunny, IoIosMoon } from 'react-icons/io';
+import { IoIosSunny, IoIosMoon } from 'react-icons/io';
 
 export default function ComponentTest() {
     

@@ -11,7 +11,7 @@ export default function AppContainer(props : AppContainerProps) {
 
     useEffect(() => {
         document.body.style.backgroundColor = themeContainer.theme.backgroundColor;
-    }, [])
+    }, [themeContainer])
 
     return (
         <div className="app-container">

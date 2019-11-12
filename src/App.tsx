@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 import { RouteProps, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
@@ -7,10 +7,10 @@ import ComponentTest from './pages/component-test/ComponentTest';
 import NotFoundComponent from './pages/no-found/NotFound';
 import { useDispatch } from 'react-redux';
 import { fetchGroups } from './store/actions';
-import ThemeContext, { themes, Theme } from './contexts/themeContext';
+import ThemeContext from './contexts/themeContext';
 import AppContainer from './components/app-container/AppContainer';
-import useTheme from './hooks/useTheme';
 import DarkModeToggle from './components/dark-mode-toggle/DarkModeToggle';
+import useTheme from './hooks/useTheme';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -37,15 +37,14 @@ const AppRoutes : Array<RouteProps> = [
 ];
 
 export default function App() {
-  let [theme] = useTheme();
+  let themeContainer = useTheme();
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGroups());
   }, []);
-  console.log("THEME:", theme);
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={themeContainer}>
       <AppContainer>
         <Router>
           <Switch>
