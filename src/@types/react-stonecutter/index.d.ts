@@ -35,4 +35,12 @@ declare module 'react-stonecutter' {
     }
 
     export declare class SpringGrid extends Component<SpringGridProps, SpringGridState> {}
+
+    export interface MakeResponseConfig {
+        maxWidth : number,
+        minPadding? : number,
+        defaultColumns? : number
+    }
+
+    export declare function makeResponsive<P, S>(Grid : ComponentClass<P, S>, config : MakeResponseConfig) : ComponentClass<P, S> {}
 }

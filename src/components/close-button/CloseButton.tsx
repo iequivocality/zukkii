@@ -17,7 +17,7 @@ export default function CloseButton(props : CloseButtonProps) {
                     <IoIosCloseCircleOutline color={color}/>
                 </div>
             )
-        }, [])
+        }, [onClose])
     );
 }
 
