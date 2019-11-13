@@ -3,6 +3,7 @@ import Member from '../../models/Member';
 import styles from './MemberCountdown.module.scss';
 import Countdown from '../countdown/CountdownComponent';
 import Group from '../../models/Group';
+import { SpringGrid } from 'react-stonecutter';
 
 interface MemberCountdownProps {
     group : Group,
@@ -15,7 +16,10 @@ export default function MemberCountdown(props: MemberCountdownProps) {
 
     return (
         <main className={members.length ? styles.groupContainer : styles.noMemberGroupContainer}>
-            { members.map( member => <Countdown key={member.id} member={member} groupColor={color} groupId={id}></Countdown>) }
+            <SpringGrid columns={3} columnWidth={350} gutterWidth={20} gutterHeight={20}
+                springConfig={{ stiffness: 110, damping: 26 }} itemHeight={140}>
+                { members.map( member => <div key={member.id}><Countdown member={member} groupColor={color} groupId={id}></Countdown></div>) }
+            </SpringGrid>
         </main>
     );
 }

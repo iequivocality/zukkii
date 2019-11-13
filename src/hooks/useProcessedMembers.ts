@@ -15,7 +15,7 @@ export default function useProcessedMembers(currentSort : SortObject, currentFil
     }, [members]);
 
     useEffect(() => {
-        setProcessedMembers(currentFilter.type !== FilterType.NONE ? [...members].filter((member) => {
+        setProcessedMembers(currentFilter.type !== FilterType.NONE ? [...members].filter((member : any) => {
             return member[currentFilter.type] === currentFilter.value
         }) : members)
     }, [currentFilter])
