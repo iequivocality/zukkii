@@ -7,6 +7,7 @@ import Group from '../../models/Group';
 import { Link } from 'react-router-dom';
 import Loading from '../../components/loading/Loading';
 import ThemeContext from '../../contexts/themeContext';
+import { makeResponsive, SpringGrid } from 'react-stonecutter';
 
 interface BirthdaySelectionPageProps {
     groupChoices : Array<Group>,
@@ -39,6 +40,8 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
 
     console.log("SEEC", themeContainer)
 
+    let Grid = makeResponsive(SpringGrid, { maxWidth : 1090 })
+
     if (!isLoading) {
         return (
             <>
@@ -58,6 +61,10 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
                             </Link>
                         );
                     })}
+                    {/* <Grid columns={1} columnWidth={240} gutterWidth={20} gutterHeight={20}
+                    springConfig={{ stiffness: 83, damping: 14 }} itemHeight={180}>
+                        
+                    </Grid> */}
                 </div>
             </>
         );
