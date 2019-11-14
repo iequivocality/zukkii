@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from './CountdownComponent.module.scss'
 import Util from '../../Util';
 import moment from 'moment';
@@ -7,6 +7,7 @@ import CountdownDetails from './details/CountdownDetails';
 import CountdownUnitComponent from './units/CountdownUnitComponent';
 import { Constants } from '../../Constants';
 import useInterval from '../../hooks/useInterval';
+import ThemeContext from '../../contexts/themeContext';
 
 interface CountdownProps {
     member : Member,
@@ -15,6 +16,7 @@ interface CountdownProps {
 }
 
 export default function Countdown(props : CountdownProps) {
+    let { theme } = useContext(ThemeContext);
     let [ week, setWeek ] = useState(0);
     let [ day, setDay ] = useState(0);
     let [ hour, setHour ] = useState(0);
@@ -28,7 +30,8 @@ export default function Countdown(props : CountdownProps) {
     }
 
     let countdownStyle : React.CSSProperties = {
-        backgroundColor : groupColor
+        backgroundColor : theme.countdownContainerBackground(groupColor),
+        color : theme.countdownContainerForeground(groupColor)
     }
 
     let { birthdate } = props.member;
@@ -55,7 +58,7 @@ export default function Countdown(props : CountdownProps) {
             <div className={styles.photoContainer}>
                 <div className={styles.photo} style={photoStyle}></div>
             </div>
-            <CountdownDetails {...props.member}></CountdownDetails>
+            <CountdownDetails member={member} groupColor={groupColor}></CountdownDetails>
         </div>
         {
             !Util.checkIsBirthday(targetDate) ?

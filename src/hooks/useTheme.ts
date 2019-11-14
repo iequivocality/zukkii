@@ -11,14 +11,15 @@ export default function useTheme() {
     let [ currentTheme, setCurrentTheme ] = useState<ThemeContextContainer>(themeContainer);
 
     let toggleTheme = (newTheme : Theme) => {
-        setCurrentTheme({toggleTheme, theme : newTheme});
+        setCurrentTheme({toggleTheme, theme : newTheme, isDarkTheme : newTheme === DarkTheme});
         setEnabledState(newTheme === DarkTheme);
     };
 
     useEffect(() => {
         setCurrentTheme({
           theme : enabledState ? DarkTheme : LightTheme,
-          toggleTheme
+          toggleTheme,
+          isDarkTheme : enabledState
         });
     }, []);
 

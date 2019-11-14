@@ -4,11 +4,13 @@ import DarkTheme from "../themes/darkTheme";
 
 export interface ThemeContextContainer {
     theme : Theme,
-    toggleTheme : (theme : Theme) => void
+    toggleTheme : (theme : Theme) => void,
+    isDarkTheme : boolean,
 }
 
 const ThemeContext = createContext<ThemeContextContainer>({
     theme : DarkTheme,
-    toggleTheme : (theme : Theme) => {}
+    toggleTheme : (theme : Theme) => {},
+    isDarkTheme : true
 });
 export default ThemeContext;

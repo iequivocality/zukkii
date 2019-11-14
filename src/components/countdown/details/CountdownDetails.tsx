@@ -1,16 +1,26 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useContext } from "react";
 import Member from "../../../models/Member";
 import Util from "../../../Util";
 
 import styles from "./CountdownDetails.module.scss";
+import ThemeContext from "../../../contexts/themeContext";
 
-export default function CountdownDetails(props : Member) {
-    let { name, prefecture, kana, height, bloodType, birthdate, ageByYears } = props;
+export interface CountdownDetailsProps {
+    member : Member,
+    groupColor : string
+}
+
+export default function CountdownDetails(props : CountdownDetailsProps) {
+    let { theme } = useContext(ThemeContext);
+    let { name, prefecture, kana, height, bloodType, birthdate, ageByYears } = props.member;
     let formattedDate = Util.formatYYYYMMDDToJapaneseFormat(birthdate);
+    let detailStyle : React.CSSProperties = {
+        color : theme.countdownDetailsForeground(props.groupColor)
+    }
 
     return (
         useMemo(() => {
-            return <div className={styles.details}>
+            return <div className={styles.details} style={detailStyle}>
                 <div className={styles.name}>{ name }</div>
                 <div className={styles.kana}>{ kana }</div>
                 <div className={styles.otherDetails}>
