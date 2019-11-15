@@ -1,10 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
-import styles from './GenerationSelection.module.scss';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AppState from "../../store/state/AppState";
-import { Constants } from "../../Constants";
-import { filterMembers } from "../../store/actions";
-import FilterType from "../../models/FilterType";
 import ButtonGroup from "../button-group/ButtonGroup";
 
 export interface GenerationSelect {

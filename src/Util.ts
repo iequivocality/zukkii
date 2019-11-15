@@ -17,6 +17,32 @@ export default class Util {
         let now = moment().tz("Japan");
         return targetDate.isSame(now, 'day');
     }
+
+    static clampToColorLimits(color : number) : number {
+        return Math.round(Math.min(Math.max(0, color), 255))
+    }
+
+    static desaturateColor(hex : string, percent : number) {
+        hex = String(hex).replace(/[^0-9a-f]/gi, '');
+        if (hex.length < 6) {
+            hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+        }
+        percent = percent || 0;
+
+        let rgb = "#", red : number, green : number, blue : number;
+        red = parseInt(hex.substr(0,2), 16);
+        green = parseInt(hex.substr(2,2), 16);
+        blue = parseInt(hex.substr(4,2), 16);
+
+        let L = 0.3*red + 0.6*green + 0.1*blue;
+        let new_r = Util.clampToColorLimits(red + percent * (L - red)).toString(16);
+        let new_g = Util.clampToColorLimits(green + percent * (L - green)).toString(16);
+        let new_b = Util.clampToColorLimits(blue + percent * (L - blue)).toString(16);
+        return rgb
+            + ("00" + new_r).substr(new_r.length)
+            + ("00"+new_g).substr(new_g.length)
+            + ("00"+new_b).substr(new_b.length);
+    }
     
     static computeShade(hex : string, lum : number) {
         hex = String(hex).replace(/[^0-9a-f]/gi, '');
@@ -25,11 +51,11 @@ export default class Util {
         }
         lum = lum || 0;
     
-        let rgb = "#", c, i;
-        for (i = 0; i < 3; i++) {
+        let rgb = "#", c : number;
+        for (let i = 0; i < 3; i++) {
             c = parseInt(hex.substr(i*2,2), 16);
-            c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-            rgb += ("00"+c).substr(c.length);
+            let cs = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+            rgb += ("00"+c).substr(cs.length);
         }
     
         return rgb;
