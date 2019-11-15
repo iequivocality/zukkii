@@ -19,7 +19,26 @@ export default class Util {
     }
 
     static clampToColorLimits(color : number) : number {
-        return Math.round(Math.min(Math.max(0, color), 255))
+        // return Math.round(Math.min(Math.max(0, color), 255))
+        return Util.clampToLimits(color, 0, 255);
+    }
+
+    static clampToLimits(color : number, min : number, max : number) : number {
+        return Math.round(Math.min(Math.max(min, color), max))
+    }
+
+    static addTransparency(hex : string, alpha : number) {
+        hex = String(hex).replace(/[^0-9a-f]/gi, '');
+        if (hex.length < 6) {
+            hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+        }
+        alpha = alpha || 1;
+
+        let red = parseInt(hex.substr(0,2), 16);
+        let green = parseInt(hex.substr(2,2), 16);
+        let blue = parseInt(hex.substr(4,2), 16);
+
+        return `rgb(${red}, ${green}, ${blue}, ${alpha})`
     }
 
     static desaturateColor(hex : string, percent : number) {
@@ -51,11 +70,12 @@ export default class Util {
         }
         lum = lum || 0;
     
-        let rgb = "#", c : number;
-        for (let i = 0; i < 3; i++) {
+        let rgb = "#", c, i;
+        for (i = 0; i < 3; i++) {
             c = parseInt(hex.substr(i*2,2), 16);
-            let cs = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-            rgb += ("00"+c).substr(cs.length);
+            c = Util.clampToColorLimits(c + (c * lum)).toString(16);
+            rgb += ("00"+c).substr(c.length);
+            console.log(rgb);
         }
     
         return rgb;

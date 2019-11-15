@@ -1,4 +1,4 @@
-export type ThemeColorFunction = (customColor : string) => string
+export type ThemeColorFunction = (customColor : string) => string | string;
 
 export default interface Theme {
     backgroundColor : string,
@@ -7,7 +7,11 @@ export default interface Theme {
     /** Countdown */
     countdownContainerBackground : ThemeColorFunction,
     countdownContainerForeground : ThemeColorFunction,
+    countdownContainerHoverBackground : ThemeColorFunction,
+    countdownContainerHoverForeground : ThemeColorFunction,
+    // countdownContainerHoverBorderColor : ThemeColorFunction,
+    // countdownContainerHoverBoxShadow : ThemeColorFunction,
     countdownDetailsForeground : ThemeColorFunction,
     countdownUnitBackground : ThemeColorFunction,
-    countdownValueAndUnitForeground : string
+    countdownValueAndUnitForeground : string,
 }

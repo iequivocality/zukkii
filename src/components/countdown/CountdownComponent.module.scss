@@ -9,6 +9,11 @@
     flex-direction: column;
     overflow: hidden;
     border-radius: 5px;
+    transition: .3s;
+}
+
+.countdownContainer:hover {
+    cursor: pointer;
 }
 
 .profile {
@@ -30,7 +35,7 @@
 
 .photoContainer {
     flex: 1 0 15%;
-    padding-left: 2px;
+    padding-left: 5px;
     display: flex;
     align-items: center;
     justify-content: center;

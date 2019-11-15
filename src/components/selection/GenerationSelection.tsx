@@ -40,7 +40,7 @@ export default function GenerationSelection(props : GenerationSelectionProps) {
             width={150} color={group.color}
             contents={generationArray}
             onSelect={(value : GenerationSelect) => { onSelectGeneration(value) }}
-            style={{ fontFamily : 'SawarabiGothic, sans-serif', zIndex : 25 }}
+            style={{ fontFamily : 'SawarabiGothic, sans-serif', zIndex : 20 }}
             mapContentToDropdown={(content : GenerationSelect) => ( { key : content.value + '', label : content.label, value : content } )}/>
     );
 }

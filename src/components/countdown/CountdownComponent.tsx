@@ -8,6 +8,7 @@ import CountdownUnitComponent from './units/CountdownUnitComponent';
 import { Constants } from '../../Constants';
 import useInterval from '../../hooks/useInterval';
 import ThemeContext from '../../contexts/themeContext';
+import useHover from '../../hooks/useHover';
 
 interface CountdownProps {
     member : Member,
@@ -22,6 +23,7 @@ export default function Countdown(props : CountdownProps) {
     let [ hour, setHour ] = useState(0);
     let [ minute, setMinute ] = useState(0);
     let [ second, setSecond ] = useState(0);
+    let [ ref, isHover ] = useHover();
 
     let { groupColor, groupId, member } = props;
 
@@ -30,7 +32,7 @@ export default function Countdown(props : CountdownProps) {
     }
 
     let countdownStyle : React.CSSProperties = {
-        backgroundColor : theme.countdownContainerBackground(groupColor),
+        backgroundColor : isHover ? theme.countdownContainerHoverBackground(theme.countdownContainerBackground(groupColor)) : theme.countdownContainerBackground(groupColor),
         color : theme.countdownContainerForeground(groupColor)
     }
 
@@ -41,6 +43,8 @@ export default function Countdown(props : CountdownProps) {
     if (Util.checkIfCurrentDateIsBeforeBirthday(targetDate)) {
         targetDate.add(1, 'y')
     }
+
+    console.log(isHover);
 
     useInterval(() => {
         let currentDate = moment().tz("Asia/Tokyo");
@@ -53,7 +57,7 @@ export default function Countdown(props : CountdownProps) {
         setSecond(duration.seconds());
     }, 1000);
 
-    return (<div className={styles.countdownContainer} style={countdownStyle}>
+    return (<div className={styles.countdownContainer} style={countdownStyle} ref={ref}>
         <div className={styles.profile}>
             <div className={styles.photoContainer}>
                 <div className={styles.photo} style={photoStyle}></div>
