@@ -78,7 +78,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     all width={150} color={selectedGroup.color}
                                     contents={prefectureValues}
                                     onSelect={(value : Prefecture) => { doFilter(FilterType.PREFECTURE, value) }}
-                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 40 }}
+                                    style={{ fontFamily : 'SawarabiGothic,sans-serif', zIndex : 40 }}
                                     mapContentToDropdown={(content : Prefecture) => ( { key : content.en.toLowerCase(), label : content.jp, value : content } )}/>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     width={150} color={selectedGroup.color}
                                     contents={SortOrders.toArray()}
                                     onSelect={(value : SortOrder) => { doSort(value, SortType.AGE_BY_DAYS) }}
-                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 35 }}
+                                    style={{ fontFamily : 'SawarabiGothic,sans-serif', zIndex : 35 }}
                                     mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content, iconComponent : content.icon } )}/>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     width={150} color={selectedGroup.color}
                                     contents={SortOrders.toArray()}
                                     onSelect={(value : SortOrder) => { doSort(value, SortType.HEIGHT) }}
-                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 30 }}
+                                    style={{ fontFamily : 'SawarabiGothic,sans-serif', zIndex : 30 }}
                                     mapContentToDropdown={(content : SortOrder) => ( { key : content.key, label : content.jp, value : content, iconComponent : content.icon } )}/>
                             </div>
                         </div>
@@ -114,7 +114,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     width={150} color={selectedGroup.color}
                                     contents={BLOOD_TYPES}
                                     onSelect={(value : BloodType) => { doFilter(FilterType.BLOOD_TYPE, value) }}
-                                    style={{ fontFamily : 'KosugiMaru,sans-serif', zIndex : 25 }}
+                                    style={{ fontFamily : 'SawarabiGothic,sans-serif', zIndex : 25 }}
                                     mapContentToDropdown={(content : BloodType) => ( { key : content.type, label : content.jp, value : content } )}/>
                             </div>
                         </div>

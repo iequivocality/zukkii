@@ -2,6 +2,8 @@ import React, { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import AppState from "../../store/state/AppState";
 import ButtonGroup from "../button-group/ButtonGroup";
+import Dropdown from "../ui/dropdown/Dropdown";
+import FilterType from "../../models/FilterType";
 
 export interface GenerationSelect {
     label : string,
@@ -15,20 +17,14 @@ export interface GenerationSelectionProps {
 export default function GenerationSelection(props : GenerationSelectionProps) {
     let { onGenerationSelect } = props;
     let group = useSelector(( state : AppState ) => state.selectedGroup);
-    let [selected, setSelected] = useState<GenerationSelect>(null);
     let [generationArray, setGenerationArray] = useState<GenerationSelect[]>([]);
     let onSelectGeneration = useCallback((generation : GenerationSelect) => {
         onGenerationSelect(generation);
-        setSelected(generation);
     }, []);
 
     useEffect(() => {
         let { generations } = group;
         let generationArray : Array<GenerationSelect> = [];
-        generationArray.push({
-            label : "全部",
-            value : 0
-        });
         for( let index = 1; index <= generations; index++) {
             generationArray.push({
                 label : `${index}期`,
@@ -36,23 +32,15 @@ export default function GenerationSelection(props : GenerationSelectionProps) {
             });
         }
         setGenerationArray(generationArray);
-        setSelected(generationArray[0]);
-
     }, [group]);
 
     return (
-        <ButtonGroup<GenerationSelect>
-            backgroundColor={group.color}
+        <Dropdown<GenerationSelect>
+            all
+            width={150} color={group.color}
             contents={generationArray}
-            selectedItemStyle={{ backgroundColor : "#FFFFFF", color : group.color }}
-            mapToButton={(gs : GenerationSelect) => {
-                return {
-                    key : gs.value,
-                    onClick : (gs : GenerationSelect) => onSelectGeneration(gs),
-                    selected : gs.value === selected.value,
-                    value : gs,
-                    label : gs.label
-                }
-            }}/>
+            onSelect={(value : GenerationSelect) => { onSelectGeneration(value) }}
+            style={{ fontFamily : 'SawarabiGothic, sans-serif', zIndex : 25 }}
+            mapContentToDropdown={(content : GenerationSelect) => ( { key : content.value + '', label : content.label, value : content } )}/>
     );
 }

@@ -20,7 +20,7 @@ export interface ButtonGroupProps<T> {
 }
 
 export default function ButtonGroup<T>(props : ButtonGroupProps<T>) {
-    let { backgroundColor, contents, all, mapToButton, selectedItemStyle } = props;
+    let { backgroundColor, contents, mapToButton, selectedItemStyle } = props;
     let [ buttonGroupContents, setButtonGroupContents ] = useState<ButtonProps<T>[]>([]);
     let [ selectedItem, setSelectedItem ] = useState<ButtonProps<T>>(null);
 
