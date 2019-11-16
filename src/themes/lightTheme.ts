@@ -8,8 +8,10 @@ const LightTheme : Theme = {
     countdownContainerForeground : (customColor : string) => '#E1E1E1',
     countdownContainerHoverBackground : (customColor : string) => customColor,
     countdownContainerHoverForeground : (customColor : string) => customColor,
+    countdownContainerDropShadow : Util.createShadowProperties(2),
     countdownDetailsForeground : (customColor : string) => '#FFFFFF',
     countdownUnitBackground : (customColor : string) => Util.desaturateColor(customColor, 0.3),
-    countdownValueAndUnitForeground : '#FFFFFF'
+    countdownValueAndUnitForeground : '#FFFFFF',
+    footerBackground : '#E9EBEE'
 }
 export default LightTheme;

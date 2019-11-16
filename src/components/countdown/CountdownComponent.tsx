@@ -33,7 +33,8 @@ export default function Countdown(props : CountdownProps) {
 
     let countdownStyle : React.CSSProperties = {
         backgroundColor : isHover ? theme.countdownContainerHoverBackground(theme.countdownContainerBackground(groupColor)) : theme.countdownContainerBackground(groupColor),
-        color : theme.countdownContainerForeground(groupColor)
+        color : theme.countdownContainerForeground(groupColor),
+        boxShadow : theme.countdownContainerDropShadow
     }
 
     let { birthdate } = props.member;

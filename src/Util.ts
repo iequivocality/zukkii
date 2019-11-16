@@ -70,7 +70,7 @@ export default class Util {
         }
         lum = lum || 0;
     
-        let rgb = "#", c, i;
+        let rgb = "#", c : any, i : number;
         for (i = 0; i < 3; i++) {
             c = parseInt(hex.substr(i*2,2), 16);
             c = Util.clampToColorLimits(c + (c * lum)).toString(16);
@@ -115,5 +115,14 @@ export default class Util {
             }
             return order.key === SortOrders.DESCENDING.key ? comparison * -1 : comparison;
         }
+    }
+
+    static createShadowProperties(dp : number) {
+        if (dp <= 0)
+        {
+            return "none";
+        }
+    
+        return "0px " + dp + "px " + dp + "px " + "rgba(0, 0, 0, .38)";
     }
 }

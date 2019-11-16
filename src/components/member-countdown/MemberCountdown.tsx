@@ -13,7 +13,7 @@ interface MemberCountdownProps {
 export default function MemberCountdown(props: MemberCountdownProps) {
     let { color, id } = props.group;
     let { members } = props;
-    let Grid = makeResponsive(SpringGrid, { maxWidth : 1090 })
+    let Grid = makeResponsive(SpringGrid, { maxWidth : 1100 })
 
     return (
         useMemo(() => {

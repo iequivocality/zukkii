@@ -9,9 +9,11 @@ export default interface Theme {
     countdownContainerForeground : ThemeColorFunction,
     countdownContainerHoverBackground : ThemeColorFunction,
     countdownContainerHoverForeground : ThemeColorFunction,
-    // countdownContainerHoverBorderColor : ThemeColorFunction,
-    // countdownContainerHoverBoxShadow : ThemeColorFunction,
+    countdownContainerDropShadow : string,
     countdownDetailsForeground : ThemeColorFunction,
     countdownUnitBackground : ThemeColorFunction,
     countdownValueAndUnitForeground : string,
+
+    /** Footer */
+    footerBackground : string
 }
