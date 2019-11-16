@@ -1,3 +1,9 @@
 .darkModeToggle {
-    
+    display: flex;
+    flex-direction: row;
+
+    .darkModeToggleLabel {
+        margin-right: 5px;
+        align-items: center;
+    }
 }

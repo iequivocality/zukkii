@@ -12,6 +12,8 @@ const DarkTheme : Theme = {
     countdownDetailsForeground : (customColor : string) => Util.desaturateColor(customColor, 0.3),
     countdownUnitBackground : (customColor : string) => Util.desaturateColor(customColor, 0.3),
     countdownValueAndUnitForeground : '#E1E1E1',
-    footerBackground : Util.computeShade('#111111', 2)
+    footerBackground : Util.computeShade('#111111', 2),
+    footerForeground : '#ecf0f1',
+    footerIconColor : '#ecf0f1'
 }
 export default DarkTheme;

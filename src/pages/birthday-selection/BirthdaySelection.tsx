@@ -7,13 +7,7 @@ import Group from '../../models/Group';
 import { Link } from 'react-router-dom';
 import Loading from '../../components/loading/Loading';
 import ThemeContext from '../../contexts/themeContext';
-import { makeResponsive, SpringGrid } from 'react-stonecutter';
-
-interface BirthdaySelectionPageProps {
-    groupChoices : Array<Group>,
-    loadGroups : () => void,
-    setGroup : (group : Group) => void,
-}
+import AppFooter from '../../components/app-footer/AppFooter';
 
 function getGroupStyle(group : Group) {
     let groupStyle : React.CSSProperties = {
@@ -22,7 +16,7 @@ function getGroupStyle(group : Group) {
     return groupStyle
 }
 
-export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps) {
+export default function BirthdaySelectionPage() {
     let themeContainer = useContext(ThemeContext);
     let groupChoices = useSelector((state : AppState) => state.groupChoices);
     let isLoading = useSelector((state : AppState) => state.isLoading);
@@ -37,10 +31,6 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
     useEffect(() => {
         loadGroups();
     }, []);
-
-    console.log("SEEC", themeContainer)
-
-    let Grid = makeResponsive(SpringGrid, { maxWidth : 1090 })
 
     if (!isLoading) {
         return (
@@ -61,11 +51,8 @@ export default function BirthdaySelectionPage(props: BirthdaySelectionPageProps)
                             </Link>
                         );
                     })}
-                    {/* <Grid columns={1} columnWidth={240} gutterWidth={20} gutterHeight={20}
-                    springConfig={{ stiffness: 83, damping: 14 }} itemHeight={180}>
-                        
-                    </Grid> */}
                 </div>
+                <AppFooter></AppFooter>
             </>
         );
     }

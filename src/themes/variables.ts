@@ -15,5 +15,7 @@ export default interface Theme {
     countdownValueAndUnitForeground : string,
 
     /** Footer */
-    footerBackground : string
+    footerBackground : string,
+    footerForeground : string,
+    footerIconColor : string,
 }

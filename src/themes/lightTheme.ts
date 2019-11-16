@@ -12,6 +12,8 @@ const LightTheme : Theme = {
     countdownDetailsForeground : (customColor : string) => '#FFFFFF',
     countdownUnitBackground : (customColor : string) => Util.desaturateColor(customColor, 0.3),
     countdownValueAndUnitForeground : '#FFFFFF',
-    footerBackground : '#E9EBEE'
+    footerBackground : '#E9EBEE',
+    footerForeground : '#2c3e50',
+    footerIconColor : '#2c3e50'
 }
 export default LightTheme;

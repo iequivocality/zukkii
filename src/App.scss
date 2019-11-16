@@ -8,15 +8,6 @@
   src: url('./assets/fonts/SawarabiGothic-Regular.ttf');
 }
 
-html, body, #root, .app-container {
-  // height : 100%;
-}
-
 body {
   font-family: 'SawarabiGothic', 'Roboto', sans-serif;
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
 }

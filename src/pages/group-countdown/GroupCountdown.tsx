@@ -16,6 +16,8 @@ import { IoIosFunnel } from 'react-icons/io';
 import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
 import { Constants } from '../../Constants';
+import createPage from '../../hoc/createPage';
+import AppFooter from '../../components/app-footer/AppFooter';
 
 export default function GroupCountdownPageComponent() {
     let { isExact, params } = useRouteMatch();
@@ -46,6 +48,8 @@ export default function GroupCountdownPageComponent() {
         }
     }, 10000, [showNotFound]);
 
+    // return <Loading></Loading>;
+
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;
         let titleStyle : React.CSSProperties = {
@@ -69,6 +73,7 @@ export default function GroupCountdownPageComponent() {
                     <h6>アイドルバースデーカウントダウン</h6>
                 </header>
                 <MemberCountdown group={selectedGroup} members={processedMembers} ></MemberCountdown>
+                <AppFooter></AppFooter>
             </>
         );
     }

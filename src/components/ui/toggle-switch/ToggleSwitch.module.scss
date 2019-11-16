@@ -2,8 +2,8 @@
     position: relative;
     display: inline-block;
     width: 100px;
-    height: 34px;
-    border-radius: 34px;
+    height: 24px;
+    border-radius: 24px;
     transition: .4s all;
     cursor: pointer;
 
@@ -16,7 +16,7 @@
         bottom: 0;
         background-color: #999999;
         transition: 0.6s;
-        border-radius: 34px;
+        border-radius: 24px;
         box-shadow: 0 0 1px #2196F3;
     }
 
@@ -27,8 +27,8 @@
     
     .switch {
         position: absolute;
-        height: 28px;
-        width: 28px;
+        height: 18px;
+        width: 18px;
         left: 2px;
         bottom: 3px;
         background-color: white;
@@ -40,13 +40,13 @@
     .switchIcon {
         position: absolute;
         right: 5px;
-        bottom: 4.5px;
-        height: 25px;
-        width: 25px;
+        bottom: 2px;
+        height: 20px;
+        width: 20px;
 
         svg {
-            height: 25px;
-            width: 25px;
+            height: 20px;
+            width: 20px;
         }
     }
 }

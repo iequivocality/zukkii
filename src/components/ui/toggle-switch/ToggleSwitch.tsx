@@ -29,7 +29,7 @@ export default function ToggleSwitch(props : ToggleSwitchProps) {
         setIsOn(value);
     }, [value]);
     
-    let transform : number = isOn ? width - 34 : 2;
+    let transform : number = isOn ? width - 24 : 2;
 
     let onSwitchClick = () => {
         setIsOn(!isOn);
@@ -48,7 +48,7 @@ export default function ToggleSwitch(props : ToggleSwitchProps) {
         <label className={styles.toggleSwitch} style={{ width : `${newWidth}px`, backgroundColor : isOn ? onState.color : offState.color, ...switchContainerStyle, ...stateSwitchContainerStyle }} onClick={onSwitchClick}>
             <span className={styles.switch} style={{ transform : `translateX(${transform}px)`, ...stateSwitchStyle }}></span>
             <span className={isOn ? styles.sliderOn : styles.slider} style={{ backgroundColor : isOn ? onState.color : offState.color }}>
-                {(icon) ? (<span className={styles.switchIcon} style={!isOn ? { right : '5px' } : { right : `${width - 34}px` }}>{iconComponent}</span>) : null}
+                {(icon) ? (<span className={styles.switchIcon} style={!isOn ? { right : '5px' } : { right : `${width - 24}px` }}>{iconComponent}</span>) : null}
             </span>
         </label>
     );

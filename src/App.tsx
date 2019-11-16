@@ -53,7 +53,6 @@ export default function App() {
             ))}
           </Switch>
         </Router>
-        <AppFooter></AppFooter>
       </AppContainer>
     </ThemeContext.Provider>
   );
