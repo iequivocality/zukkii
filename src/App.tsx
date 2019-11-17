@@ -10,7 +10,6 @@ import { fetchGroups } from './store/actions';
 import ThemeContext from './contexts/themeContext';
 import AppContainer from './components/app-container/AppContainer';
 import useTheme from './hooks/useTheme';
-import AppFooter from './components/app-footer/AppFooter';
 
 const AppRoutes : Array<RouteProps> = [
   {

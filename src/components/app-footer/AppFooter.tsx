@@ -9,10 +9,12 @@ export default function AppFooter() {
     
     return (
         <footer className={styles.appFooter} style={{ backgroundColor : theme.footerBackground, color : theme.footerForeground }}>
-            <div className={styles.footerTitle}>zukkii - japanese idol fan info portal</div>
-            <div className={styles.footerLinks}>
-                <a target="_blank" className={styles.footerIcon} href="https://github.com/iequivocality/zukkii"><IoLogoGithub color={theme.footerIconColor} size={25}></IoLogoGithub></a>
-                <a target="_blank" className={styles.footerIcon} href="https://twitter.com/ambidere"><IoLogoTwitter color={theme.footerIconColor} size={25}></IoLogoTwitter></a>
+            <div className={styles.footerDetails}>
+                <div className={styles.footerTitle}>zukkii - japanese idol fan info portal (2019)</div>
+                <div className={styles.footerLinks}>
+                    <a target="_blank" className={styles.footerIcon} href="https://github.com/iequivocality/zukkii"><IoLogoGithub color={theme.footerIconColor} size={20}></IoLogoGithub></a>
+                    <a target="_blank" className={styles.footerIcon} href="https://twitter.com/ambidere"><IoLogoTwitter color={theme.footerIconColor} size={20}></IoLogoTwitter></a>
+                </div>
             </div>
             <div className={styles.settings}>
                 <DarkModeToggle></DarkModeToggle>
