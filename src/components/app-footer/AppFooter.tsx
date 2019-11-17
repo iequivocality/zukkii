@@ -10,9 +10,9 @@ export default function AppFooter() {
     return (
         <footer className={styles.appFooter} style={{ backgroundColor : theme.footerBackground, color : theme.footerForeground }}>
             <DarkModeToggle></DarkModeToggle>
-            <a target="_blank" href="https://github.com/iequivocality"><IoLogoGithub color={theme.footerIconColor}></IoLogoGithub></a>
+            <a target="_blank" href="https://github.com/iequivocality/zukkii"><IoLogoGithub color={theme.footerIconColor}></IoLogoGithub></a>
             <a target="_blank" href="https://twitter.com/ambidere"><IoLogoTwitter color={theme.footerIconColor}></IoLogoTwitter></a>
-            2019 MIT License
+            zukkii 2019 MIT License
         </footer>
     );
 }
