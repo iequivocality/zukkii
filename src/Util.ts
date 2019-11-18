@@ -75,7 +75,6 @@ export default class Util {
             c = parseInt(hex.substr(i*2,2), 16);
             c = Util.clampToColorLimits(c + (c * lum)).toString(16);
             rgb += ("00"+c).substr(c.length);
-            console.log(rgb);
         }
     
         return rgb;
@@ -117,12 +116,7 @@ export default class Util {
         }
     }
 
-    static createShadowProperties(dp : number) {
-        if (dp <= 0)
-        {
-            return "none";
-        }
-    
-        return "0px " + dp + "px " + dp + "px " + "rgba(0, 0, 0, .38)";
+    static createShadowProperties(dp : number) {    
+        return dp <= 0 ? `none` : `0px ${dp}px ${dp}px rgba(0, 0, 0, .38)`;
     }
 }

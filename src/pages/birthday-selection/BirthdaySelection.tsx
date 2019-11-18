@@ -36,7 +36,7 @@ export default function BirthdaySelectionPage() {
         return (
             <>
                 <div className={styles.titleContainer} style={{ color : themeContainer.theme.foregroundColor }}>
-                    <h2>アイドルバースデーカウントダウン</h2>
+                    <h2>ズッキー日本アイドルバースデーカウントダウン</h2>
                     <h4>アイドルグループ選んでください</h4>
                 </div>
                 <div className={styles.birthdaySelection}>

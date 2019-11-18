@@ -1,23 +1,24 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import styles from './CloseButton.module.scss';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
+import ThemeContext from '../../contexts/themeContext';
 
 export interface CloseButtonProps {
-    onClose : () => void,
-    color : string
+    onClose : () => void
 }
 
 export default function CloseButton(props : CloseButtonProps) {
-    let { onClose, color } = props;
+    let { onClose } = props;
+    let { theme } = useContext(ThemeContext);
 
     return (
         useMemo(() => {
             return (
                 <div className={styles.closeButton} onClick={() => onClose()}>
-                    <IoIosCloseCircleOutline color={color}/>
+                    <IoIosCloseCircleOutline color={theme.foregroundColor}/>
                 </div>
             )
-        }, [onClose])
+        }, [onClose, theme.foregroundColor])
     );
 }
 

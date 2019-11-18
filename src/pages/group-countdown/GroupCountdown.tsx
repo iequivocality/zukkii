@@ -16,7 +16,6 @@ import { IoIosFunnel } from 'react-icons/io';
 import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
 import { Constants } from '../../Constants';
-import createPage from '../../hoc/createPage';
 import AppFooter from '../../components/app-footer/AppFooter';
 
 export default function GroupCountdownPageComponent() {

@@ -38,7 +38,7 @@
 
 .groupChoice:hover {
     .groupBackground {
-        transform: scale(1.25) rotate(3deg);
+        transform: scale(1.15);
     }
 }
 
@@ -53,11 +53,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 700;
+    font-size: 1.142857142857143rem;
 }
 
 .groupBackground {
     position: absolute;
     width: 240px;
     z-index: 1;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.3s ease-in;
 }

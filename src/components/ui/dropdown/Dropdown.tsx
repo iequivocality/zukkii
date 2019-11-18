@@ -4,6 +4,7 @@ import useClickOutside from '../../../hooks/useClickOutside';
 import { Constants } from '../../../Constants';
 
 export interface DropdownContent<T = any> {
+    index? : number,
     key : string,
     label : string,
     value : T,
@@ -12,17 +13,18 @@ export interface DropdownContent<T = any> {
 
 export interface DropdownProps<T = string> {
     contents : Array<T>,
-    mapContentToDropdown : (content : T) => DropdownContent<T>,
-    onSelect : (value : T, event? : any) => void 
+    mapContentToDropdown : (content : T, index : number) => DropdownContent<T>,
+    onSelect : (value : T, index? : number, event? : any) => void 
     width? : number,
     style? : CSSProperties,
     all? : boolean,
     icon? : boolean,
-    color? : string
+    color? : string,
+    selectedValue? : number
 }
 
 export default function Dropdown<T = string>(props : DropdownProps<T>) {
-    let { width, contents, mapContentToDropdown, onSelect, style, all, color, icon } = props;
+    let { width, contents, mapContentToDropdown, onSelect, style, all, color, icon, selectedValue } = props;
     let [ isOpen, setIsOpen ] = useState(false);
     let [ currentValue, setCurrentValue ] = useState<DropdownContent<T>>(null);
     let [ contentsForDropdown, setContentsForDropdown] = useState([]);
@@ -32,19 +34,29 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
     let newWidth = width ? width : 100;
 
     useEffect(() => {
-        setCurrentValue(all ? Constants.ALL_DROPDOWN_CONTENT : mapContentToDropdown(contents[0]))
+        setCurrentValue(all ? Constants.ALL_DROPDOWN_CONTENT : mapContentToDropdown(contents[0], 0))
     }, [])
 
     useEffect(() => {
-        let newContents = contents.map(mapContentToDropdown);
-        if (all) {
-            newContents.unshift(Constants.ALL_DROPDOWN_CONTENT);
+        console.log("VALUE SHOULD CHANGE", contentsForDropdown, selectedValue)
+        if (contentsForDropdown.length > (all ? 1 : 0)) {
+            console.log(contentsForDropdown.map(c => c.index))
+            setCurrentValue(contentsForDropdown[selectedValue])
+        }
+    }, [selectedValue]);
+
+    useEffect(() => {
+        let newContents = all ? [Constants.ALL_DROPDOWN_CONTENT] : [];
+        newContents = [...newContents, ...contents.map((content : T, index : number) => mapContentToDropdown(content, all ? index + 1 : index))];
+
+        if (selectedValue && newContents.length > (all ? 1 : 0)) {
+            setCurrentValue(newContents[selectedValue]);
         }
         setContentsForDropdown(newContents)
     }, [contents]);
 
     let onDropdownSelect = useCallback((content : DropdownContent<T>) => {
-        onSelect(content.value);
+        onSelect(content.value, content.index);
         setCurrentValue(content)
         setIsOpen(false);
     }, [currentValue]);
@@ -58,15 +70,15 @@ export default function Dropdown<T = string>(props : DropdownProps<T>) {
 
     return (
         <div ref={dropdownElement} className={isOpen ? styles.dropdownWrapperOpen : styles.dropdownWrapper} style={style}>
-            <div className={styles.dropdownButton} style={{ width : `${newWidth}px`, backgroundColor : color }} onClick={toggleDropdown}>
+            { currentValue && <div className={styles.dropdownButton} style={{ width : `${newWidth}px`, backgroundColor : color }} onClick={toggleDropdown}>
                 { icon && <span className={styles.dropdownContentIcon}>{currentValue && currentValue.iconComponent}</span> }
                 {currentValue !== null ? currentValue.label : ''}
                 <span className={styles.triangle}/>
-            </div>
+            </div> }
             <div className={styles.dropdownContent} style={{ width : `${newWidth}px`, backgroundColor : color, opacity : isOpen ? 1 : 0, pointerEvents : isOpen ? 'inherit' : 'none' }}>
                 {contentsForDropdown.map((content : DropdownContent<T>) => {
                     return (
-                        content.key !== currentValue.key ? 
+                        currentValue && content.key !== currentValue.key ? 
                         <div key={content.key} className={styles.dropdownContentItem} onClick={() => onDropdownSelect(content)}>
                             { icon && <span className={styles.dropdownContentIcon}>{content.iconComponent}</span> }
                             <span>{content.label}</span>

@@ -45,8 +45,6 @@ export default function Countdown(props : CountdownProps) {
         targetDate.add(1, 'y')
     }
 
-    console.log(isHover);
-
     useInterval(() => {
         let currentDate = moment().tz("Asia/Tokyo");
         let duration = moment.duration(targetDate.diff(currentDate)); 

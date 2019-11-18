@@ -11,15 +11,16 @@ export interface GenerationSelect {
 }
 
 export interface GenerationSelectionProps {
-    onGenerationSelect : (generation : GenerationSelect) => void
+    onGenerationSelect : (generation : GenerationSelect, index : number) => void,
+    selectedValue : number
 }
 
 export default function GenerationSelection(props : GenerationSelectionProps) {
-    let { onGenerationSelect } = props;
+    let { onGenerationSelect, selectedValue } = props;
     let group = useSelector(( state : AppState ) => state.selectedGroup);
     let [generationArray, setGenerationArray] = useState<GenerationSelect[]>([]);
-    let onSelectGeneration = useCallback((generation : GenerationSelect) => {
-        onGenerationSelect(generation);
+    let onSelectGeneration = useCallback((generation : GenerationSelect, index : number) => {
+        onGenerationSelect(generation, index);
     }, []);
 
     useEffect(() => {
@@ -37,10 +38,11 @@ export default function GenerationSelection(props : GenerationSelectionProps) {
     return (
         <Dropdown<GenerationSelect>
             all
+            selectedValue={selectedValue}
             width={150} color={group.color}
             contents={generationArray}
-            onSelect={(value : GenerationSelect) => { onSelectGeneration(value) }}
+            onSelect={(value : GenerationSelect, index : number) => { onSelectGeneration(value, index) }}
             style={{ fontFamily : 'SawarabiGothic, sans-serif', zIndex : 20 }}
-            mapContentToDropdown={(content : GenerationSelect) => ( { key : content.value + '', label : content.label, value : content } )}/>
+            mapContentToDropdown={(content : GenerationSelect, index : number) => ( { index, key : content.value + '', label : content.label, value : content } )}/>
     );
 }

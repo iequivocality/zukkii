@@ -20,6 +20,7 @@ export class Constants {
         type : SortType.NONE
     };
     static ALL_DROPDOWN_CONTENT : DropdownContent = {
+        index : 0,
         key : 'all',
         label : '全部',
         value : null

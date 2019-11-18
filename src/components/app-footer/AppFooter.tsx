@@ -12,8 +12,8 @@ export default function AppFooter() {
             <div className={styles.footerDetails}>
                 <div className={styles.footerTitle}>zukkii - japanese idol fan info portal (2019)</div>
                 <div className={styles.footerLinks}>
-                    <a target="_blank" className={styles.footerIcon} href="https://github.com/iequivocality/zukkii"><IoLogoGithub color={theme.footerIconColor} size={20}></IoLogoGithub></a>
-                    <a target="_blank" className={styles.footerIcon} href="https://twitter.com/ambidere"><IoLogoTwitter color={theme.footerIconColor} size={20}></IoLogoTwitter></a>
+                    <a target="_blank" className={styles.footerIcon} rel="noopener noreferrer" href="https://github.com/iequivocality/zukkii"><IoLogoGithub color={theme.footerIconColor} size={20}></IoLogoGithub></a>
+                    <a target="_blank" className={styles.footerIcon} rel="noopener noreferrer" href="https://twitter.com/ambidere"><IoLogoTwitter color={theme.footerIconColor} size={20}></IoLogoTwitter></a>
                 </div>
             </div>
             <div className={styles.settings}>
