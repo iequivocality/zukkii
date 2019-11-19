@@ -12,7 +12,7 @@ export default function Loading() {
                 <main className={styles.loadingContainer}>
                     <div className={styles.loadingAnimation}>
                         <Sakamichi className={styles.sakamichi}></Sakamichi>
-                        <span style={{ color : themeContainer.theme.foregroundColor }}>LOADING</span>
+                        <span style={{ color : themeContainer.theme.foregroundColor }}>ダウンロード中</span>
                     </div>
                 </main>
             );

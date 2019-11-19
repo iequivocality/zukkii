@@ -125,7 +125,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                         right: interpolatingStyle.x + 'px', backgroundColor : themeContainer.theme.backgroundColor
                     }}>
                         <div className={styles.memberChooserContainer}>
-                            <div style={{ color : themeContainer.theme.foregroundColor }}>SELECT</div>
+                            <div style={{ color : themeContainer.theme.foregroundColor }}>フィルターたら類い<br/>選んでください</div>
                             <CloseButton onClose={() => { onChoose() }}></CloseButton>
                         </div>
                         <div className={styles.memberChooserContainer}>
