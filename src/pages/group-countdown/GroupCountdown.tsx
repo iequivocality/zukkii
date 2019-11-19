@@ -17,10 +17,10 @@ import SortObject from '../../models/SortObject';
 import FilterObject from '../../models/FilterObject';
 import { Constants } from '../../Constants';
 import AppFooter from '../../components/app-footer/AppFooter';
+import useRedirect from '../../hooks/useRedirect';
 
 export default function GroupCountdownPageComponent() {
     let { isExact, params } = useRouteMatch();
-    let history = useHistory();
     let [ openChooser, setOpenChooser ] = useState(false);
     let [ currentFilter, setCurrentFilter ] = useState<FilterObject>(Constants.ALL_FILTER);
     let [ currentSort, setCurrentSort ] = useState<SortObject>(Constants.NONE_SORT);
@@ -40,14 +40,7 @@ export default function GroupCountdownPageComponent() {
             loadGroupFromParameter(groupParam);
         }
     }, []);
-
-    useTimeout(() => {
-        if (!doesGroupExist) {
-            history.push('/404')
-        }
-    }, 10000);
-
-    // return <Loading></Loading>;
+    useRedirect('/404', 10000, !doesGroupExist);
 
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;
