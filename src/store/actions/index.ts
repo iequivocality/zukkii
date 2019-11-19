@@ -2,8 +2,6 @@ import Group from "../../models/Group";
 import FirebaseApp from "../../data/firebase";
 import Util from "../../Util";
 import Member from "../../models/Member";
-import FilterObject from "../../models/FilterObject";
-import SortObject from "../../models/SortObject";
 
 export const CHANGE_GENERATION_SELECTION = "CHANGE_GENERATION";
 export const CLEAR_GENERATION_SELECTION = "CLEAR_GENERATION_SELECTION";
@@ -14,19 +12,6 @@ export const FILTER_MEMBERS = "FILTER_MEMBERS";
 export const SORT_MEMBERS = "SORT_MEMBERS"
 export const LOADING_STARTED = "LOADING_STARTED";
 export const LOADING_FINISHED = "LOADING_FINISHED";
-
-export function changeGeneration(gen : number) {
-    return {
-      type: CHANGE_GENERATION_SELECTION,
-      payload : gen
-    }
-}
-
-export function clearGeneration() {
-    return {
-        type : CLEAR_GENERATION_SELECTION
-    }
-}
 
 export function loadGroup(group : Group) {
     return {
@@ -61,24 +46,11 @@ export function loadingFinished() {
     }
 }
 
-export function filterMembers(filter : FilterObject) {
-    return {
-        type : FILTER_MEMBERS,
-        payload : filter
-    }
-}
-
-export function sortMembers(sort : SortObject) {
-    return {
-        type : SORT_MEMBERS,
-        payload : sort
-    }
-}
-
 export function fetchGroup(groupName : string) {
     return (dispatch : any) => {
         dispatch(loadingStarted());
         FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
+            
             let groups = Util.convertObjectToArray<Group>(snapshot.val());
             let filteredGroup = groups.filter((value : Group) => {
               return value.id === groupName;
@@ -89,6 +61,9 @@ export function fetchGroup(groupName : string) {
             if (Util.isNotNullAndNotUndefined(selectedGroup)) {
                 dispatch(loadGroup(filteredGroup.length > 0 ? filteredGroup[0] : null))
                 dispatch(fetchMembersFromGroup(groupName));
+            }
+            else {
+                console.log("NOT FOUND")
             }
             dispatch(loadingFinished());
             return snapshot;

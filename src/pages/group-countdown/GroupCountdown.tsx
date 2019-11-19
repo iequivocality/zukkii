@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, CSSProperties } from 'react';
 import styles from './GroupCountdown.module.scss'
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { Redirect, useRouteMatch } from 'react-router';
+import { Redirect, useRouteMatch, useHistory } from 'react-router';
 import { fetchGroup } from '../../store/actions';
 import BackButton from '../../components/back-button/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
@@ -20,6 +20,7 @@ import AppFooter from '../../components/app-footer/AppFooter';
 
 export default function GroupCountdownPageComponent() {
     let { isExact, params } = useRouteMatch();
+    let history = useHistory();
     let [ openChooser, setOpenChooser ] = useState(false);
     let [ currentFilter, setCurrentFilter ] = useState<FilterObject>(Constants.ALL_FILTER);
     let [ currentSort, setCurrentSort ] = useState<SortObject>(Constants.NONE_SORT);
@@ -29,7 +30,6 @@ export default function GroupCountdownPageComponent() {
     let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual);
     let doesGroupExist = useSelector((state : AppState) => Util.isNotNullAndNotUndefined(state.groupChoices.find((group) => ( group.id === groupParam ))), shallowEqual) 
     let dispatch = useDispatch();
-    let [ showNotFound, setShowNotFound ] = useState(false);
     let loadGroupFromParameter = useCallback((group : string) => {
         dispatch(fetchGroup(group));
     }, [dispatch]);
@@ -43,9 +43,9 @@ export default function GroupCountdownPageComponent() {
 
     useTimeout(() => {
         if (!doesGroupExist) {
-            setShowNotFound(true);
+            history.push('/404')
         }
-    }, 10000, [showNotFound]);
+    }, 10000);
 
     // return <Loading></Loading>;
 
@@ -77,11 +77,6 @@ export default function GroupCountdownPageComponent() {
         );
     }
     else {
-        if (showNotFound) {
-            return <Redirect to="/404"></Redirect>;
-        }
-        else {
-            return <Loading></Loading>;
-        }
+        return <Loading></Loading>;
     }
 }
