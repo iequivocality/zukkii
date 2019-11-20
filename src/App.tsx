@@ -5,11 +5,13 @@ import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection'
 import GroupCountdown from './pages/group-countdown/GroupCountdown';
 import ComponentTest from './pages/component-test/ComponentTest';
 import NotFoundComponent from './pages/no-found/NotFound';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchGroups } from './store/actions';
 import ThemeContext from './contexts/themeContext';
 import AppContainer from './components/app-container/AppContainer';
 import useTheme from './hooks/useTheme';
+import AppState from './store/state/AppState';
+import Loading from './components/loading/Loading';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -38,6 +40,7 @@ const AppRoutes : Array<RouteProps> = [
 export default function App() {
   let themeContainer = useTheme();
   let dispatch = useDispatch();
+  let isLoading = useSelector((state : AppState) => state.isLoading)
   useEffect(() => {
     dispatch(fetchGroups());
   }, []);
@@ -45,6 +48,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={themeContainer}>
       <AppContainer>
+        { isLoading ? <Loading></Loading> : null }
         <Router>
           <Switch>
             {AppRoutes.map((route : RouteProps, key : number) => (

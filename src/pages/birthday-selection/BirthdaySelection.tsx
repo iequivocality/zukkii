@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchGroups, loadGroup } from '../../store/actions';
 import Group from '../../models/Group';
 import { Link } from 'react-router-dom';
-import Loading from '../../components/loading/Loading';
 import ThemeContext from '../../contexts/themeContext';
 import AppFooter from '../../components/app-footer/AppFooter';
 import useRedirect from '../../hooks/useRedirect';
@@ -60,6 +59,6 @@ export default function BirthdaySelectionPage() {
         );
     }
     else {
-        return <Loading></Loading>
+        return null;
     }
 }

@@ -1,3 +1,7 @@
+.memberChooserContainer {
+    display: block;
+}
+
 .memberChooser {
     position: fixed;
     top: 0;
@@ -11,7 +15,7 @@
     align-items: center;
 }
 
-.memberChooserContainer {
+.memberChooserFieldContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;

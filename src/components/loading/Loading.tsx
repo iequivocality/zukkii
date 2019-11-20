@@ -4,18 +4,18 @@ import Sakamichi from '../svg/Sakamichi';
 import ThemeContext from '../../contexts/themeContext';
 
 export default function Loading() {
-    const themeContainer = useContext(ThemeContext)
+    const { theme } = useContext(ThemeContext)
 
     return (
         useMemo(() => {
             return (
-                <main className={styles.loadingContainer}>
+                <main className={styles.loadingContainer} style={{ backgroundColor : theme.backgroundColor}}>
                     <div className={styles.loadingAnimation}>
                         <Sakamichi className={styles.sakamichi}></Sakamichi>
-                        <span style={{ color : themeContainer.theme.foregroundColor }}>ダウンロード中</span>
+                        <span style={{ color : theme.foregroundColor }}>ダウンロード中</span>
                     </div>
                 </main>
             );
-        }, [themeContainer])
+        }, [theme])
     );
 }

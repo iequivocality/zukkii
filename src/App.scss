@@ -11,3 +11,12 @@
 body {
   font-family: 'SawarabiGothic', 'Roboto', sans-serif;
 }
+
+.app-body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+header {
+  user-select: none;
+}

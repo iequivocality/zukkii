@@ -2,29 +2,22 @@ import React, { useCallback, useEffect, useState, CSSProperties } from 'react';
 import styles from './GroupCountdown.module.scss'
 import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { Redirect, useRouteMatch, useHistory } from 'react-router';
+import { useRouteMatch } from 'react-router';
 import { fetchGroup } from '../../store/actions';
 import BackButton from '../../components/back-button/BackButton';
 import MemberCountdown from '../../components/member-countdown/MemberCountdown';
 import Util from '../../Util';
-import useTimeout from '../../hooks/useTimeout';
 import useProcessedMembers from '../../hooks/useProcessedMembers';
-import Loading from '../../components/loading/Loading';
 import MemberChooser from '../../components/member-chooser/MemberChooser';
 import Group from '../../models/Group';
 import { IoIosFunnel } from 'react-icons/io';
-import SortObject from '../../models/SortObject';
-import FilterObject from '../../models/FilterObject';
-import { Constants } from '../../Constants';
-import AppFooter from '../../components/app-footer/AppFooter';
 import useRedirect from '../../hooks/useRedirect';
+import createPage from '../../hoc/createPage';
 
-export default function GroupCountdownPageComponent() {
+function GroupCountdownPageComponent() {
     let { isExact, params } = useRouteMatch();
     let [ openChooser, setOpenChooser ] = useState(false);
-    let [ currentFilter, setCurrentFilter ] = useState<FilterObject>(Constants.ALL_FILTER);
-    let [ currentSort, setCurrentSort ] = useState<SortObject>(Constants.NONE_SORT);
-    let processedMembers = useProcessedMembers(currentSort, currentFilter);
+    let [processedMembers, setCurrentSort, setCurrentFilter] = useProcessedMembers();
     let groupParam = params['group'];
     let isLoading = useSelector((state : AppState) => state.isLoading, shallowEqual)
     let selectedGroup : Group = useSelector((state : AppState) => state.selectedGroup, shallowEqual);
@@ -36,7 +29,6 @@ export default function GroupCountdownPageComponent() {
     
     useEffect(() => {
         if ( isExact ) {
-            console.log(groupParam)
             loadGroupFromParameter(groupParam);
         }
     }, []);
@@ -65,11 +57,14 @@ export default function GroupCountdownPageComponent() {
                     <h6>アイドルバースデーカウントダウン</h6>
                 </header>
                 <MemberCountdown group={selectedGroup} members={processedMembers} ></MemberCountdown>
-                <AppFooter></AppFooter>
+                {/* <AppFooter></AppFooter> */}
             </>
         );
     }
     else {
-        return <Loading></Loading>;
+        return null;
     }
 }
+
+export default createPage(GroupCountdownPageComponent);
+

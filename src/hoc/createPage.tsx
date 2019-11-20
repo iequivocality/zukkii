@@ -1,7 +1,7 @@
-import React, { Component, ComponentClass, SFC } from "react";
+import React, { Component, FC } from "react";
 import AppFooter from "../components/app-footer/AppFooter";
 
-export default function createPage<P = {}>(PageComponent : SFC) {
+export default function createPage<P = {}>(PageComponent : FC) {
     return class extends Component {
         constructor(props : P) {
             super(props);
@@ -10,7 +10,9 @@ export default function createPage<P = {}>(PageComponent : SFC) {
         render() {
             return (
                 <>
-                    <PageComponent {...this.props}></PageComponent>
+                    <main className="app-body">
+                        <PageComponent {...this.props}></PageComponent>
+                    </main>
                     <AppFooter></AppFooter>
                 </>
             );

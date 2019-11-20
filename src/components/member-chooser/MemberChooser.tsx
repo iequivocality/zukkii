@@ -106,10 +106,8 @@ export default function MemberChooser(props : MemberChooserProps) {
         onChoose();
     }, []);
 
-    console.log("STATE", currentState)
-
     return (
-        <>
+        <div className={styles.memberChooserContainer}>
             <Motion defaultStyle={{ x : 0 }} style={{ x : isOpen ? spring(0.4) : spring(0) }}>
                 {
                     interpolatingStyle => (
@@ -124,11 +122,11 @@ export default function MemberChooser(props : MemberChooserProps) {
                     <aside className={styles.memberChooser} style={{
                         right: interpolatingStyle.x + 'px', backgroundColor : themeContainer.theme.backgroundColor
                     }}>
-                        <div className={styles.memberChooserContainer}>
+                        <div className={styles.memberChooserFieldContainer}>
                             <div style={{ color : themeContainer.theme.foregroundColor }}>フィルターたら類い<br/>選んでください</div>
                             <CloseButton onClose={() => { onChoose() }}></CloseButton>
                         </div>
-                        <div className={styles.memberChooserContainer}>
+                        <div className={styles.memberChooserFieldContainer}>
                             <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>都道府県</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<Prefecture>
@@ -140,7 +138,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     mapContentToDropdown={(content : Prefecture, index: number) => ( { index, key : content.en.toLowerCase(), label : content.jp, value : content } )}/>
                             </div>
                         </div>
-                        <div className={styles.memberChooserContainer}>
+                        <div className={styles.memberChooserFieldContainer}>
                             <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>歳</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
@@ -152,7 +150,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     mapContentToDropdown={(content : SortOrder, index : number) => ( { index, key : content.key, label : content.jp, value : content, iconComponent : content.icon } )}/>
                             </div>
                         </div>
-                        <div className={styles.memberChooserContainer}>
+                        <div className={styles.memberChooserFieldContainer}>
                             <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>身長</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<SortOrder>
@@ -164,7 +162,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     mapContentToDropdown={(content : SortOrder, index : number) => ( { index, key : content.key, label : content.jp, value : content, iconComponent : content.icon } )}/>
                             </div>
                         </div>
-                        <div className={styles.memberChooserContainer}>
+                        <div className={styles.memberChooserFieldContainer}>
                             <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>身長</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<BloodType>
@@ -177,7 +175,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                                     mapContentToDropdown={(content : BloodType, index : number) => ( { index, key : content.type, label : content.jp, value : content } )}/>
                             </div>
                         </div>
-                        <div className={styles.memberChooserContainer}>
+                        <div className={styles.memberChooserFieldContainer}>
                             <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>期</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <GenerationSelection
@@ -189,6 +187,6 @@ export default function MemberChooser(props : MemberChooserProps) {
                     </aside>
                 ) }
             </Motion>
-        </>
+        </div>
     );
 }

@@ -1,5 +1,5 @@
 import AppState from "../state/AppState";
-import { LOAD_GROUPS, LOAD_MEMBERS, LOAD_GROUP, LOADING_STARTED, LOADING_FINISHED, SORT_MEMBERS } from "../actions";
+import { LOAD_GROUPS, LOAD_MEMBERS, LOAD_GROUP, LOADING_STARTED, LOADING_FINISHED } from "../actions";
 import { Constants } from "../../Constants";
 import Util from "../../Util";
 import Member from "../../models/Member";

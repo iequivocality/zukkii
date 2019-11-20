@@ -1,9 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import AppState from "../../store/state/AppState";
-import ButtonGroup from "../button-group/ButtonGroup";
 import Dropdown from "../ui/dropdown/Dropdown";
-import FilterType from "../../models/FilterType";
 
 export interface GenerationSelect {
     label : string,
