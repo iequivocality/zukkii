@@ -3,13 +3,15 @@ import ToggleSwitch from '../../components/ui/toggle-switch/ToggleSwitch';
 import Dropdown from '../../components/ui/dropdown/Dropdown';
 import { IoIosSunny, IoIosMoon } from 'react-icons/io';
 import Util from '../../Util';
+import ObjectCircle from '../../components/svg/ObjectCircle';
 
 export default function ComponentTest() {
     
     let contents = ['Link 1', 'Link 2', 'Link 3'];
     return (
         <main style={{ justifyContent : 'space-around' }}>
-            <div style={{ width : '50px', height : '50px', backgroundColor : Util.computeShade('#B00020', 0.4) }}>
+            <ObjectCircle bigRadius={50} smallRadius={4} strokeWidth={3} numberOfCircles={2}/>
+            {/* <div style={{ width : '50px', height : '50px', backgroundColor : Util.computeShade('#B00020', 0.4) }}>
 
             </div>
             <ToggleSwitch
@@ -20,7 +22,7 @@ export default function ComponentTest() {
                 onToggle={(toggleStatus) => { console.log(toggleStatus) }}></ToggleSwitch>
             <Dropdown width={200} contents={contents}
                       onSelect={(value : string) => { console.log(value) }}
-                      mapContentToDropdown={(content : string) => ({ key : content, label : content, value : content })}/>
+                      mapContentToDropdown={(content : string) => ({ key : content, label : content, value : content })}/> */}
         </main>
     );
 }
