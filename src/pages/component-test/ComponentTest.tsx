@@ -3,26 +3,15 @@ import ToggleSwitch from '../../components/ui/toggle-switch/ToggleSwitch';
 import Dropdown from '../../components/ui/dropdown/Dropdown';
 import { IoIosSunny, IoIosMoon } from 'react-icons/io';
 import Util from '../../Util';
-import ObjectCircle from '../../components/svg/ObjectCircle';
+import ObjectCircle from '../../components/svg/OrbitingObjects';
+import styles from './ComponentTest.module.scss'
+import OrbitingObjects from '../../components/svg/OrbitingObjects';
 
 export default function ComponentTest() {
-    
-    let contents = ['Link 1', 'Link 2', 'Link 3'];
     return (
         <main style={{ justifyContent : 'space-around' }}>
-            <ObjectCircle bigRadius={50} smallRadius={4} strokeWidth={3} numberOfCircles={2}/>
-            {/* <div style={{ width : '50px', height : '50px', backgroundColor : Util.computeShade('#B00020', 0.4) }}>
-
-            </div>
-            <ToggleSwitch
-                width={75}
-                icon value
-                onState={{ key : 'light', color : '#ecf0f1', switchStyle : { backgroundColor : "#f1c40f" }, iconComponent : <IoIosSunny color="#f1c40f"/> }}
-                offState={{ key : 'dark', color : '#34495e', switchStyle : { backgroundColor : "#ffffff" }, iconComponent : <IoIosMoon color="#ffffff"/> }}
-                onToggle={(toggleStatus) => { console.log(toggleStatus) }}></ToggleSwitch>
-            <Dropdown width={200} contents={contents}
-                      onSelect={(value : string) => { console.log(value) }}
-                      mapContentToDropdown={(content : string) => ({ key : content, label : content, value : content })}/> */}
+            <OrbitingObjects distance={120} numberOfCircles={75} radius={2} className={styles.circle1} color={"#5BBEE4"}/>
+            <OrbitingObjects distance={150} numberOfCircles={75} radius={2} className={styles.circle2} color={"#7c32a2"}/>
         </main>
     );
 }

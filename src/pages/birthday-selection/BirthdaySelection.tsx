@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import ThemeContext from '../../contexts/themeContext';
 import AppFooter from '../../components/app-footer/AppFooter';
 import useRedirect from '../../hooks/useRedirect';
+import OrbitingObjects from '../../components/svg/OrbitingObjects';
 
 function getGroupStyle(group : Group) {
     let groupStyle : React.CSSProperties = {
@@ -54,6 +55,8 @@ export default function BirthdaySelectionPage() {
                         );
                     })}
                 </div>
+                <OrbitingObjects distance={120} numberOfCircles={75} radius={2} className={styles.hinatazakaCircle} color={"#5BBEE4"}/>
+                <OrbitingObjects distance={200} numberOfCircles={100} radius={2} className={styles.nogizakaCircle} color={"#7C32A2"}/>
                 <AppFooter></AppFooter>
             </>
         );
