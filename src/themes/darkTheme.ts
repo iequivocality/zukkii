@@ -4,6 +4,7 @@ import Util from "../Util";
 const DarkTheme : Theme = {
     backgroundColor : '#111111',
     foregroundColor : '#ecf0f1',
+    headerForeground : '#ecf0f1',
     countdownContainerBackground : (customColor : string) => '#333333',
     countdownContainerForeground : (customColor : string) => customColor,
     countdownContainerHoverBackground : (customColor : string) => Util.computeShade(customColor, 0.5),
@@ -14,6 +15,7 @@ const DarkTheme : Theme = {
     countdownValueAndUnitForeground : '#E1E1E1',
     footerBackground : Util.computeShade('#111111', 2),
     footerForeground : '#ecf0f1',
-    footerIconColor : '#ecf0f1'
+    footerIconColor : '#ecf0f1',
+    birthdaySelectionDropShadow : Util.createShadowProperties(0)
 }
 export default DarkTheme;

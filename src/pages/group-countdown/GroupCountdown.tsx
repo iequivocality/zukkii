@@ -13,6 +13,7 @@ import Group from '../../models/Group';
 import { IoIosFunnel } from 'react-icons/io';
 import useRedirect from '../../hooks/useRedirect';
 import createPage from '../../hoc/createPage';
+import AppHeader from '../../components/app-header/AppHeader';
 
 function GroupCountdownPageComponent() {
     let { isExact, params } = useRouteMatch();
@@ -32,6 +33,13 @@ function GroupCountdownPageComponent() {
             loadGroupFromParameter(groupParam);
         }
     }, []);
+
+    useEffect(() => {
+        if (selectedGroup !== null) {
+            document.title = selectedGroup.name + " - アイドルバースデーカウントダウン";
+        }
+    }, [selectedGroup])
+
     useRedirect('/404', 10000, !doesGroupExist);
 
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
@@ -48,16 +56,12 @@ function GroupCountdownPageComponent() {
                     filter={(f) => setCurrentFilter(f)}
                     sort={(s) => setCurrentSort(s)}
                     isOpen={openChooser} onChoose={() => { setOpenChooser(false) }}></MemberChooser>
+                <BackButton to="/" style={buttonStyle}></BackButton>
                 <div className={styles.sortButton} onClick={() => { setOpenChooser(true) }} style={buttonStyle}>
                     <IoIosFunnel/>分ける
                 </div>
-                <header className={styles.titleContainer} style={titleStyle}>
-                    <BackButton to="/" style={buttonStyle}></BackButton>
-                    <h2>{name}</h2>
-                    <h6>アイドルバースデーカウントダウン</h6>
-                </header>
+                <AppHeader title={name} subtitle="アイドルバースデーカウントダウン" style={titleStyle}></AppHeader>
                 <MemberCountdown group={selectedGroup} members={processedMembers} ></MemberCountdown>
-                {/* <AppFooter></AppFooter> */}
             </>
         );
     }

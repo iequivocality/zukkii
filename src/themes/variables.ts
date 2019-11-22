@@ -3,6 +3,9 @@ export type ThemeColorFunction = (customColor : string) => string | string;
 export default interface Theme {
     backgroundColor : string,
     foregroundColor : string,
+
+    /** Header */
+    headerForeground : string,
     
     /** Countdown */
     countdownContainerBackground : ThemeColorFunction,
@@ -18,4 +21,7 @@ export default interface Theme {
     footerBackground : string,
     footerForeground : string,
     footerIconColor : string,
+
+    /** Birthday Selection */
+    birthdaySelectionDropShadow : string
 }

@@ -1,20 +1,10 @@
 @import '../../App.scss';
 
-.titleContainer {
-    height: 20vh;
-
-    h2, h4 {
-        text-align: center;
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-}
-
 .birthdaySelection {
     color : #fff;
-    margin: 0 15%;
+    margin: 0 10%;
     width: 100%;
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
