@@ -11,6 +11,7 @@ import useRedirect from '../../hooks/useRedirect';
 import OrbitingObjects from '../../components/svg/OrbitingObjects';
 import Theme from '../../themes/variables';
 import AppHeader from '../../components/app-header/AppHeader';
+import Logo from '../../components/svg/Logo';
 
 function getGroupStyle(group : Group, theme : Theme) {
     let groupStyle : React.CSSProperties = {
@@ -59,8 +60,6 @@ export default function BirthdaySelectionPage() {
                         );
                     })}
                 </div>
-                <OrbitingObjects distance={120} numberOfCircles={75} radius={2} className={styles.hinatazakaCircle} color={"#5BBEE4"}/>
-                <OrbitingObjects distance={200} numberOfCircles={100} radius={2} className={styles.nogizakaCircle} color={"#7C32A2"}/>
                 <AppFooter></AppFooter>
             </>
         );

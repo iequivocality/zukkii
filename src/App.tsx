@@ -12,6 +12,7 @@ import AppContainer from './components/app-container/AppContainer';
 import useTheme from './hooks/useTheme';
 import AppState from './store/state/AppState';
 import Loading from './components/loading/Loading';
+import OrbitingObjects from './components/svg/OrbitingObjects';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -57,6 +58,8 @@ export default function App() {
           </Switch>
         </Router>
       </AppContainer>
+      <OrbitingObjects distance={120} numberOfCircles={75} radius={2} className={'hinatazakaCircle'} color={"#5BBEE4"}/>
+      <OrbitingObjects distance={200} numberOfCircles={100} radius={2} className={'nogizakaCircle'} color={"#7C32A2"}/>
     </ThemeContext.Provider>
   );
 }
