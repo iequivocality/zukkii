@@ -7,7 +7,7 @@ const DarkTheme : Theme = {
     headerForeground : '#ecf0f1',
     countdownContainerBackground : (customColor : string) => '#333333',
     countdownContainerForeground : (customColor : string) => customColor,
-    countdownContainerHoverBackground : (customColor : string) => Util.computeShade(customColor, 0.5),
+    countdownContainerHoverBackground : (customColor : string) => Util.computeShade(customColor, 0.2),
     countdownContainerHoverForeground : (customColor : string) => customColor,
     countdownContainerDropShadow : Util.createShadowProperties(0),
     countdownDetailsForeground : (customColor : string) => Util.desaturateColor(customColor, 0.3),

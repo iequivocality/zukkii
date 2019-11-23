@@ -4,6 +4,7 @@ import Util from "../../../Util";
 
 import styles from "./CountdownDetails.module.scss";
 import ThemeContext from "../../../contexts/themeContext";
+import { IoIosLink } from "react-icons/io";
 
 export interface CountdownDetailsProps {
     member : Member,
@@ -12,7 +13,7 @@ export interface CountdownDetailsProps {
 
 export default function CountdownDetails(props : CountdownDetailsProps) {
     let { theme } = useContext(ThemeContext);
-    let { name, prefecture, kana, height, bloodType, birthdate, ageByYears } = props.member;
+    let { name, prefecture, kana, height, bloodType, birthdate, ageByYears, blog } = props.member;
     let formattedDate = Util.formatYYYYMMDDToJapaneseFormat(birthdate);
     let detailStyle : React.CSSProperties = {
         color : theme.countdownDetailsForeground(props.groupColor)
@@ -21,7 +22,14 @@ export default function CountdownDetails(props : CountdownDetailsProps) {
     return (
         useMemo(() => {
             return <div className={styles.details} style={detailStyle}>
-                <div className={styles.name}>{ name }</div>
+                <div className={styles.name}>
+                    { name }
+                    <div className={styles.links}>
+                        <a href={blog} target="_blank" rel="noopener noreferrer">
+                            <IoIosLink></IoIosLink>
+                        </a>
+                    </div>
+                </div>
                 <div className={styles.kana}>{ kana }</div>
                 <div className={styles.otherDetails}>
                     <div className={styles.birthdate}>

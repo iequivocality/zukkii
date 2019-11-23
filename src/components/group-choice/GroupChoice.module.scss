@@ -7,9 +7,10 @@
     position: relative;
     overflow: hidden;
     margin: 10px;
-    background-size: contain;
+    background-size: 100%;
     background-repeat: none;
     background-position: center;
+    transition: all 0.3s ease-in;
 
     a {
         text-decoration: none;
@@ -20,9 +21,7 @@
 }
 
 .groupChoice:hover {
-    .groupBackground {
-        transform: scale(1.15);
-    }
+    background-size: 125%;
 }
 
 .groupName {

@@ -15,5 +15,6 @@ export default interface Member {
     bloodType : string,
     generation : number,
     ageByYears : number,
-    ageByDays : number
+    ageByDays : number,
+    blog : string
 }

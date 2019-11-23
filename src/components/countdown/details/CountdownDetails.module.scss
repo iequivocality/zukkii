@@ -17,6 +17,24 @@
     .name {
         font-size: 1.25rem;
         font-weight: bold;
+
+        .links {
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            top : 0;
+            right : 0;
+            height: 25px;
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 25px;
+                height: 25px;    
+            }
+        }
     }
 
     .label {

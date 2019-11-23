@@ -60,6 +60,7 @@ export default function App() {
           </Switch>
         </Router>
       </AppContainer>
+      <Rectangle width={3} height={"100%"} color={"#51B14A"} className={'keyakiRect'}></Rectangle>
       <Rectangle width={4} height={"100%"} color={"#5BBEE4"} className={'hinataRect'}></Rectangle>
       <Rectangle width={2} height={"100%"} color={"#7C32A2"} className={'nogiRect'}></Rectangle>
       <OrbitingObjects distance={100} numberOfCircles={60} radius={2} className={'keyakizakaCircle'} color={"#51B14A"}/>
