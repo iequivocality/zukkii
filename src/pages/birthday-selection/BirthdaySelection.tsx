@@ -60,6 +60,7 @@ export default function BirthdaySelectionPage() {
                         );
                     })}
                 </div>
+                {/* <Logo width={300} height={300}></Logo> */}
                 <AppFooter></AppFooter>
             </>
         );

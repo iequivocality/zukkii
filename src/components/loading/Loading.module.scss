@@ -14,12 +14,13 @@
 .loadingAnimation {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     width: 200px;
     height: 60px;
 
     span {
+        margin-left: 15px;
         font-family: 'Roboto', sans-serif;
         font-weight: bold;
         font-size: 1.1rem;
@@ -33,9 +34,8 @@
     100% { fill: #812E90; }
 }
 
-.sakamichi {
+.logo {
     width: 75px;
     height: 75px;
-    fill: #812E90;
-    animation: triangle-color 3.6s ease infinite;
+    
 }
