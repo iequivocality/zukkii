@@ -10,6 +10,7 @@ import AppFooter from '../../components/app-footer/AppFooter';
 import useRedirect from '../../hooks/useRedirect';
 import Theme from '../../themes/variables';
 import AppHeader from '../../components/app-header/AppHeader';
+import GroupChoice from '../../components/group-choice/GroupChoice';
 
 function getGroupStyle(group : Group, theme : Theme) {
     let groupStyle : React.CSSProperties = {
@@ -48,13 +49,7 @@ export default function BirthdaySelectionPage() {
                 <div className={styles.birthdaySelection}>
                     {groupChoices.map((group : Group) => {
                         return (
-                            <Link style={getGroupStyle(group, theme)} className={styles.groupChoice} to={`/group/${group.id}`} 
-                                key={group.id} onClick={() => setGroup(group)}>
-                                <img alt={group.name} className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img>
-                                <div className={styles.groupName}>
-                                    {group.name}
-                                </div>
-                            </Link>
+                            <GroupChoice key={group.id} group={group} selectGroup={(group : Group) => setGroup(group)}></GroupChoice>
                         );
                     })}
                 </div>

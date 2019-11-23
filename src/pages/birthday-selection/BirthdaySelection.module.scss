@@ -9,49 +9,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-}
-
-.groupChoice {
-    display: flex;
-    color: #fff;
-    max-width: 240px;
-    flex: 1 0 31%;
-    height: 180px;
+    z-index : 20;
     position: relative;
-    overflow: hidden;
-
-    a {
-        text-decoration: none;
-    }
-    a:visited {
-        color: #fff;
-    }
-}
-
-.groupChoice:hover {
-    .groupBackground {
-        transform: scale(1.15);
-    }
-}
-
-.groupName {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-    background-color: rgba(0.5,0.5,0.5,0.5);
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    font-size: 1.142857142857143rem;
-}
-
-.groupBackground {
-    position: absolute;
-    width: 240px;
-    z-index: 1;
-    transition: transform 0.3s ease-in;
 }
