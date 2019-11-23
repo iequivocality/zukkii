@@ -13,7 +13,7 @@ import useTheme from './hooks/useTheme';
 import AppState from './store/state/AppState';
 import Loading from './components/loading/Loading';
 import OrbitingObjects from './components/svg/OrbitingObjects';
-import Logo from './components/svg/Logo';
+import Rectangle from './components/svg/Rectangle';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -60,6 +60,8 @@ export default function App() {
           </Switch>
         </Router>
       </AppContainer>
+      <Rectangle width={4} height={"100%"} color={"#5BBEE4"} className={'hinataRect'}></Rectangle>
+      <Rectangle width={2} height={"100%"} color={"#7C32A2"} className={'nogiRect'}></Rectangle>
       <OrbitingObjects distance={120} numberOfCircles={75} radius={2} className={'hinatazakaCircle'} color={"#5BBEE4"}/>
       <OrbitingObjects distance={200} numberOfCircles={100} radius={2} className={'nogizakaCircle'} color={"#7C32A2"}/>
     </ThemeContext.Provider>

@@ -13,7 +13,7 @@ export default function Logo(props : LogoProps) {
     return (
         // <img src={logo} width={width} height={height}></img>
         <svg version="1.1" className={className} id="Layer_1" xmlBase="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            width={`${width}px`} height={`${height}px`} viewBox={`0 0 1000 1000`} enableBackground={`new 0 0 1000 1000`} xmlSpace="preserve">
+            width={width} height={height} viewBox={`0 0 1000 1000`} enableBackground={`new 0 0 1000 1000`} xmlSpace="preserve">
             <path fill="#51B14A" d="M187.201,235.659c33.443,12.721,66.659,28.409,99.162,47.175C520.75,418.157,636.027,664.911,562.92,855.313
                 c75.31-29.271,141.533-83.412,185.077-158.828c101.574-175.93,41.295-400.889-134.636-502.46
                 C473.399,113.217,302.41,134.855,187.201,235.659z"/>

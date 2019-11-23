@@ -35,6 +35,7 @@ header {
   top: 25%;
   right: 20%;
   animation: rotating 40s linear infinite;
+  z-index : 2;
 }
 
 .nogizakaCircle {
@@ -42,4 +43,21 @@ header {
   bottom: 5%;
   right: 0%;
   animation: rotating 35s linear infinite;
+  z-index : 2;
+}
+
+.hinataRect {
+  position: fixed;
+  left: 1.5%;
+  top : 0;
+  height: 100%;
+  z-index : 2;
+}
+
+.nogiRect {
+  position: fixed;
+  left: 2.5%;
+  top : 0;
+  height: 100%;
+  z-index : 2;
 }

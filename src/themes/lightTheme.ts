@@ -16,6 +16,6 @@ const LightTheme : Theme = {
     footerBackground : '#D9DBDD',
     footerForeground : '#2c3e50',
     footerIconColor : '#2c3e50',
-    birthdaySelectionDropShadow : Util.createShadowProperties(3)
+    birthdaySelectionDropShadow : Util.createShadowProperties(4)
 }
 export default LightTheme;

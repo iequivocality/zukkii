@@ -8,10 +8,8 @@ import { Link } from 'react-router-dom';
 import ThemeContext from '../../contexts/themeContext';
 import AppFooter from '../../components/app-footer/AppFooter';
 import useRedirect from '../../hooks/useRedirect';
-import OrbitingObjects from '../../components/svg/OrbitingObjects';
 import Theme from '../../themes/variables';
 import AppHeader from '../../components/app-header/AppHeader';
-import Logo from '../../components/svg/Logo';
 
 function getGroupStyle(group : Group, theme : Theme) {
     let groupStyle : React.CSSProperties = {
@@ -60,7 +58,6 @@ export default function BirthdaySelectionPage() {
                         );
                     })}
                 </div>
-                {/* <Logo width={300} height={300}></Logo> */}
                 <AppFooter></AppFooter>
             </>
         );
