@@ -1,6 +1,6 @@
 .groupContainer {
     // flex: 1 0 85%;
-    min-height: 80vh;
+    min-height: 70vh;
     // width: 90%;
     display: flex;
     flex-direction: row;
@@ -13,9 +13,16 @@
 }
 
 .noMemberGroupContainer {
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    z-index: 5;
+}
+
+.noMemberText {
+    user-select: none;
+    font-weight: 700;
+    font-size: 1.25rem;
 }
