@@ -13,5 +13,5 @@ export default function useClickOutside<T extends HTMLElement>(element : Mutable
         let listener = onOutsideCallback;
         document.addEventListener('click', listener);
         return () => document.removeEventListener('click', listener)
-    }, [callback]);
+    }, [onOutsideCallback]);
 }

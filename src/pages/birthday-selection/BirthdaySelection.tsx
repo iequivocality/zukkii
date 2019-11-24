@@ -4,21 +4,11 @@ import AppState from '../../store/state/AppState';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchGroups, loadGroup } from '../../store/actions';
 import Group from '../../models/Group';
-import { Link } from 'react-router-dom';
 import ThemeContext from '../../contexts/themeContext';
 import AppFooter from '../../components/app-footer/AppFooter';
 import useRedirect from '../../hooks/useRedirect';
-import Theme from '../../themes/variables';
 import AppHeader from '../../components/app-header/AppHeader';
 import GroupChoice from '../../components/group-choice/GroupChoice';
-
-function getGroupStyle(group : Group, theme : Theme) {
-    let groupStyle : React.CSSProperties = {
-        backgroundColor: group.color,
-        boxShadow: theme.birthdaySelectionDropShadow
-    };
-    return groupStyle
-}
 
 export default function BirthdaySelectionPage() {
     let { theme } = useContext(ThemeContext);

@@ -81,7 +81,7 @@ export default function MemberChooser(props : MemberChooserProps) {
         }
 
         onChoose();
-    }, []);
+    }, [filter, onChoose]);
 
     let doSort = useCallback((order : SortOrder, type : SortType, index : number) => {
         if (type === SortType.HEIGHT) {
@@ -104,7 +104,7 @@ export default function MemberChooser(props : MemberChooserProps) {
         }
         sort({ type, order });
         onChoose();
-    }, []);
+    }, [sort, onChoose]);
 
     return (
         <div className={styles.memberChooserContainer}>
@@ -127,7 +127,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             <CloseButton onClose={() => { onChoose() }}></CloseButton>
                         </div>
                         <div className={styles.memberChooserFieldContainer}>
-                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>都道府県</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>出身地</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<Prefecture>
                                     selectedValue={currentState.prefecture}
@@ -163,7 +163,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             </div>
                         </div>
                         <div className={styles.memberChooserFieldContainer}>
-                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>身長</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>血液型</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <Dropdown<BloodType>
                                     all

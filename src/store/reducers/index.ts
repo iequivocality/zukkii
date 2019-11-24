@@ -24,7 +24,9 @@ const addAgeToMember = (member : Member) : Member => {
 export function rootReducer(state : AppState = initialState, action : any) : AppState {
     switch (action.type) {
         case LOAD_GROUP:
-            return {...state, selectedGroup : action.payload};
+            let previousGroup = state.selectedGroup;
+            let members = previousGroup && action.payload.id == previousGroup.id ? state.members : [];
+            return {...state, selectedGroup : action.payload, members : members};
         case LOAD_GROUPS:
             return {...state, groupChoices : action.payload};
         case LOAD_MEMBERS:
