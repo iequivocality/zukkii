@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import styles from './CountdownComponent.module.scss'
 import Util from '../../Util';
 import moment from 'moment';
@@ -9,6 +9,7 @@ import { Constants } from '../../Constants';
 import useInterval from '../../hooks/useInterval';
 import ThemeContext from '../../contexts/themeContext';
 import useHover from '../../hooks/useHover';
+import useOnScreen from '../../hooks/useOnScreen';
 
 interface CountdownProps {
     member : Member,
@@ -24,6 +25,7 @@ export default function Countdown(props : CountdownProps) {
     let [ minute, setMinute ] = useState(0);
     let [ second, setSecond ] = useState(0);
     let [ ref, isHover ] = useHover();
+    let isOnScreen = useOnScreen(ref, '5px')
 
     let { groupColor, groupId, member } = props;
 
@@ -46,14 +48,16 @@ export default function Countdown(props : CountdownProps) {
     }
 
     useInterval(() => {
-        let currentDate = moment().tz("Asia/Tokyo");
-        let duration = moment.duration(targetDate.diff(currentDate)); 
-        let asDays = duration.asDays();
-        setWeek(Math.floor(asDays / 7));
-        setDay(Math.floor(asDays % 7));
-        setHour(duration.hours());
-        setMinute(duration.minutes());
-        setSecond(duration.seconds());
+        if (isOnScreen) {
+            let currentDate = moment().tz("Asia/Tokyo");
+            let duration = moment.duration(targetDate.diff(currentDate)); 
+            let asDays = duration.asDays();
+            setWeek(Math.floor(asDays / 7));
+            setDay(Math.floor(asDays % 7));
+            setHour(duration.hours());
+            setMinute(duration.minutes());
+            setSecond(duration.seconds());
+        }
     }, 1000);
 
     return (<div className={styles.countdownContainer} style={countdownStyle} ref={ref}>
