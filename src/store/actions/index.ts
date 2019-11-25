@@ -49,17 +49,10 @@ export function loadingFinished() {
 export function fetchGroup(groupName : string) {
     return (dispatch : any) => {
         dispatch(loadingStarted());
-        FirebaseApp.database().ref('groups').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
-            
-            let groups = Util.convertObjectToArray<Group>(snapshot.val());
-            let filteredGroup = groups.filter((value : Group) => {
-              return value.id === groupName;
-            });
-            let selectedGroup = groups.find((value : Group) => {
-                return value.id === groupName;
-            });
+        FirebaseApp.database().ref('groups/' + groupName).once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
+            let selectedGroup = snapshot.val() as Group;
             if (Util.isNotNullAndNotUndefined(selectedGroup)) {
-                dispatch(loadGroup(filteredGroup.length > 0 ? filteredGroup[0] : null))
+                dispatch(loadGroup(selectedGroup))
                 dispatch(fetchMembersFromGroup(groupName));
             }
             else {
@@ -86,12 +79,9 @@ export function fetchGroups() {
 export function fetchMembersFromGroup(group : string) {
     return function (dispatch : any) {
         dispatch(loadingStarted());
-        FirebaseApp.database().ref('members').once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
+        FirebaseApp.database().ref('members').orderByChild("group/" + group).equalTo(true).once('value').then<firebase.database.DataSnapshot>((snapshot : firebase.database.DataSnapshot) => {
             let members = Util.convertObjectToArray<Member>(snapshot.val());
-            let filteredMembers = members.filter((value : Member) => {
-              return Object.keys(value.group).findIndex(( value : string ) => ( value === group)) > -1;
-            });
-            dispatch(loadMembers(filteredMembers));
+            dispatch(loadMembers(members));
             dispatch(loadingFinished());
             return snapshot;
         });

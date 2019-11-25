@@ -81,7 +81,10 @@ export default class Util {
     }
 
     static convertObjectToArray<O>(object : Object) : Array<O> {
-        return Object.keys(object).map<O>(key => object[key])
+        if (Util.isNotNullAndNotUndefined(object)) {
+            return Object.keys(object).map<O>(key => object[key])
+        }
+        return [];
     }
 
     static getAgeFromBirthdate(birthdate : string) : Age {
