@@ -27,7 +27,12 @@ export default function GroupChoice(props : GroupChoiceProps) {
         <Link style={getGroupStyle(group, theme)} className={styles.groupChoice} to={`/group/${group.id}`} 
             key={group.id} onClick={() => selectGroup(group)}>
             <div className={styles.hoverRect} style={{ backgroundColor: group.color }}>
-                {group.name}
+                <div className={styles.groupTitle}>
+                    {group.name}
+                </div>
+                <div className={styles.groupSubtitle}>
+                    {group.en}
+                </div>
             </div>
         </Link>
     );

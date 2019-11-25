@@ -12,3 +12,18 @@
     z-index : 20;
     position: relative;
 }
+
+.noGroupBirthdaySelection {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 5;
+}
+
+.noGroupText {
+    user-select: none;
+    font-weight: 700;
+    font-size: 1.25rem;
+}

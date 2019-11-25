@@ -36,12 +36,12 @@ export default function BirthdaySelectionPage() {
                     title="ズッキー日本アイドルバースデーカウントダウン"
                     subtitle="アイドルグループ選んでください"
                     style={{ color : theme.foregroundColor }}></AppHeader>
-                <div className={styles.birthdaySelection}>
-                    {groupChoices.map((group : Group) => {
+                <div className={groupChoices.length > 0 ? styles.birthdaySelection : styles.noGroupBirthdaySelection}>
+                    {groupChoices.length > 0 ? groupChoices.map((group : Group) => {
                         return (
                             <GroupChoice key={group.id} group={group} selectGroup={(group : Group) => setGroup(group)}></GroupChoice>
                         );
-                    })}
+                    }) : <div className={styles.noGroupText}>{`ごめん。全然グループがみつかりません。`}</div>}
                 </div>
                 <AppFooter></AppFooter>
             </>

@@ -22,7 +22,7 @@ export default function MemberCountdown(props: MemberCountdownProps) {
                     springConfig={{ stiffness: 65, damping: 18 }} itemHeight={150}>
                     { members.map( member => <div key={member.id}><Countdown member={member} groupColor={color} groupId={id}></Countdown></div>) }
                 </Grid> : <div className={styles.noMemberText}>
-                    {`ごめん。全然${name}のメンバーが見つけられない`}
+                    {`ごめん。全然${name}のメンバーがみつかりません。`}
                 </div> }
             </main>
         }, [members])
