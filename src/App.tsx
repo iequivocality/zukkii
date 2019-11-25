@@ -12,8 +12,6 @@ import AppContainer from './components/app-container/AppContainer';
 import useTheme from './hooks/useTheme';
 import AppState from './store/state/AppState';
 import Loading from './components/loading/Loading';
-import OrbitingObjects from './components/svg/OrbitingObjects';
-import Rectangle from './components/svg/Rectangle';
 import Background from './components/background/Background';
 
 const AppRoutes : Array<RouteProps> = [
@@ -52,7 +50,6 @@ export default function App() {
     <ThemeContext.Provider value={themeContainer}>
       <AppContainer>
         { isLoading ? <Loading></Loading> : null }
-        {/* <Loading></Loading> */}
         <Router>
           <Switch>
             {AppRoutes.map((route : RouteProps, key : number) => (

@@ -21,13 +21,12 @@ export interface GroupChoiceProps {
 
 export default function GroupChoice(props : GroupChoiceProps) {
     let { theme } = useContext(ThemeContext);
-    let { group, selectGroup } = props; 
+    let { group, selectGroup } = props;
 
     return (
         <Link style={getGroupStyle(group, theme)} className={styles.groupChoice} to={`/group/${group.id}`} 
             key={group.id} onClick={() => selectGroup(group)}>
-            {/* <img alt={group.name} className={styles.groupBackground} src={`${process.env.PUBLIC_URL}/images/${group.id}/cover.jpg`}></img> */}
-            <div className={styles.groupName}>
+            <div className={styles.hoverRect} style={{ backgroundColor: group.color }}>
                 {group.name}
             </div>
         </Link>
