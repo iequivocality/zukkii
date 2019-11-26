@@ -3,10 +3,6 @@ import AppFooter from "../components/app-footer/AppFooter";
 
 export default function createPage<P = {}>(PageComponent : FC) {
     return class extends Component {
-        constructor(props : P) {
-            super(props);
-        }
-
         render() {
             return (
                 <>
