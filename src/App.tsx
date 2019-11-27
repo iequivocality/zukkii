@@ -13,6 +13,7 @@ import useTheme from './hooks/useTheme';
 import AppState from './store/state/AppState';
 import Loading from './components/loading/Loading';
 import Background from './components/background/Background';
+import GlobalErrorBoundary from './components/global-error-boundary/GlobalErrorBoundary';
 
 const AppRoutes : Array<RouteProps> = [
   {
@@ -47,18 +48,20 @@ export default function App() {
   }, []);
 
   return (
-    <ThemeContext.Provider value={themeContainer}>
-      <AppContainer>
-        { isLoading ? <Loading></Loading> : null }
-        <Router>
-          <Switch>
-            {AppRoutes.map((route : RouteProps, key : number) => (
-              <Route key={key} {...route}></Route>
-            ))}
-          </Switch>
-        </Router>
-      </AppContainer>
-      <Background></Background>
-    </ThemeContext.Provider>
+    <GlobalErrorBoundary>
+      <ThemeContext.Provider value={themeContainer}>
+        <AppContainer>
+          { isLoading ? <Loading></Loading> : null }
+          <Router>
+            <Switch>
+              {AppRoutes.map((route : RouteProps, key : number) => (
+                <Route key={key} {...route}></Route>
+              ))}
+            </Switch>
+          </Router>
+        </AppContainer>
+        <Background></Background>
+      </ThemeContext.Provider>
+    </GlobalErrorBoundary>
   );
 }

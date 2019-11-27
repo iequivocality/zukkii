@@ -8,7 +8,6 @@ import DarkTheme from '../../themes/darkTheme';
 
 export default function DarkModeToggle() {
     let { theme, toggleTheme } = useContext(ThemeContext);
-
     return (
         <div className={styles.darkModeToggle}>
             <span className={styles.darkModeToggleLabel} style={{ color : theme.footerForeground }}>配色</span>
