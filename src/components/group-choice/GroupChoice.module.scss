@@ -1,3 +1,5 @@
+@import '../../App.scss';
+
 .groupChoice {
     display: flex;
     color: #fff;
@@ -11,7 +13,6 @@
     background-repeat: none;
     background-position: center;
     border-radius: 10px;
-    // transition: background-size 0.3s 0.5s ease-in;
 
     a {
         text-decoration: none;
@@ -29,16 +30,27 @@
     height: 100%;
     z-index: 5;
     border-radius: 10px;
-    // transform: scale(1);
-    transition: transform 0.3s 0s ease-in;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-weight: 700;
+}
+
+.hoverText {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .groupTitle {
+    font-weight: 700;
     font-size: 1.428571428571429rem;
 }
 
@@ -49,54 +61,10 @@
 
 }
 
-.hoverName {
+.orbiting {
     position: absolute;
-    transition: transform opacity 0.3s ease-in;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    bottom: -35%;
+    right: -35%;
     z-index: 6;
-    font-size: 1.4rem;
-    opacity: 0;
-    transform: scale(5);
-}
-
-.groupChoice:hover {
-    // transition: background-size 0.3s 0s ease-in;
-    // background-size: 125%;
-
-    .hoverRect {
-        transform: scale(1);
-    }
-
-    .hoverName {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.groupName {
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-    background-color: rgba(0.5,0.5,0.5,0.5);
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    font-size: 1.142857142857143rem;
-}
-
-.groupBackground {
-    position: absolute;
-    width: 200px;
-    z-index: 1;
-    transition: transform 0.3s ease-in;
+    animation: rotating 6s linear infinite;
 }

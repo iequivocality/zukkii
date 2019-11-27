@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import Vector from '../../models/Vector';
 
 export interface OrbitingObjectsProps {
@@ -6,11 +6,12 @@ export interface OrbitingObjectsProps {
     className? : string
     color : string
     distance : number,
-    radius : number
+    radius : number,
+    style? : CSSProperties
 }
 
 export default function OrbitingObjects(props : OrbitingObjectsProps) {
-    let { numberOfCircles, className, color, distance, radius } = props;
+    let { numberOfCircles, className, color, distance, radius, style } = props;
     let degreeDiff = 360 / numberOfCircles;
     let size = (distance + radius) * 2;
     let centerVector : Vector = new Vector(distance + radius, distance + radius);
@@ -23,7 +24,7 @@ export default function OrbitingObjects(props : OrbitingObjectsProps) {
     }
 
     return (
-    <svg width={size} height={size} className={className}>
+    <svg width={size} height={size} className={className} style={style}>
         {vectors.map((v, i) => {
         let newVector = v.translate(centerVector.x, centerVector.y);
         return <circle
