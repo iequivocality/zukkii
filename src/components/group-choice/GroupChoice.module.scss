@@ -3,14 +3,14 @@
 .groupChoice {
     display: flex;
     color: #fff;
-    max-width: 200px;
+    width: 200px;
     flex: 1 0 31%;
     height: 150px;
     position: relative;
     overflow: hidden;
     margin: 10px;
     background-size: contain;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-position: center;
     border-radius: 10px;
 
