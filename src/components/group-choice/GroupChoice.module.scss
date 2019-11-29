@@ -8,18 +8,10 @@
     height: 150px;
     position: relative;
     overflow: hidden;
-    // margin: 10px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10px;
-
-    a {
-        text-decoration: none;
-    }
-    a:visited {
-        color: #fff;
-    }
 }
 
 .hoverRect {

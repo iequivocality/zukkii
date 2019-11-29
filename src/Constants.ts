@@ -26,11 +26,3 @@ export class Constants {
         value : null
     };
 }
-
-export enum Units {
-    WEEKS,
-    DAYS,
-    HOURS,
-    MINUTES,
-    SECONDS
-}
