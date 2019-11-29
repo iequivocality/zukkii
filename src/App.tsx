@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import './App.scss';
 import { RouteProps, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import BirthdaySelectionPage from './pages/birthday-selection/BirthdaySelection';
@@ -18,24 +18,29 @@ import GlobalErrorBoundary from './components/global-error-boundary/GlobalErrorB
 const AppRoutes : Array<RouteProps> = [
   {
     path: "/",
-    component: BirthdaySelectionPage,
+    // component: BirthdaySelectionPage,
+    component: React.lazy(() => import('./pages/birthday-selection/BirthdaySelection')),
     exact: true
   },
   {
     path: "/group/:group",
-    component: GroupCountdown
+    // component: GroupCountdown
+    component: React.lazy(() => import('./pages/group-countdown/GroupCountdown'))
   },
   {
     path: "/test",
-    component : ComponentTest
+    // component : ComponentTest
+    component: React.lazy(() => import('./pages/component-test/ComponentTest'))
   },
   {
     path: "404",
-    component : NotFoundComponent
+    // component : NotFoundComponent
+    component: React.lazy(() => import('./pages/no-found/NotFound'))
   },
   {
     path: "*",
-    component : NotFoundComponent
+    // component : NotFoundComponent
+    component: React.lazy(() => import('./pages/no-found/NotFound'))
   }
 ];
 
@@ -53,11 +58,13 @@ export default function App() {
         <AppContainer>
           { isLoading ? <Loading></Loading> : null }
           <Router>
-            <Switch>
-              {AppRoutes.map((route : RouteProps, key : number) => (
-                <Route key={key} {...route}></Route>
-              ))}
-            </Switch>
+            <Suspense  fallback={<Loading></Loading>}>
+              <Switch>
+                {AppRoutes.map((route : RouteProps, key : number) => (
+                    <Route key={key} {...route}></Route>
+                ))}
+              </Switch>
+            </Suspense>
           </Router>
         </AppContainer>
         <Background></Background>

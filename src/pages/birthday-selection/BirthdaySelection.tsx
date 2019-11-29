@@ -10,8 +10,9 @@ import useRedirect from '../../hooks/useRedirect';
 import AppHeader from '../../components/app-header/AppHeader';
 import GroupChoice from '../../components/group-choice/GroupChoice';
 import { SpringGrid, makeResponsive } from 'react-stonecutter';
+import createPage from '../../hoc/createPage';
 
-export default function BirthdaySelectionPage() {
+function BirthdaySelectionPage() {
     let { theme } = useContext(ThemeContext);
     let groupChoices = useSelector((state : AppState) => state.groupChoices);
     let isLoading = useSelector((state : AppState) => state.isLoading);
@@ -54,7 +55,6 @@ export default function BirthdaySelectionPage() {
                     
                     : <div className={styles.noGroupText}>{`ごめん。全然グループがみつかりません。`}</div>}
                 </div>
-                <AppFooter></AppFooter>
             </>
         );
     }
@@ -62,3 +62,5 @@ export default function BirthdaySelectionPage() {
         return null;
     }
 }
+
+export default createPage(BirthdaySelectionPage);
