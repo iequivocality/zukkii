@@ -15,18 +15,16 @@ const Balloon : React.FC<BalloonProps> = (props : BalloonProps) => {
         <svg version="1.1" className={className} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             width={`${newWidth}px`} height={`${newWidth * 2}px`} viewBox="0 0 500 1000" enable-background="new 0 0 500 1000" xmlSpace="preserve">
             <g>
-                <path fill="none" stroke="#FFFFFF" stroke-width="4.5499" stroke-miterlimit="10"
-                    d="M232.834,490.219
-                    c0,0,59.131,139.902-42.099,241.133c-101.232,101.23,27.538,154.688,59.264,200.185">
-                    {/* <animate attributeName="d" dur="3000ms" values="
-                    M247.985,490.219
-                    c0,0-59.131,139.902,42.099,241.133c101.232,101.23-27.538,154.688-59.264,200.185;
+                <path fill="none" stroke="#FFFFFF" stroke-width="4.5499" stroke-miterlimit="10">
+                    <animate attributeName="d" dur="3000ms" values="
+                    M236.89,526.398
+                    c0,0-59.131,139.902,42.098,241.133c101.232,101.23-27.537,154.688-59.263,200.185;
                     
-                    M232.834,490.219
-                    c0,0,59.131,139.902-42.099,241.133c-101.232,101.23,27.538,154.688,59.264,200.185;
+                    M236.767,526.398
+	                c-6.199,26.519-38.432,94.624,42.099,241.133c64.248,134.313-8.358,174.15-40.084,219.647;
                     
-                    M247.985,490.219
-                    c0,0-59.131,139.902,42.099,241.133c101.232,101.23-27.538,154.688-59.264,200.185;" repeatCount="indefinite"/> */}
+                    M236.89,526.398
+	                c0,0-59.131,139.902,42.098,241.133c101.232,101.23-27.537,154.688-59.263,200.185;" repeatCount="indefinite"/>
                 </path>
                 <path opacity={0.75} className="mainBalloon" fill={newFill} d="M415.312,289.892c0-98.839-66.474-221.428-165.312-221.428S84.688,191.053,84.688,289.892
                     c0,91.833,57.392,205.458,144.803,221.107c-3.924,9.452-12.856,14.86-12.856,14.86s29.267,1.148,42.466,2.583
