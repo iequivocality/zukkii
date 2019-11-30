@@ -1,6 +1,6 @@
 .groupContainer {
     // flex: 1 0 85%;
-    min-height: 70vh;
+    min-height: calc(70vh - 30px);
     // width: 90%;
     display: flex;
     flex-direction: row;

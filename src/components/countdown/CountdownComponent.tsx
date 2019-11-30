@@ -64,7 +64,7 @@ export default function Countdown(props : CountdownProps) {
     }, 1000);
 
     return (<div className={styles.countdownContainer} style={countdownStyle} ref={ref}>
-        <BalloonGroup parentElement={ref}></BalloonGroup>
+        {Util.checkIsBirthday(targetDate) && <BalloonGroup parentElement={ref}></BalloonGroup>}
         <div className={styles.profile}>
             <div className={styles.photoContainer}>
                 <div className={styles.photo} style={photoStyle}></div>
