@@ -50,6 +50,6 @@ export default function CountdownDetails(props : CountdownDetailsProps) {
                     </div>
                 </div>
             </div>
-        }, [name, prefecture, kana, height, bloodType, birthdate, ageByYears, detailStyle, formattedDate])
+        }, [name, prefecture, kana, height, bloodType, birthdate, ageByYears, detailStyle, formattedDate, blog])
     );
 }

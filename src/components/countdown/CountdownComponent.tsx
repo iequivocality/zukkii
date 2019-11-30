@@ -10,6 +10,7 @@ import useInterval from '../../hooks/useInterval';
 import ThemeContext from '../../contexts/themeContext';
 import useHover from '../../hooks/useHover';
 import useOnScreen from '../../hooks/useOnScreen';
+import BalloonGroup from '../balloon-group/BalloonGroup';
 
 interface CountdownProps {
     member : Member,
@@ -24,8 +25,8 @@ export default function Countdown(props : CountdownProps) {
     let [ hour, setHour ] = useState(0);
     let [ minute, setMinute ] = useState(0);
     let [ second, setSecond ] = useState(0);
-    let [ ref, isHover ] = useHover();
-    let isOnScreen = useOnScreen(ref, '5px')
+    let [ ref, isHover ] = useHover<HTMLDivElement>();
+    let isOnScreen = useOnScreen(ref, '5px');
 
     let { groupColor, groupId, member } = props;
 
@@ -49,18 +50,21 @@ export default function Countdown(props : CountdownProps) {
 
     useInterval(() => {
         if (isOnScreen) {
-            let currentDate = moment().tz("Asia/Tokyo");
-            let duration = moment.duration(targetDate.diff(currentDate)); 
-            let asDays = duration.asDays();
-            setWeek(Math.floor(asDays / 7));
-            setDay(Math.floor(asDays % 7));
-            setHour(duration.hours());
-            setMinute(duration.minutes());
-            setSecond(duration.seconds());
+            if (!Util.checkIsBirthday(targetDate)) {
+                let currentDate = moment().tz("Asia/Tokyo");
+                let duration = moment.duration(targetDate.diff(currentDate)); 
+                let asDays = duration.asDays();
+                setWeek(Math.floor(asDays / 7));
+                setDay(Math.floor(asDays % 7));
+                setHour(duration.hours());
+                setMinute(duration.minutes());
+                setSecond(duration.seconds());
+            }
         }
     }, 1000);
 
     return (<div className={styles.countdownContainer} style={countdownStyle} ref={ref}>
+        <BalloonGroup parentElement={ref}></BalloonGroup>
         <div className={styles.profile}>
             <div className={styles.photoContainer}>
                 <div className={styles.photo} style={photoStyle}></div>
@@ -68,14 +72,13 @@ export default function Countdown(props : CountdownProps) {
             <CountdownDetails member={member} groupColor={groupColor}></CountdownDetails>
         </div>
         {
-            !Util.checkIsBirthday(targetDate) ?
             <div className={styles.countdown}>
                 <CountdownUnitComponent value={week} unit="週" maxValue={Constants.MAX_WEEKS} color={groupColor}></CountdownUnitComponent>
                 <CountdownUnitComponent value={day} unit="日" maxValue={Constants.MAX_DAYS} color={groupColor}></CountdownUnitComponent>
                 <CountdownUnitComponent value={hour} unit="時" maxValue={Constants.MAX_HOURS} color={groupColor}></CountdownUnitComponent>
                 <CountdownUnitComponent value={minute} unit="分" maxValue={Constants.MAX_MINUTES} color={groupColor}></CountdownUnitComponent>
                 <CountdownUnitComponent value={second} unit="秒" maxValue={Constants.MAX_SECONDS} color={groupColor}></CountdownUnitComponent>
-            </div> : <div className={styles.currentbirthday}>お誕生日おめでとうございます</div>
+            </div>
         }
     </div>)
 }
