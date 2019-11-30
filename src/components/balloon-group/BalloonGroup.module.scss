@@ -1,20 +1,38 @@
 .balloonGroup {
     position: absolute;
     z-index: 45;
-    pointer-events: none;
+
+    svg {
+        opacity: 1;
+        transition: opacity 0.4s ease-out;
+        pointer-events: none;
+    }
 }
 
-@keyframes float {
+.balloonGroup:hover svg {
+    opacity: 0;
+}
+
+@keyframes floatUp {
 	0% {
-		// box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
 		transform: translateY(0px);
 	}
 	50% {
-		// box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
 		transform: translateY(-20px);
 	}
 	100% {
-		// box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translateY(0px);
+	}
+}
+
+@keyframes floatDown {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(15px);
+	}
+	100% {
 		transform: translateY(0px);
 	}
 }
@@ -31,9 +49,19 @@
 	}
 }
 
-%balloonAnimation {
+%balloonAnimationUp {
     transform: translateY(0px);
-    animation: float 6s ease-in-out infinite;
+    animation: floatUp 6s ease-in-out infinite;
+    
+    g {
+        box-shadow: 0 5px 15px 0px rgba(1,1,1,0.6);
+        animation: floatShadow 6s ease-in-out infinite;
+    }
+}
+
+%balloonAnimationDown {
+    transform: translateY(0px);
+    animation: floatDown 6s ease-in-out infinite;
     
     g {
         box-shadow: 0 5px 15px 0px rgba(1,1,1,0.6);
@@ -45,33 +73,47 @@
     position: absolute;
     top : -37.5px;
     right : -37.5px;
-    @extend %balloonAnimation;
+    @extend %balloonAnimationUp;
 }
 
 .balloon2 {
     position: absolute;
     top : -25px;
     left : -50px;
-    @extend %balloonAnimation;
+    @extend %balloonAnimationDown;
 }
 
 .balloon3 {
     position: absolute;
     top : 35px;
     left : 120px;
-    @extend %balloonAnimation;
+    @extend %balloonAnimationUp;
 }
 
 .balloon4 {
     position: absolute;
     top : 55px;
     right : 65px;
-    @extend %balloonAnimation;
+    @extend %balloonAnimationDown;
 }
 
 .balloon5 {
     position: absolute;
     top : 65px;
     left : 50px;
-    @extend %balloonAnimation;
+    @extend %balloonAnimationUp;
+}
+
+.balloon6 {
+    position: absolute;
+    top : -45px;
+    left : 90px;
+    @extend %balloonAnimationDown;
+}
+
+.balloon7 {
+    position: absolute;
+    top : -55px;
+    right : 50px;
+    @extend %balloonAnimationUp;
 }
