@@ -26,7 +26,7 @@ export default function GenerationSelection(props : GenerationSelectionProps) {
         let generationArray : Array<GenerationSelect> = [];
         for( let index = 1; index <= generations; index++) {
             generationArray.push({
-                label : `${index}期`,
+                label : `${index}期生`,
                 value : index
             });
         }

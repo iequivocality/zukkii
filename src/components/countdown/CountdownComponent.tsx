@@ -31,6 +31,7 @@ export default function Countdown(props : CountdownProps) {
     let { groupColor, groupId, member } = props;
 
     let photoStyle : React.CSSProperties = {
+        backgroundColor : groupColor,
         backgroundImage: `url(${process.env.PUBLIC_URL}/images/${groupId}/${member.id}.jpg)`
     }
 

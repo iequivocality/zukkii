@@ -176,7 +176,7 @@ export default function MemberChooser(props : MemberChooserProps) {
                             </div>
                         </div>
                         <div className={styles.memberChooserFieldContainer}>
-                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>期</div>
+                            <div className={styles.memberChooserContainerLabel} style={{ color : themeContainer.theme.foregroundColor }}>合格期</div>
                             <div className={styles.memberChooserContainerForm}>
                                 <GenerationSelection
                                     selectedValue={currentState.generation}
