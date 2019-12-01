@@ -1,0 +1,56 @@
+.background {
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+%animatedBackgroundCircle {
+    position: fixed;
+    animation: rotating 40s linear infinite;
+    z-index : 2;
+}
+
+.hinatazakaCircle {
+    @extend %animatedBackgroundCircle;
+    top: 25%;
+    right: 20%;
+}
+
+.nogizakaCircle {
+    @extend %animatedBackgroundCircle;
+    bottom: 5%;
+    right: 0%;
+}
+
+.keyakizakaCircle {
+    @extend %animatedBackgroundCircle;
+    bottom: 0%;
+    right: -10%;
+}
+
+.hinataRect {
+    position: fixed;
+    left: 1.5%;
+    top : 0;
+    height: 100%;
+    z-index : 2;
+}
+
+.nogiRect {
+    position: fixed;
+    left: 2.5%;
+    top : 0;
+    height: 100%;
+    z-index : 2;
+}
+
+.keyakiRect {
+    position: fixed;
+    left: 0.5%;
+    top : 0;
+    height: 100%;
+    z-index : 2;
+}
