@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from './CountdownComponent.module.scss'
 import Util from '../../Util';
 import moment from 'moment';

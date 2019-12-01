@@ -1,9 +1,4 @@
 import React from 'react';
-import ToggleSwitch from '../../components/ui/toggle-switch/ToggleSwitch';
-import Dropdown from '../../components/ui/dropdown/Dropdown';
-import { IoIosSunny, IoIosMoon } from 'react-icons/io';
-import Util from '../../Util';
-import ObjectCircle from '../../components/svg/OrbitingObjects';
 import styles from './ComponentTest.module.scss'
 import OrbitingObjects from '../../components/svg/OrbitingObjects';
 import FirebaseApp from '../../data/firebase';

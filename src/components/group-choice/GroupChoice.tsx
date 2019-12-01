@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import Group from '../../models/Group';
 import Theme from '../../themes/variables';
 import { Link } from 'react-router-dom';

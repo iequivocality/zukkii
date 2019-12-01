@@ -11,6 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #282C34;
   color: #FFFFFF;
+  transition: background-color 0.3s ease-out;
 }
 
 a:link,

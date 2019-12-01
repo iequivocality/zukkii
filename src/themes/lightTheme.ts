@@ -16,6 +16,10 @@ const LightTheme : Theme = {
     footerBackground : '#D9DBDD',
     footerForeground : '#2c3e50',
     footerIconColor : '#2c3e50',
-    birthdaySelectionDropShadow : Util.createShadowProperties(4)
+    birthdaySelectionDropShadow : Util.createShadowProperties(4),
+    countdownBadgeForeground : (customColor : string) => customColor,
+    countdownBadgeBackground : (customColor : string) => '#FFFFFF',
+    
+    noMemberTextColor : (customColor : string) => customColor
 }
 export default LightTheme;

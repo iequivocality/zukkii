@@ -1,4 +1,4 @@
-import React, { useMemo, useContext } from "react";
+import React, { useContext } from "react";
 import Member from "../../../models/Member";
 import Util from "../../../Util";
 
@@ -26,7 +26,7 @@ export default function CountdownDetails(props : CountdownDetailsProps) {
                 { name }
                 <div className={styles.links}>
                     {/* <div style={{ fontSize : '10px', height : '100%' }}>{generation}期生</div> */}
-                    <Badge style={{ backgroundColor : theme.countdownDetailsForeground(props.groupColor) }}>{generation}期生</Badge>
+                    <Badge style={{ backgroundColor : theme.countdownBadgeBackground(props.groupColor), color : theme.countdownBadgeForeground(props.groupColor) }}>{generation}期生</Badge>
                     <a href={blog} target="_blank" rel="noopener noreferrer">
                         <IoIosLink></IoIosLink>
                     </a>

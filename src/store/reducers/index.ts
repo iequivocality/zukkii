@@ -25,7 +25,7 @@ export function rootReducer(state : AppState = initialState, action : any) : App
     switch (action.type) {
         case LOAD_GROUP:
             let previousGroup = state.selectedGroup;
-            let members = previousGroup && action.payload.id == previousGroup.id ? state.members : [];
+            let members = previousGroup && action.payload.id === previousGroup.id ? state.members : [];
             return {...state, selectedGroup : action.payload, members : members};
         case LOAD_GROUPS:
             return {...state, groupChoices : action.payload};

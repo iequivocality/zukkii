@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchGroups, loadGroup } from '../../store/actions';
 import Group from '../../models/Group';
 import ThemeContext from '../../contexts/themeContext';
-import AppFooter from '../../components/app-footer/AppFooter';
 import useRedirect from '../../hooks/useRedirect';
 import AppHeader from '../../components/app-header/AppHeader';
 import GroupChoice from '../../components/group-choice/GroupChoice';

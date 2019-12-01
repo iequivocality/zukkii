@@ -23,5 +23,12 @@ export default interface Theme {
     footerIconColor : string,
 
     /** Birthday Selection */
-    birthdaySelectionDropShadow : string
+    birthdaySelectionDropShadow : string,
+
+    /** No Member Text */
+    noMemberTextColor : ThemeColorFunction,
+
+    /** Countdown Badge */
+    countdownBadgeForeground : ThemeColorFunction,
+    countdownBadgeBackground : ThemeColorFunction
 }
