@@ -1,0 +1,11 @@
+.badgeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 1rem;
+    min-width: 30px;
+    user-select: none;
+    color: #FFF;
+    border-radius: 5px;
+    margin: 3px;
+}
