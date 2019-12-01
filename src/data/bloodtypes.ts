@@ -8,7 +8,8 @@ const BLOOD_TYPES = [
     { type : 'A', en : 'A', jp : 'A型' },
     { type : 'B', en : 'B', jp : 'B型' },
     { type : 'AB', en : 'AB', jp : 'AB型' },
-    { type : 'O', en : 'O', jp : 'O型' }
+    { type : 'O', en : 'O', jp : 'O型' },
+    { type : 'U', en : 'Unknown', jp : '不明' }
 ]
 
 export default BLOOD_TYPES;

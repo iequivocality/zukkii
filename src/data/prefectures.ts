@@ -47,7 +47,8 @@ const PREFECTURES : Array<Prefecture> = [
     { en : 'wakayama', jp : '和歌山県', category : 'ken' },
     { en : 'yamagata', jp : '山形県', category : 'ken' },
     { en : 'yamaguchi', jp : '山口県', category : 'ken' },
-    { en : 'yamanashi', jp : '山梨県', category : 'ken' }
+    { en : 'yamanashi', jp : '山梨県', category : 'ken' },
+    { en : 'outside japan', jp : '海外', category : 'outside' }
 ]
 
 export default PREFECTURES;
