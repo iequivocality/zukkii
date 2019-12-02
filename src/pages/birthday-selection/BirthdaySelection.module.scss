@@ -7,10 +7,14 @@
     min-height: calc(70vh - 30px);
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: flex-start;
     z-index : 20;
     position: relative;
+
+    @include for-size(phone-only) {
+        padding: 0;
+        justify-content: center;
+    }
 }
 
 .noGroupBirthdaySelection {

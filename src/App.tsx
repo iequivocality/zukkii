@@ -11,11 +11,13 @@ import Loading from './components/loading/Loading';
 import Background from './components/background/Background';
 import GlobalErrorBoundary from './components/global-error-boundary/GlobalErrorBoundary';
 import AppRoutes from './AppRoutes';
+import useBreakpoint from './hooks/useBreakpoint';
 
 export default function App() {
   let themeContainer = useTheme();
   let dispatch = useDispatch();
   let isLoading = useSelector((state : AppState) => state.isLoading)
+  let breakpoint = useBreakpoint();
   useEffect(() => {
     dispatch(fetchGroups());
   }, []);
@@ -35,7 +37,7 @@ export default function App() {
             </Suspense>
           </Router>
         </AppContainer>
-        <Background></Background>
+        { breakpoint !== 'phone-only' && <Background></Background> }
       </ThemeContext.Provider>
     </GlobalErrorBoundary>
   );

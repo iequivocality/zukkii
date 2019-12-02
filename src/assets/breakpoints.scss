@@ -1,60 +1,74 @@
+
+/* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px) {...}
+
 /* 
   Device = Desktops
   Screen = 1281px to higher resolution desktops
 */
-@mixin extra-large {
-    @media (min-width: 1281px) {
-        @content;
-    }
-}
+// @mixin extra-large {
+//     @media (min-width: 1281px) {
+//         @content;
+//     }
+// }
 
 /* 
   Device = Laptops, Desktops
   Screen = B/w 1025px to 1280px
   Zukki was design with large size in mind
 */
-@mixin large {
-    @media (min-width: 1025px) and (max-width: 1280px) {
-        @content;   
-    }
-}
+// @mixin large {
+//     @media (min-width: 1025px) and (max-width: 1280px) {
+//         @content;   
+//     }
+// }
 
 /* 
   Device = Tablets, Ipads (portrait)
   Screen = B/w 768px to 1024px
 */
-@mixin tablet {
-    @media (min-width: 768px) and (max-width: 1024px) {
-        @content;
-    }
-}
+// @mixin tablet {
+//     @media (min-width: 768px) and (max-width: 1024px) {
+//         @content;
+//     }
+// }
 
 /* 
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
 */
-@mixin tablet-land {
-    @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-        @content;
-    }
-}
-
-/* 
-  Device = Low Resolution Tablets, Mobiles (Landscape)
-  Screen = B/w 481px to 767px
-*/
-@mixin mobile-land {
-    @media (min-width: 481px) and (max-width: 767px) {
-        @content;
-    }
-}
+// @mixin tablet-land {
+//     @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+//         @content;
+//     }
+// }
 
 /* 
   Device = Most of the Smartphones Mobiles (Portrait)
   Screen = B/w 320px to 479px
 */
-@mixin mobile {
-    @media (min-width: 320px) and (max-width: 480px) {
-        @content;
-    }
+// @mixin mobile {
+//     @media only screen and (max-width: 768px) {
+//         @content;
+//     }
+// }
+
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media (max-width: 599px) { @content; }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) { @content; }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) { @content; }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) { @content; }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) { @content; }
+  }
 }
