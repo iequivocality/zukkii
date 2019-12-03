@@ -60,15 +60,14 @@
 // }
 
 @mixin for-size($size) {
-  @if $size == phone-only {
-    @media (max-width: 599px) { @content; }
-  } @else if $size == tablet-portrait-up {
-    @media (min-width: 600px) { @content; }
-  } @else if $size == tablet-landscape-up {
-    @media (min-width: 900px) { @content; }
-  } @else if $size == desktop-up {
-    @media (min-width: 1200px) { @content; }
-  } @else if $size == big-desktop-up {
-    @media (min-width: 1800px) { @content; }
+  @if $size == desktop {
+    @media (min-width: 1024px) { @content; }
+  }
+  @else if $size == tablet {
+    @media (min-width: 720px) and (max-width : 1023px) { @content; }
+  }
+  @else if $size == mobile {
+    @media (min-width: 320px) and (max-width: 719px) { @content; }
   }
 }
+

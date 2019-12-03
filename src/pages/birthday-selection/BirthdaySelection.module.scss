@@ -10,8 +10,9 @@
     justify-content: flex-start;
     z-index : 20;
     position: relative;
+    box-sizing: border-box;
 
-    @include for-size(phone-only) {
+    @include for-size(mobile) {
         padding: 0;
         justify-content: center;
     }

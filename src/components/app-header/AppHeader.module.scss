@@ -9,7 +9,7 @@
     position: relative;
     z-index: 5;
 
-    @include for-size(phone-only) {
+    @include for-size(mobile) {
         height: 10vh;
     }
 
@@ -23,7 +23,7 @@
         font-size: 1.5rem;
         font-weight: 700;
 
-        @include for-size(phone-only) {
+        @include for-size(mobile) {
             font-size: 1rem;
         }
     }
@@ -33,7 +33,7 @@
         font-weight: 500;
         margin-bottom: 0px;
 
-        @include for-size(phone-only) {
+        @include for-size(mobile) {
             font-size: 0.75rem;
         }
     }

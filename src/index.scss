@@ -14,6 +14,11 @@ body {
   transition: background-color 0.3s ease-out;
 }
 
+#root {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
 a:link,
 a:visited,
 a:hover,

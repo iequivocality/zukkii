@@ -1,5 +1,6 @@
 import React, { ReactChild, useContext, useEffect } from 'react';
 import ThemeContext from '../../contexts/themeContext';
+import './AppContainer.scss';
 
 export interface AppContainerProps {
     children : Array<ReactChild> | ReactChild

@@ -21,6 +21,7 @@ export default function App() {
   useEffect(() => {
     dispatch(fetchGroups());
   }, []);
+  console.log(breakpoint)
 
   return (
     <GlobalErrorBoundary>
@@ -37,7 +38,7 @@ export default function App() {
             </Suspense>
           </Router>
         </AppContainer>
-        { breakpoint !== 'phone-only' && <Background></Background> }
+        {/* { breakpoint !== 'mobile' ? <Background></Background> : null } */}
       </ThemeContext.Provider>
     </GlobalErrorBoundary>
   );

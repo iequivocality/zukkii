@@ -26,6 +26,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @include for-size(mobile) {
+        display: none;
+    }
 }
 
 .hoverText {
@@ -39,6 +43,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @include for-size(mobile) {
+        display: none;
+    }
 }
 
 .groupTitle {
@@ -59,4 +67,8 @@
     right: -35%;
     z-index: 6;
     animation: rotating 6s linear infinite;
+
+    @include for-size(mobile) {
+        display: none;
+    }
 }
