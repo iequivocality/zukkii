@@ -20,6 +20,7 @@ const DarkTheme : Theme = {
     countdownBadgeForeground : (customColor : string) => '#FFFFFF',
     countdownBadgeBackground : (customColor : string) => customColor,
 
-    noMemberTextColor : (customColor : string) => '#FFFFFF'
+    noMemberTextColor : (customColor : string) => '#FFFFFF',
+    countdownPhotoBlankColor : (customColor : string) => customColor
 }
 export default DarkTheme;

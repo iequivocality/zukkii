@@ -63,6 +63,11 @@
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
+    overflow: hidden;
+
+    img {
+        width: 60px;
+    }
 }
 
 .currentbirthday {

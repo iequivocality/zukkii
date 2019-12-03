@@ -16,6 +16,7 @@ export default interface Theme {
     countdownDetailsForeground : ThemeColorFunction,
     countdownUnitBackground : ThemeColorFunction,
     countdownValueAndUnitForeground : string,
+    countdownPhotoBlankColor : ThemeColorFunction
 
     /** Footer */
     footerBackground : string,

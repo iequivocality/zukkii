@@ -31,7 +31,7 @@ export default function Countdown(props : CountdownProps) {
     let { groupColor, groupId, member } = props;
 
     let photoStyle : React.CSSProperties = {
-        backgroundColor : groupColor,
+        backgroundColor : theme.countdownPhotoBlankColor(groupColor),
         backgroundImage: `url(${process.env.PUBLIC_URL}/images/${groupId}/${member.id}.jpg)`
     }
 
@@ -68,7 +68,9 @@ export default function Countdown(props : CountdownProps) {
         {Util.checkIsBirthday(targetDate) && <BalloonGroup parentElement={ref}></BalloonGroup>}
         <div className={styles.profile}>
             <div className={styles.photoContainer}>
-                <div className={styles.photo} style={photoStyle}></div>
+                <div className={styles.photo} style={photoStyle}>
+                {/* <img src={`${process.env.PUBLIC_URL}/images/${groupId}/${member.id}.jpg`}></img> */}
+                </div>
             </div>
             <CountdownDetails member={member} groupColor={groupColor}></CountdownDetails>
         </div>

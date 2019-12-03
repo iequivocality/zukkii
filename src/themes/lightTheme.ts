@@ -20,6 +20,7 @@ const LightTheme : Theme = {
     countdownBadgeForeground : (customColor : string) => customColor,
     countdownBadgeBackground : (customColor : string) => '#FFFFFF',
     
-    noMemberTextColor : (customColor : string) => customColor
+    noMemberTextColor : (customColor : string) => customColor,
+    countdownPhotoBlankColor : (customColor : string) => '#DDDDDD'
 }
 export default LightTheme;
