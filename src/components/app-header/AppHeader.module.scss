@@ -24,7 +24,8 @@
         font-weight: 700;
 
         @include for-size(mobile) {
-            font-size: 1rem;
+            font-size: 1.25rem;
+            width: 65%;
         }
     }
 
@@ -34,7 +35,8 @@
         margin-bottom: 0px;
 
         @include for-size(mobile) {
-            font-size: 0.75rem;
+            font-size: 1rem;
+            width: 55%;
         }
     }
 }

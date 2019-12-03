@@ -19,18 +19,33 @@
     @extend %animatedBackgroundCircle;
     top: 25%;
     right: 20%;
+
+    @include for-size(mobile) {
+        top: 45%;
+        right: 50%;
+    }
 }
 
 .nogizakaCircle {
     @extend %animatedBackgroundCircle;
     bottom: 5%;
     right: 0%;
+
+    @include for-size(mobile) {
+        bottom: -10%;
+        right: -50%;
+    }
 }
 
 .keyakizakaCircle {
     @extend %animatedBackgroundCircle;
     bottom: 0%;
     right: -10%;
+
+    @include for-size(mobile) {
+        bottom: 40%;
+        right: -40%;
+    }
 }
 
 .hinataRect {

@@ -37,7 +37,7 @@ export default function App() {
             </Suspense>
           </Router>
         </AppContainer>
-        { breakpoint !== 'mobile' ? <Background></Background> : null }
+        <Background></Background>
       </ThemeContext.Provider>
     </GlobalErrorBoundary>
   );
