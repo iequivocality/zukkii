@@ -1,3 +1,5 @@
+@import '../../../assets/breakpoints.scss';
+
 %detailsContainer {
     display: flex;
     flex-direction: row;
@@ -57,12 +59,20 @@
         .height {
             @extend %detailsContainer;
             flex: 1 0 58%;
+
+            @include for-size(mobile) {
+                flex: 1 0 100%;
+            }
         }
 
         .prefecture,
         .bloodType {
             @extend %detailsContainer;
             flex: 1 0 38%;
+
+            @include for-size(mobile) {
+                flex: 1 0 100%;
+            }
         }
     }
 }

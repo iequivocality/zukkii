@@ -14,6 +14,7 @@ import { IoIosFunnel } from 'react-icons/io';
 import useRedirect from '../../hooks/useRedirect';
 import createPage from '../../hoc/createPage';
 import AppHeader from '../../components/app-header/AppHeader';
+import useBreakpoint from '../../hooks/useBreakpoint';
 
 function GroupCountdownPageComponent() {
     let { isExact, params } = useRouteMatch();
@@ -41,6 +42,7 @@ function GroupCountdownPageComponent() {
     }, [selectedGroup])
 
     useRedirect('/404', 10000, !doesGroupExist);
+    let breakpoint = useBreakpoint();
 
     if (!isLoading && doesGroupExist && selectedGroup !== null) {
         let { name, color } = selectedGroup;
@@ -56,10 +58,14 @@ function GroupCountdownPageComponent() {
                     filter={(f) => setCurrentFilter(f)}
                     sort={(s) => setCurrentSort(s)}
                     isOpen={openChooser} onChoose={() => { setOpenChooser(false) }}></MemberChooser>
-                <BackButton to="/" style={buttonStyle}></BackButton>
-                <div className={styles.sortButton} onClick={() => { setOpenChooser(true) }} style={buttonStyle}>
-                    <IoIosFunnel/>分ける
-                </div>
+                { breakpoint !== 'mobile' ? (
+                    <>
+                        <BackButton to="/" style={buttonStyle}></BackButton>
+                        <div className={styles.sortButton} onClick={() => { setOpenChooser(true) }} style={buttonStyle}>
+                            <IoIosFunnel/>分ける
+                        </div>
+                    </>
+                ) : null}
                 <AppHeader title={name} subtitle="アイドルバースデーカウントダウン" style={titleStyle}></AppHeader>
                 <MemberCountdown group={selectedGroup} members={processedMembers} ></MemberCountdown>
             </>
