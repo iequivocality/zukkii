@@ -1,20 +1,20 @@
 @import '../../App.scss';
 
 .birthdaySelection {
-    color : #fff;
     padding: 10px 40px 20px 40px;
-    width: 100%;
     min-height: calc(70vh - 30px);
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-start;
     z-index : 20;
     position: relative;
     box-sizing: border-box;
 
     @include for-size(mobile) {
-        padding: 0;
+        padding: 10px 0px 20px 0px;
         justify-content: center;
+        min-height: 75vh;
     }
 }
 

@@ -45,7 +45,7 @@ export default function GroupChoice(props : GroupChoiceProps) {
         stiffness : 140,
         damping: 14,
         precision: 0.5
-    }
+    };
 
     let [showText, setShowText] = useState(false);
 

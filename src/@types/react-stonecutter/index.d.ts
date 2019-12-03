@@ -15,7 +15,7 @@ declare module 'react-stonecutter' {
         lengthUnit?: number,
         angleUnit?: string,
         itemHeight?: number,
-        children : Array<ReactChild> | ReactChild
+        children? : Array<ReactChild> | ReactChild
     }
 
     export interface SpringGridConfig {
