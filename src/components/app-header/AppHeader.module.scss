@@ -10,7 +10,7 @@
     z-index: 5;
 
     @include for-size(mobile) {
-        height: 15vh;
+        height: 25vh;
     }
 
     h2, h4 {
@@ -25,7 +25,7 @@
 
         @include for-size(mobile) {
             font-size: 1.25rem;
-            width: 65%;
+            width: 85%;
         }
     }
 
